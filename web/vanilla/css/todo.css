@@ -1,0 +1,76 @@
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+
+:root {
+    --ubuntu: Ubuntu-Regular, sans-serif;
+    --poppins: "Poppins", sans-serif;
+    --lato: "Lato", sans-serif;
+
+    --light: #f9f9f9;
+    --blue: #00d4b0;
+    --light-blue: #cfe8ff;
+    --gray: #eee;
+    --dark-gray: #aaa;
+    --dark: #342e37;
+    --red: #db504a;
+    --yelow: #fce26;
+    --light-yellow: #fff2c6;
+    --orange: #fd7238;
+    --light-orange: #ffb38a;
+    --green: #00f800;
+    --bright: #00e54b;
+
+}
+
+body {
+    background-color: var(--dark);
+}
+
+.todo {
+    width: 100%;
+    max-width: 540px;
+    background-color: var(--light);
+    margin: 100px auto 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+}
+
+.todo header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-family: var(--lato);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.todo .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--gray);
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+.todo .row input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.todo .row button {
+    border: none;
+    outline: none;
+    padding: 16px 50px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    color: var(--light);
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
