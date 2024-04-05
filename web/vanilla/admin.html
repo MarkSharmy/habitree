@@ -2,9 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/ref.css">
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-    <script src="scripts/main.js" defer></script>
+    <link rel="stylesheet" href="css/ref.css">
+    <script src="scripts/script.js" defer></script>
     <title>Dashboard</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
             <span class="text">Habitree</span>
         </a>
         <ul class="side-menu top">
-            <li>
+            <li class="active">
                 <a href="#">
                     <i class="bx bxs-dashboard"></i>
                     <span class="text">Dashboard</span>
@@ -53,12 +53,20 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="logout">
                     <i class="bx bxs-log-out-circle"></i>
                     <span class="text">Logout</span>
                 </a>
             </li>
         </ul>
     </aside>
+    <main id="content">
+        <header>
+            <nav>
+                <i class="bx bx-menu"></i>
+                <a href="#" class="nav-link">Categories</a>
+            </nav>
+        </header>
+    </main>
 </body>
 </html>

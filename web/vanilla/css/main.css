@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Ubuntu-Regular;
+    src: url("../fonts/Ubuntu-Regular.ttf");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +17,9 @@ li {
     list-style: none;
 }
 
+
 :root {
+    --ubuntu: Ubuntu-Regular, sans-serif;
     --poppins: "Poppins", sans-serif;
     --lato: "Lato", sans-serif;
 
@@ -28,6 +35,7 @@ li {
     --orange: #fd7238;
     --light-orange: #ffb38a;
     --green: #00f800;
+    --bright: #00e54b;
 
 }
 
@@ -55,6 +63,7 @@ body {
     align-items: baseline;
     margin-top: 24px;
     margin-left: 24px;
+    font-family: var(--ubuntu);
 }
 
 #sidebar .brand .text {
@@ -71,10 +80,45 @@ body {
 
 #sidebar .side-menu li {
     height: 48px;
-    background-color: var(--gray);
+    background-color: transparent;
     margin-left: 10px;
     border-radius: 48px 0 0 48px;
     padding: 4px;
+}
+
+#sidebar .side-menu li.active {
+    background-color: var(--gray);
+    position: relative;
+}
+
+#sidebar .side-menu li.active a {
+    color: var(--bright);
+}
+
+#sidebar .side-menu li.active::before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+    right: 0;
+    top: -40;
+    box-shadow: 20px 20px 0 var(--gray);
+    z-index: -1;
+}
+
+#sidebar .side-menu li.active::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+    bottom: -40;
+    right: 0;
+    box-shadow: 20px -20px 0 var(--gray);
+    z-index: -1;
 }
 
 #sidebar .side-menu li a {
@@ -84,10 +128,19 @@ body {
     display: flex;
     align-items: center;
     border-radius: 48px;
+    color: var(--dark);
+}
+
+#sidebar .side-menu li a:hover {
+    color: var(--bright);
 }
 
 #sidebar .side-menu li a .bx {
     min-width: calc(60px - (( 4px + 6px) * 2));
     display: flex;
     justify-content: center;
+}
+
+#sidebar .side-menu li a.logout {
+    color: var(--red);
 }
