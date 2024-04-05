@@ -61,7 +61,7 @@ body {
     height: 56px;
     display: flex;
     align-items: baseline;
-    margin-top: 24px;
+    margin-top: 20px;
     margin-left: 24px;
     font-family: var(--ubuntu);
 }
@@ -143,4 +143,119 @@ body {
 
 #sidebar .side-menu li a.logout {
     color: var(--red);
+}
+
+#content {
+    position: relative;
+    width: calc(100% - 280px);
+    left: 280;
+}
+
+#content header nav {
+    height: 56px;
+    background-color: var(--light);
+    padding: 0 24px;
+    font-family: var(--lato);
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    position: relative;
+}
+
+#content header nav::before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: -40px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: -20px -20px 0 var(--light);
+}
+
+#content header nav a {
+    color: var(--dark);
+}
+
+#content header nav .bx.bx-menu {
+    cursor: pointer;
+}
+
+#content header nav .nav-link {
+    font-size: 16px;
+    transition: 0.2s ease;
+}
+
+#content header nav .nav-link:hover {
+    color: var(--bright);
+}
+
+#content header nav form {
+    max-width: 400px;
+    width: 100%;
+    margin-right: auto;
+}
+
+#content header nav form .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 36px;
+    border-radius: 36px;
+    background-color: var(--gray);
+}
+
+#content header nav form .search-bar input {
+    flex-grow: 1;
+    padding: 0 16px;
+    height: 100%;
+    
+    border: none;
+    outline: none;
+    background-color: var(--gray);
+    border-radius: 36px 0 0 36px;
+}
+
+#content header nav form .search-bar button {
+    width: 48px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    color: var(--light);
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 36px;
+    cursor: pointer;
+}
+
+#content header nav .notification {
+    font-size: 24px;
+    position: relative;
+}
+
+#content header nav .notification .num {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--light);
+    background: var(--red);
+    color: var(--light);
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#content header nav .profile img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
 }
