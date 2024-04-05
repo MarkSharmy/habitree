@@ -1,0 +1,12 @@
+seta.magnet.habitree.app-jetified-window-java-1.0.0-beta04-0 C:\Users\Seta\.gradle\caches\transforms-3\19ff66f031cb422764b0da25d9d6bdb4\transformed\jetified-window-java-1.0.0-beta04\res
+seta.magnet.habitree.app-jetified-annotation-experimental-1.1.0-1 C:\Users\Seta\.gradle\caches\transforms-3\55b58230e55ac19e11de59e32a6117b3\transformed\jetified-annotation-experimental-1.1.0\res
+seta.magnet.habitree.app-core-1.6.0-2 C:\Users\Seta\.gradle\caches\transforms-3\bbbbd632898af927049fa4f571ee9e7e\transformed\core-1.6.0\res
+seta.magnet.habitree.app-jetified-window-1.0.0-beta04-3 C:\Users\Seta\.gradle\caches\transforms-3\d97cf3ffa6f05f8e8de8b41da1cca67f\transformed\jetified-window-1.0.0-beta04\res
+seta.magnet.habitree.app-debug-4 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\android\app\src\debug\res
+seta.magnet.habitree.app-main-5 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\android\app\src\main\res
+seta.magnet.habitree.app-pngs-6 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\build\app\generated\res\pngs\debug
+seta.magnet.habitree.app-resValues-7 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\build\app\generated\res\resValues\debug
+seta.magnet.habitree.app-rs-8 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\build\app\generated\res\rs\debug
+seta.magnet.habitree.app-mergeDebugResources-9 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+seta.magnet.habitree.app-mergeDebugResources-10 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+seta.magnet.habitree.app-merged_res-11 C:\Users\Seta\Development Projects\Local Projects\habitree\mobile\build\app\intermediates\merged_res\debug
