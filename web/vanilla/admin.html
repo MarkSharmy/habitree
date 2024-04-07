@@ -60,7 +60,7 @@
             </li>
         </ul>
     </aside>
-    <main id="content">
+    <div id="content">
         <header>
             <nav>
                 <i class="bx bx-menu"></i>
@@ -80,46 +80,68 @@
                 </a>
             </nav>
         </header>
-        <section class="head-title">
-            <div class="left">
+        <main>
+            <div class="head-title">
                 <h1>Dashboard</h1>
                 <ul class="breadcrum">
                     <li><a href="#">Dashboard</a></li>
                     <li><i class="bx bx-chevron-right"></i></li>
                     <li><a href="#" class="active">Home</a></li>
                 </ul>
-                <ul class="info">
-                    <li>
-                        <i class="bx bxs-calendar-check"></i>
-                        <span class="text">
-                            <h3>11</h3>
-                            <p>Goals</p>
-                        </span>
-                    </li>
-                    <li>
-                        <i class="bx bxs-calendar-check"></i>
-                        <span class="text">
-                            <h3>3</h3>
-                            <p>Projects</p>
-                        </span>
-                    </li>
-                    <li>
-                        <i class="bx bxs-calendar-check"></i>
-                        <span class="text">
-                            <h3>27</h3>
-                            <p>Tasks</p>
-                        </span>
-                    </li>
-                    <li>
-                        <i class="bx bxs-calendar-check"></i>
-                        <span class="text">
-                            <h3>8</h3>
-                            <p>Resolutions</p>
-                        </span>
-                    </li>
-                </ul>
             </div>
-        </section>
-    </main>
+            <div class="container">
+                <div class="left">
+                    <div class="date">
+                        <h2>Today - 7th of April, 2024</h2>
+                    </div>
+                    <div class="tasks">
+                        <ul class="task-list">
+                            <li class="task">No Tasks</li>
+                            <li><button class="btn-add">Add</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <h2>Overview</h2>
+                    <div class="todo">
+                        <ul class="info">
+                            <li>
+                                <i class='bx bx-run' ></i>
+                                <span class="text">
+                                    <h3>11</h3>
+                                    <p>Goals</p>
+                                </span>
+                            </li>
+                            <li>
+                                <i class='bx bxs-wrench' ></i>
+                                <span class="text">
+                                    <h3>3</h3>
+                                    <p>Projects</p>
+                                </span>
+                            </li>
+                            <li>
+                                <i class='bx bx-clipboard' ></i>
+                                <span class="text">
+                                    <h3>27</h3>
+                                    <p>Tasks</p>
+                                </span>
+                            </li>
+                            <li>
+                                <i class='bx bx-target-lock'></i>
+                                <span class="text">
+                                    <h3>8</h3>
+                                    <p>Resolutions</p>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="chart">
+
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
 </body>
 </html>

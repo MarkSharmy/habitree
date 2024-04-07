@@ -41,6 +41,7 @@ li {
 
 
 body {
+    font-family: var(--lato);
     background-color: var(--gray);
 }
 
@@ -308,39 +309,89 @@ body {
     color: var(--dark);
 }
 
-#content section.head-title .left .breadcrum {
+
+
+
+#content main {
+    padding: 24px;
+    margin-left: 16px;
+}
+
+main .head-title h1 {
+    color: var(--dark);
+}
+
+main .container {
+    display: flex;
+}
+
+main .head-title .breadcrum {
     display: flex;
     align-items: center;
+    margin: 10px 5px 10px 5px;
     grid-gap: 8px;
 }
 
-#content section.head-title .left .breadcrum li a {
+main .head-title .breadcrum li a {
     color: var(--dark-gray);
     pointer-events: none;
 }
 
-#content section.head-title .left .breadcrum li a.active {
+main .head-title .breadcrum li a.active {
     color: var(--bright);
     pointer-events: unset;
 }
 
-.info {
-    display: grid;
-    grid-template-columns: 300px repeat(auto-fill, 300px);
-    grid-gap: 24px;
-    margin-top: 36px;
+main .container .left {
+    flex-grow: 1;
+    height: 100vh;
+    background-color: var(--light);
+    border-top-left-radius: 20px;
+    padding: 16px;
 }
 
-.info li {
+main .container .left .date h2{
+    font-family: var(--poppins);
+    font-weight: 600;
+    color: var(--dark);
+}
+
+main .container .left .tasks .task-list li.task{
+    height: 48px;
+    border-top: 2px solid var(--dark-gray);
+    border-bottom: 2px solid var(--dark-gray);
+    color: red;
+}
+
+main .container .right {
+    flex-grow: 1;
+    height: 100vh;
+    background-color: var(--dark-gray);
+    border-top-right-radius: 20px;
+    padding: 8px;
+}
+
+main .container .right h2 {
+    text-align: center;
+}
+
+main .container .right .info {
+    display: grid;
+    width: 80%;
+    margin: 0 auto;
+}
+
+main .container .right .info li {
     padding: 24px;
     background-color: var(--light);
     border-radius: 20px;
     display: flex;
     align-items: center;
     grid-gap: 24px;
+    margin: 10px 5px;
 }
 
-.info li .bx {
+main .container .right .info li .bx {
     width: 50px;
     height: 50px;
     border-radius: 10px;
@@ -351,19 +402,19 @@ body {
     background-color: var(--dark);
 }
 
-.info li:nth-child(1) .bx {
+.right .info li:nth-child(1) .bx {
     color: var(--blue);
 }
 
-.info li:nth-child(2) .bx {
+.right .info li:nth-child(2) .bx {
     color: var(--purple);
 }
 
-.info li:nth-child(3) .bx {
+.right .info li:nth-child(3) .bx {
     color: var(--green);
 }
 
-.info li:nth-child(4) .bx {
+.right .info li:nth-child(4) .bx {
     color: var(--light-orange);
 }
 
