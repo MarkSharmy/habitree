@@ -53,6 +53,11 @@ body {
     width: 280px;
     height: 100%;
     z-index: 1000;
+    overflow-x: hidden;
+}
+
+#sidebar.hide {
+    width: 60px;
 }
 
 #sidebar .brand {
@@ -62,7 +67,7 @@ body {
     display: flex;
     align-items: baseline;
     margin-top: 20px;
-    margin-left: 24px;
+    margin-left: 16px;
     font-family: var(--ubuntu);
 }
 
@@ -70,7 +75,7 @@ body {
     background: linear-gradient(90deg, var(--blue), var(--green));
     background-clip: text;
     color: transparent;
-    margin-left: 5px;
+    margin-left: 6px;
 }
 
 #sidebar .side-menu {
@@ -129,6 +134,17 @@ body {
     align-items: center;
     border-radius: 48px;
     color: var(--dark);
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+#sidebar .hide .side-menu li.active a {
+    color: var(--bright);
+}
+
+#sidebar .hide .side-menu li a {
+    width: calc(48px - (4px * 2));
+    
 }
 
 #sidebar .side-menu li a:hover {
@@ -136,7 +152,7 @@ body {
 }
 
 #sidebar .side-menu li a .bx {
-    min-width: calc(60px - (( 4px + 6px) * 2));
+    min-width: calc(64px - (( 4px + 6px) * 2));
     display: flex;
     justify-content: center;
 }
@@ -149,6 +165,11 @@ body {
     position: relative;
     width: calc(100% - 280px);
     left: 280;
+}
+
+#sidebar.hide ~ #content {
+    width: calc(100% - 60px);
+    left: 60px;
 }
 
 #content header nav {
@@ -178,7 +199,13 @@ body {
 }
 
 #content header nav .bx.bx-menu {
+    font-size: 20px;
+    transition: 0.2s ease;
     cursor: pointer;
+}
+
+#content header nav .bx.bx-menu:hover {
+    color: var(--bright);
 }
 
 #content header nav .nav-link {
