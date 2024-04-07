@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="css/todo.css">
+    <script src="scripts/app.js" defer></script>
     <title>Todo</title>
 </head>
 <body>
@@ -15,8 +16,10 @@
             </header>
             <div class="row">
                 <input type="text" id="input-box" placeholder="Add your text">
-                <button>Add</button>
+                <button onclick="addTask()">Add</button>
             </div>
+            <ul id="list-container">
+            </ul>
         </div>
     </main>
 </body>
