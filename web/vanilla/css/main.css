@@ -354,13 +354,48 @@ main .container .left .date h2{
     font-family: var(--poppins);
     font-weight: 600;
     color: var(--dark);
+    border-bottom: 1px solid var(--dark-gray);
 }
 
-main .container .left .tasks .task-list li.task{
+main .container .left .tasks .task-list li{
+    display: flex;
+    align-items: center;
     height: 48px;
-    border-top: 2px solid var(--dark-gray);
-    border-bottom: 2px solid var(--dark-gray);
-    color: red;
+    font-family: var(--poppins);
+    font-size: 16px;
+    padding: 8px;
+    margin: 10px 5px;
+}
+
+main .container .left .tasks .task-list .task {
+    min-width: 50%;
+    margin-right: 80px;
+    border-radius: 6px;
+    border: 1px solid var(--dark-gray);
+    background-color: var(--gray);
+    cursor: pointer;
+}
+
+main .container .left .tasks .task-list .task i {
+    margin-right: 5px;
+}
+
+main .container .left .tasks .task-list li.btn-item {
+    display: flex;
+    align-items: center;
+
+}
+
+main .container .left .tasks .task-list li.btn-item button {
+    width: 72px;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: var(--light);
+    border-radius: 12px;
+    background: linear-gradient(90deg, var(--blue), var(--bright));
+    cursor: pointer;
 }
 
 main .container .right {
@@ -389,6 +424,7 @@ main .container .right .info li {
     align-items: center;
     grid-gap: 24px;
     margin: 10px 5px;
+    cursor: pointer;
 }
 
 main .container .right .info li .bx {
