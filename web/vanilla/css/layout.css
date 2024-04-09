@@ -147,26 +147,6 @@ header {
     color: var(--light)
 }
 
-.form-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    max-width: 720px;
-    width: 100%;
-    border: 1px solid var(--dark-gray);
-    transform: translate(-50%, -50%);
+main section.one {
+    background: url(../images/hero.jpg);
 }
-
-.form-popup .form-box {
-    display: flex;
-}
-
-.form-popup .form-details {
-    max-width: 330px;
-}
-
-.form-box h2 {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
