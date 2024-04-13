@@ -1,0 +1,29 @@
+@import url("colors.css");
+@import url("fonts.css");
+
+.head-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.head-container .logo {
+    display: flex;
+    align-items: baseline;
+    flex-grow: 1;
+}
+
+.head-container .navbar {
+    flex-grow: 2;
+}
+
+.head-container .navbar .links {
+    display: flex;
+    list-style: none;
+}
+
+.head-container .access {
+    display: flex;
+    flex-grow: 1;
+}
+

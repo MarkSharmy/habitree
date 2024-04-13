@@ -28,9 +28,8 @@
     --light-yellow: #fff2c6;
     --orange: #fd7238;
     --light-orange: #ffb38a;
-    --green: #00f800;
     --bright: #00e54b;
-    --purple: #be2ed6;
+    --green: #018141;
 }
 
 header {
@@ -142,9 +141,17 @@ header {
     color: var(--dark);
 }
 
+.navbar .login li .btn-login:hover {
+    color: var(--bright);
+}
+
 .navbar .login li .btn-signup {
     background-color: var(--bright);
     color: var(--light)
+}
+
+.navbar .login li .btn-signup:hover {
+    background-color: var(--green);
 }
 
 .form-popup {
@@ -166,7 +173,53 @@ header {
 }
 
 .form-box h2 {
-    text-align: center;
+    text-align: center; 
     margin-bottom: 30px;
+}
+
+.form-box .form-content {
+    width: 100%;
+    padding: 35px;
+}
+
+form .input-field {
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+}
+
+form .input-field input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 0 15px;
+    font-size: 0.95rem;
+    border-radius: 3px;
+    border: 1px solid var(--dark-gray);
+}
+
+form .input-field input:focus {
+    border-color: var(--bright);
+}
+
+form .input-field input:is(:focus, :valid) {
+    padding: 16px 15px 0;
+}
+
+form .input-field label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    color: var(--dark-gray);
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: 0.2s ease;
+}
+
+.input-field input:is(:focus, :valid) ~ label {
+    color: var(--bright);
+    font-size: 10px;
+    transform: translateY(-120%);
 }
 

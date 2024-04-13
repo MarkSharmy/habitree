@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Ubuntu-Regular;
+    src: url("../fonts/Ubuntu-Regular.ttf");
+}
+
+:root {
+    --ubuntu: Ubuntu-Regular, sans-serif;
+    --poppins: "Poppins", sans-serif;
+    --lato: "Lato", sans-serif;
+}
