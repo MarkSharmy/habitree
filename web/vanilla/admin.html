@@ -9,11 +9,11 @@
 <body>
     <aside id="sidebar">
         <a href="#" class="title">
-            <img src="images/logo.svg" width="60" alt="logo">
+            <img class="logo" src="images/logo.svg" width="60" alt="logo">
             <span class="text">Habitree</span>
         </a>
         <ul class="side-menu top">
-            <li>
+            <li class="active">
                 <a href="#">
                     <i class="bx bxs-dashboard"></i>
                     <span class="text">Dashboard</span>
@@ -52,15 +52,60 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="logout">
                     <i class="bx bxs-log-out-circle"></i>
                     <span class="text">Logout</span>
                 </a>
             </li>
         </ul>
     </aside>
-    <div class="content"></div>
-
-    
+    <div id="content">
+        <header>
+            <nav>
+                <i class="bx bx-menu"></i>
+                <div></div>
+                <form action="#">
+                    <div class="search-bar">
+                        <input type="search" name="search" placeholder="Search...">
+                        <button type="submit" class="search-btn"><i class="bx bx-search"></i></button>
+                    </div>
+                </form>
+                <ul class="content-nav">
+                    <li class="link">
+                        <a href="#" id="tasks">
+                            13 Tasks
+                        </a>
+                    </li>
+                    <li class="link">
+                        <a href="#" id="goals">
+                            7 Goals
+                        </a>
+                    </li>
+                    <li class="link">
+                        <a href="#" id="projects">
+                            3 Projects
+                        </a>
+                    </li>
+                    <li class="link">
+                        <a href="#" id="resolutions">
+                            4 Resolutions
+                        </a>
+                    </li>
+                    <li>
+                        <button>+ Create New</button>
+                    </li>
+                    <li class="right-nav">
+                        <a href="#" class="notification">
+                            <i class="bx bxs-bell"></i>
+                            <span class="num">8</span>
+                        </a>
+                        <a href="#" class="profile">
+                            <img src="images/profile.png" alt="user" width = 48px>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
 </body>
 </html>

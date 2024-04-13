@@ -1,0 +1,306 @@
+@import url("fonts.css");
+@import url("colors.css");
+
+body {
+    font-family: var(--lato);
+    background-color: var(--gray);
+}
+
+#sidebar {
+    background-color: var(--light);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    height: 100%;
+    z-index: 1000;
+    overflow-x: hidden;
+}
+
+#sidebar .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 3.5rem;
+    display: flex;
+    align-items: baseline;
+    margin-top: 1.2rem;
+    margin-left: 1.5rem;
+    font-family: var(--ubuntu);
+}
+
+#sidebar .title .logo {
+    height: 2.24rem;
+}
+
+#sidebar .title .text {
+    background: linear-gradient(90deg, var(--blue), var(--bright));
+    background-clip: text;
+    color: transparent;
+    margin-left: 0.5rem;
+}
+
+#sidebar .side-menu {
+    width: 100%;
+    margin-top: 3rem;
+}
+
+#sidebar .side-menu li {
+    height: 3rem;
+    background-color: transparent;
+    margin-left: 1.5rem;
+    border-radius: 3rem 0 0 3rem;
+    padding: 0.25rem;
+}
+
+#sidebar .side-menu li.active {
+    background-color: var(--gray);
+    position: relative;
+}
+
+#sidebar .side-menu li.active a {
+    color: var(--bright)
+}
+
+#sidebar .side-menu li.active:before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+    right: 0;
+    top: -40;
+    box-shadow: 1.25rem 1.25rem 0 var(--gray);
+    z-index: -1;
+}
+
+#sidebar .side-menu li.active:after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+    right: 0;
+    bottom: -40;
+    box-shadow: 1.25rem -1.25rem 0 var(--gray);
+    z-index: -1;
+}
+
+#sidebar .side-menu li a {
+    width: 100%;
+    height: 100%;
+    background-color: var(--light);
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    border-radius: 3rem;
+    color: var(--dark);
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+#sidebar .side-menu li.active a:hover {
+    background-color: whitesmoke;
+    color: var(--green);
+}
+
+#sidebar .side-menu.top li a:hover {
+    color: var(--bright);
+}
+
+#sidebar .side-menu li a .bx {
+    min-width: calc( 4rem - ((0.25rem + 0.5rem) * 2));
+    display: flex;
+    justify-content: center;
+}
+
+#sidebar .side-menu li a.logout {
+    color: var(--red);
+}
+
+#content {
+    position: relative;
+    width: calc(100% - 16rem);
+    left: 16rem;
+}
+
+#content header nav {
+    display: flex;
+    align-items: center;
+    grid-gap: 1.5rem;
+    height: 4.5rem;
+    background-color: var(--light);
+    padding: 0 1.5rem;
+    position: relative;
+}
+
+#content header nav::before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: -40px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: -1.2rem -1.2rem 0 var(--light);
+}
+
+#content header nav a {
+    color: var(--dark);
+}
+
+#content header nav .bx.bx-menu {
+    font-size: 1.5rem;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+#content header nav .bx.bx-menu:hover {
+    color: var(--bright);
+}
+
+#content header nav .nav-link {
+    font-size: 1rem;
+    transition: 0.2s ease;
+}
+
+#content header nav .nav-link:hover {
+    color: var(--bright);
+}
+
+#content header nav .content-nav {
+    display: flex;
+    align-items: center;
+}
+
+#content header nav .content-nav li {
+    font-family: var(--poppins);
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin: inherit 0.5rem;
+}
+
+#content header nav .content-nav li.link {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.5rem;
+}
+
+#content header nav .content-nav li.link a {
+    color: var(--dark-gray);
+}
+
+#content header nav .content-nav li.link #tasks:hover {
+    color: var(--bright);
+    border-bottom: 2px solid;
+}
+
+#content header nav .content-nav li.link #goals:hover {
+    color: var(--blue);
+    border-bottom: 2px solid;
+}
+
+#content header nav .content-nav li.link #projects:hover {
+    color: var(--purple);
+    border-bottom: 2px solid;
+}
+
+#content header nav .content-nav li.link #resolutions:hover {
+    color: orange;
+    border-bottom: 2px solid;
+}
+
+#content header nav .content-nav li button {
+    margin: auto 1rem;
+    padding: 0.25rem 0.5rem;
+    font-family: var(--poppins);
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--bright);
+    background-color: transparent;
+    border: 2px solid var(--bright);
+    cursor: pointer;
+}
+
+#content header nav .content-nav li button:hover {
+    background-color: var(--bright);
+    color: var(--light);
+}
+
+#content header nav .content-nav .right-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#content header nav form {
+    max-width: 20rem;
+    width: 100%;
+    margin-right: auto;
+}
+
+#content header nav form .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 2.25rem;
+    border-radius: 2.25rem;
+    background-color: var(--gray);
+}
+
+#content header nav form .search-bar input {
+    flex-grow: 1;
+    padding: 0 1rem;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: var(--gray);
+    border-radius: 2.25rem 0 0 2.25rem;
+}
+
+#content header nav form .search-bar button {
+    width: 3rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, var(--blue), var(--bright));
+    color: var(--light);
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 2.25rem;
+    cursor: pointer;
+}
+
+#content header nav .content-nav .right-nav .notification {
+    font-size: 2rem;
+    position: relative;
+}
+
+#content header nav .content-nav .right-nav .notification .num{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.75rem;
+    border: 2px solid var(--light);
+    background-color: var(--red);
+    color: var(--light);
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+}
+
+#content header nav .content-nav .right-nav .profile img{
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: auto 0.5rem;
+}
+

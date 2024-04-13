@@ -1,6 +1,10 @@
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 @import url("home.css");
-@import url("admin.css");
+@import url("panel.css");
+
+html {
+    font-size: 100%;
+}
 
 * {
     margin: 0;
@@ -8,6 +12,12 @@
     box-sizing: border-box;
 }
 
-html {
-    font-size: 100%;
+a {
+    text-decoration: none;
 }
+
+li {
+    list-style: none;
+}
+
+
