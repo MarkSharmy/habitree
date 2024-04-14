@@ -1,5 +1,4 @@
-@import url("fonts.css");
-@import url("colors.css");
+@import url("ref.css");
 
 body {
     font-family: var(--lato);
@@ -15,6 +14,10 @@ body {
     height: 100%;
     z-index: 1000;
     overflow-x: hidden;
+}
+
+#sidebar.hide {
+    width: 4.5rem;
 }
 
 #sidebar .title {
@@ -100,6 +103,10 @@ body {
     overflow-x: hidden;
 }
 
+#sidebar .hide .side-menu li.active a {
+    color: var(--bright);
+}
+
 #sidebar .side-menu li.active a:hover {
     background-color: whitesmoke;
     color: var(--green);
@@ -123,6 +130,11 @@ body {
     position: relative;
     width: calc(100% - 16rem);
     left: 16rem;
+}
+
+#sidebar.hide ~ #content {
+    width: calc(100% - 4rem);
+    left: 4rem;
 }
 
 #content header nav {
@@ -276,6 +288,7 @@ body {
 
 #content header nav .content-nav .right-nav .notification {
     font-size: 2rem;
+    margin-left: 2rem;
     position: relative;
 }
 
@@ -301,6 +314,35 @@ body {
     height: 2rem;
     object-fit: cover;
     border-radius: 50%;
-    margin: auto 0.5rem;
+    margin: auto 1rem;
+}
+
+#content main {
+    width: 100%;
+    padding: 2.25rem 1.5rem;
+}
+
+main .head-title .breadcrumb {
+    display: flex;
+    align-items: center;
+    margin: 10px 5px 10px 5px;
+    grid-gap: 8px;
+}
+
+main .head-title .breadcrumb li a {
+    color: var(--dark-gray);
+    pointer-events: none;
+}
+
+main .head-title .breadcrumb li a.active {
+    color: var(--bright);
+    pointer-events: unset;
+}
+
+main .app {
+    width: 100%;
+    height: 100%;
+    background-color: var(--light);
+    border-radius: 1rem;
 }
 

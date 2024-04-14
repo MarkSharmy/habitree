@@ -1,5 +1,6 @@
 @import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
-@import url("home.css");
+@import url("fonts.css");
+@import url("colors.css");
 @import url("panel.css");
 
 html {
