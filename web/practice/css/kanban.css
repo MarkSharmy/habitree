@@ -1,0 +1,120 @@
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+
+@font-face {
+    font-family: Ubuntu-Regular;
+    src: url("../fonts/Ubuntu-Regular.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Lato, Poppins, Montserrat, sans-serif;
+}
+
+.kanban {
+    display: flex;
+    padding: 2rem;
+}
+
+.kanban__column {
+    width: 12rem;
+    padding: 0.5rem;
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+    background-color: #4D4D4D;
+    position: relative;
+}
+
+.kanban__column-title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    user-select: none;
+}
+
+.kanban__column .dropdown {
+    display:none;
+    width: 8rem;
+    box-shadow: 0.1rem 0.25rem 0.5rem #4d4d4d;
+    border-radius: 0.25rem;
+    background-color: #666666;
+    position: absolute;
+    left: 8rem;
+}
+
+.kanban__column .dropdown button {
+    width: 100%;
+    background-color: #666666;
+    color: #cccccc;
+    padding: 0.5rem;
+    border:none;
+    border-bottom: 1px solid #4D4D4D;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.kanban__column .dropdown button:hover {
+    background-color: #888;
+}
+
+.kanban__item-box {
+    display: flex;
+    align-items: center;
+    background-color: #666666;
+    color: #CCCCCC;
+    border-radius: 0.25rem;
+    margin: 0.25rem auto;
+}
+
+.kanban__item-input {
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+}
+
+.kanban__item-input:focus {
+    background-color: white;
+    border-radius: 0.25rem;
+    color: #4D4D4D;
+}
+
+.kanban__item-box i {
+    margin-left: auto;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.kanban__column .dropdown.active{
+    display: block;
+}
+
+.kanban__dropzone {
+    height: 0.5rem;
+    transition: background 0.15s, height 0.15s;
+}
+
+.kanban__dropzone--active {
+    height: 1.5rem;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.kanban__add-item {
+    width: 100%;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    color: #CCCCCC;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
