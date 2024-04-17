@@ -2,44 +2,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/panel.css">
-    <script src="scripts/dashboard/panel.js" defer></script>
-    <link rel="shortcut icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/css/panel.css">
+    <script src="/scripts/components/dashboard.js" defer></script>
+    <link rel="shortcut icon" href="/images/favicon.svg" type="image/svg+xml">
     <title>Habitree: Dashboard</title>
 </head>
 <body>
     <aside id="sidebar">
-        <a href="index.html" class="title">
-            <img class="logo" src="images/logo.svg" width="60" alt="logo">
+        <a href="/dashboard/" class="title" data-link>
+            <img class="logo" src="/images/logo.svg" width="60" alt="logo">
             <span class="text">Habitree</span>
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="admin.html">
+                <a href="/dashboard/" data-link>
                     <i class="bx bxs-dashboard"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="mycalendar.html">
+                <a href="/dashboard/calendar" data-link>
                     <i class="bx bxs-calendar"></i>
                     <span class="text">Calendar</span>
                 </a>
             </li>
             <li>
-                <a href="alltasks.html">
+                <a href="/dashboard/alltasks" data-link>
                     <i class="bx bxs-edit"></i>
                     <span class="text">All Tasks</span>
                 </a>
             </li>
             <li>
-                <a href="analytics.html">
+                <a href="/dashboard/analytics" data-link>
                     <i class="bx bxs-doughnut-chart"></i>
                     <span class="text">Analytics</span>
                 </a>
             </li>
             <li>
-                <a href="projects.html">
+                <a href="/dashboard/projects" data-link>
                     <i class="bx bxs-briefcase-alt-2"></i>
                     <span class="text">Projects</span>
                 </a>
@@ -47,7 +47,7 @@
         </ul>
         <ul class="side-menu">
             <li>
-                <a href="settings.html">
+                <a href="/dashboard/settings" data-link>
                     <i class="bx bxs-cog"></i>
                     <span class="text">Settings</span>
                 </a>
@@ -73,22 +73,22 @@
                 </form>
                 <ul class="content-nav">
                     <li class="link">
-                        <a href="alltasks.html" id="tasks">
+                        <a href="/dashboard/alltasks/tasks" id="tasks" data-link>
                             13 Tasks
                         </a>
                     </li>
                     <li class="link">
-                        <a href="alltasks.html" id="goals">
+                        <a href="/dashboard/alltasks/goals" id="goals" data-link>
                             7 Goals
                         </a>
                     </li>
                     <li class="link">
-                        <a href="alltasks.html" id="projects">
+                        <a href="/dashboard/alltasks/projects" id="projects" data-link>
                             3 Projects
                         </a>
                     </li>
                     <li class="link">
-                        <a href="alltasks.html" id="resolutions">
+                        <a href="/dashboard/alltasks/resolutions" id="resolutions" data-link>
                             4 Resolutions
                         </a>
                     </li>
@@ -101,25 +101,24 @@
                             <span class="num">8</span>
                         </a>
                         <a href="#" class="profile">
-                            <img src="images/profile.png" alt="user" width = 48px>
+                            <img src="/images/profile.png" alt="user" width = 48px>
                         </a>
                     </li>
                 </ul>
             </nav>
         </header>
-        <main>
+        <main id="app">
             <div class="head-title">
                 <h1>Dashboard</h1>
                 <ul class="breadcrumb">
-                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="/dashboard/">Dashboard</a></li>
                     <li><i class="bx bx-chevron-right"></i></li>
-                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="/dashboard/" class="active" data-link>Home</a></li>
                 </ul>
             </div>
-            <div class="app">
-
-            </div>
+            <div class="display"></div>
         </main>
     </div>
+    <script src="scripts/index.js" type="module"></script>
 </body>
 </html>
