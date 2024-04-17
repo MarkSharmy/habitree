@@ -45,7 +45,8 @@ app.*.map.json
 
 
 #Express server related files
-/server/node_modules
+/web/server/node_modules
+/web/practice/SPA/server/node_modules
 
 #ReactJs related files
 # dependencies
