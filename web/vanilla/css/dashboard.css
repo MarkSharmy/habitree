@@ -1,0 +1,109 @@
+@import url("ref.css");
+
+.display {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--dark);
+}
+
+.display .left {
+    height: 100vh;
+    flex-grow: 4;
+    padding: 1rem;
+    background-color: var(--light);
+    border-top-left-radius: 1rem;
+}
+
+.display .left .date {
+    border-bottom: 2px solid var(--dark-gray);
+}
+
+.display .left .date h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: var(--poppins);
+}
+
+.display .right {
+    height: 100vh;
+    flex-grow: 3;
+    background-color: var(--dark);
+    border-top-right-radius: 1rem;
+}
+
+.tasks .task-list .task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--gray);
+    border: 2px solid var(--dark-gray);
+    border-radius: 0.5rem;
+    margin: 2rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.tasks .task-list .task:hover {
+    background-color: var(--light);
+}
+
+.tasks .task-list .task::before {
+    content: "";
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-image: url(../images/unchecked.svg);
+    background-size: cover;
+    background-position: center;
+    top: 2rem;
+    left: 0.2rem;
+}
+
+.tasks .task-list .task.checked::before {
+    background-image: url(../images/checked.svg);
+}
+
+
+.tasks .task-list .task i {
+    cursor: pointer;
+}
+
+
+.tasks .task-list .task .task-entry {
+    margin-left: 1rem;
+}
+
+
+.tasks .task-list .task .task-entry p {
+    margin: 0.5rem auto;
+    font-size: 1.2rem;
+}
+
+.tasks .task-list .task .task-entry .task-info{
+    display: flex;
+    align-items: center;
+    margin: 0.5rem auto;
+}
+
+.tasks .task-list .task .task-entry .task-info time i {
+    margin: auto 0.25rem;
+}
+
+.tasks .task-list .task .task-entry .task-info .progress {
+    margin-left: 4rem;
+}
+
+.tasks .task-list .btn-item button{
+    margin-left: 2rem;
+    padding: 0.75rem 1rem;
+    color: var(--light);
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(90deg, var(--blue), var(--bright));
+    cursor: pointer;
+}
+

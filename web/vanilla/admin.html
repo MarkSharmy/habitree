@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/panel.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
     <script src="/scripts/components/dashboard.js" defer></script>
     <link rel="shortcut icon" href="/images/favicon.svg" type="image/svg+xml">
     <title>Habitree: Dashboard</title>
@@ -116,7 +117,34 @@
                     <li><a href="/dashboard/" class="active" data-link>Home</a></li>
                 </ul>
             </div>
-            <div class="display"></div>
+            <div class="display">
+                <div class="left">
+                    <div class="date">
+                        <h2>Today, 17th of April</h2>
+                    </div>
+                    <div class="tasks">
+                        <ul class="task-list">
+                            <li class="progress-bar">
+                                1 / 4 (25%)
+                            </li>
+                            <li class="task">
+                                <article class="task-entry">
+                                    <p>Write JavaScript program</p>
+                                    <div class="task-info">
+                                        <time><i class='bx bx-time'></i>12.00</time>
+                                        <span class="progress">Progress: Doing</span>
+                                    </div>
+                                </article>
+                                <i class='bx bx-dots-vertical'></i>
+                            </li>
+                            <li class="btn-item"><button>Add</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <h2>Overview</h2>
+                </div>
+            </div>
         </main>
     </div>
     <script src="scripts/index.js" type="module"></script>
