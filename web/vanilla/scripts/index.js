@@ -1,5 +1,11 @@
 import Routes from "./routes/Routes.js";
-
+import Dashboard from "./views/Dashboard.js";
+import Calendar from "./views/Calendar.js";
+import TasksView from "./views/TasksView.js";
+import AnalyticsView from "./views/AnalyticsView.js";
+import ProjectsView from "./views/ProjectsView.js";
+import ProfileView from "./views/ProfileView.js";
+import SettingsView from "./views/SettingsView.js";
 
 
 //Defacto routing function
@@ -10,11 +16,11 @@ async function router()
     const routes = [
         {path: "/dashboard", view: Dashboard},
         {path: "/dashboard/calendar", view: Calendar},
-        {path: "/dashboard/alltasks", view: AllTasks},
-        {path: "/dashboard/analytics", view: Analytics},
-        {path: "/dashboard/projects", view: Projects},
-        {path: "/dashboard/profile", view: Profile},
-        {path: "/dashboard/settings", view: Settings},
+        {path: "/dashboard/alltasks", view: TasksView},
+        {path: "/dashboard/analytics", view: AnalyticsView},
+        {path: "/dashboard/projects", view: ProjectsView},
+        {path: "/dashboard/profile", view: ProfileView},
+        {path: "/dashboard/settings", view: SettingsView},
 
     ];
 

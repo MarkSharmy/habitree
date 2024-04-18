@@ -28,8 +28,29 @@
 .display .right {
     height: 100vh;
     flex-grow: 3;
+    padding: 2rem;
     background-color: var(--dark);
     border-top-right-radius: 1rem;
+    color: var(--light);
+}
+
+.display .right h2 {
+    font-family: var(--poppins);
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--light);
+    
+}
+
+.display .time h3 {
+    margin: 2rem auto;
+}
+
+.display .time .output {
+    font-family: var(--tech);
+    font-size: 3rem;
+    margin: 1rem auto;
+    letter-spacing: 0.5rem;
 }
 
 .tasks .task-list .task {
@@ -74,12 +95,13 @@
 
 .tasks .task-list .task .task-entry {
     margin-left: 1rem;
+    font-size: 0.7rem;
 }
 
 
 .tasks .task-list .task .task-entry p {
     margin: 0.5rem auto;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .tasks .task-list .task .task-entry .task-info{
@@ -88,12 +110,20 @@
     margin: 0.5rem auto;
 }
 
+.tasks .task-list .task .task-entry .task-info time {
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
 .tasks .task-list .task .task-entry .task-info time i {
     margin: auto 0.25rem;
+    font-weight: 600;
+    color: var(--dark-gray);
 }
 
 .tasks .task-list .task .task-entry .task-info .progress {
     margin-left: 4rem;
+    
 }
 
 .tasks .task-list .btn-item button{
