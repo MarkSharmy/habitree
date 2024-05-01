@@ -1,13 +1,13 @@
-@import url("ref.css");
+@import url("props.css");
 
-.display {
+#display-dashboard {
     width: 100%;
     display: flex;
     align-items: center;
     color: var(--dark);
 }
 
-.display .left {
+#display-dashboard .left {
     height: 100vh;
     flex-grow: 4;
     padding: 1rem;
@@ -15,17 +15,17 @@
     border-top-left-radius: 1rem;
 }
 
-.display .left .date {
+#display-dashboard .left .date {
     border-bottom: 2px solid var(--dark-gray);
 }
 
-.display .left .date h2 {
+#display-dashboard .left .date h2 {
     font-size: 1.5rem;
     font-weight: 500;
     font-family: var(--poppins);
 }
 
-.display .right {
+#display-dashboard .right {
     height: 100vh;
     flex-grow: 3;
     padding: 2rem;
@@ -34,7 +34,7 @@
     color: var(--light);
 }
 
-.display .right h2 {
+#display-dashboard .right h2 {
     font-family: var(--poppins);
     font-size: 1.5rem;
     text-align: center;
@@ -42,11 +42,11 @@
     
 }
 
-.display .time h3 {
+#display-dashboard .time h3 {
     margin: 2rem auto;
 }
 
-.display .time .output {
+#display-dashboard .time .output {
     font-family: var(--tech);
     font-size: 3rem;
     margin: 1rem auto;

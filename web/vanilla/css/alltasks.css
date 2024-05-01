@@ -1,0 +1,111 @@
+@import url("props.css");
+
+#display-tasks {
+    width: 100%;
+    height: 100vh;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem 1rem 0 0;
+    background-color: var(--light);
+}
+
+#display-tasks .tabs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tabs .tabs-radio {
+    display: none;
+}
+
+.tabs .tabs-label {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: var(--poppins);
+}
+
+.tabs .tabs-content {
+    order: 1;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: none;
+}
+
+.tabs .tabs-label.active {
+    font-weight: bold;
+    color: var(--bright);
+    border-bottom: 2px solid var(--bright);
+}
+
+.tabs .tabs-label.active+.tabs-content{
+    display: initial;
+}
+
+.tabs-content header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tabs-content .left {
+    color: var(--dark-gray);
+}
+
+.tabs-content .left span {
+    font-family: var(--poppins);
+    font-size: 1rem;
+    margin: auto 1rem;
+}
+
+.tabs-content .left span:focus {
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.tabs-content .right {
+    margin-left: 28rem;
+}
+
+.tabs-content .right button {
+    background-color: transparent;
+    font-family: var(--poppins);
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border: 2px solid var(--bright);
+    border-radius: 0.5rem;
+    color: var(--bright);
+}
+
+.tabs-content .task-list {
+    height: 30rem;
+    margin: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+
+}
+
+.tabs-content .task-list li {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--gray);
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    margin: 1rem auto;
+}
+
+.tabs-content .task-list li .item-box {
+    display: flex;
+    align-items: center;
+}
+
+.item-box * {
+    margin: auto 0.5rem;
+}
+
+.item-box h3 {
+    font-family: var(--lato);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--dark);
+}

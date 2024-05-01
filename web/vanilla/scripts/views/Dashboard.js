@@ -19,7 +19,7 @@ export default class extends AbstractView
                     <li><a href="/dashboard/" class="active" data-link>Home</a></li>
                 </ul>
             </div>
-            <div class="display">
+            <div id="display-dashboard">
                 <div class="left">
                     <div class="date">
                         <h2>Today, 17th of April</h2>

@@ -322,6 +322,10 @@ body {
     padding: 2.25rem 1.5rem;
 }
 
+main .head-title h1 {
+    color: var(--dark);
+}
+
 main .head-title .breadcrumb {
     display: flex;
     align-items: center;
@@ -345,4 +349,11 @@ main .app {
     background-color: var(--light);
     border-radius: 1rem;
 }
+
+/* .display {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--dark);
+} */
 
