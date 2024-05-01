@@ -350,10 +350,68 @@ main .app {
     border-radius: 1rem;
 }
 
-/* .display {
-    width: 100%;
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid var(--dark-gray);
+    border-radius: 1rem;
+    z-index: 1000;
+    background-color: var(--light);
+    width: 40rem;
+    height: 28rem;
+    padding: 1rem;
+}
+
+.popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup header {
+    padding: 0.5rem 1rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    color: var(--dark);
-} */
+    border-bottom: 1px solid var(--dark-gray);
+}
+
+.popup header .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+
+.popup header .btn-close {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dark-gray)
+}
+
+.popup .body {
+    padding: 0.5rem 1rem;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 100;
+}
 

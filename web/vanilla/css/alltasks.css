@@ -73,6 +73,7 @@
     border: 2px solid var(--bright);
     border-radius: 0.5rem;
     color: var(--bright);
+    cursor: pointer;
 }
 
 .tabs-content .task-list {
@@ -109,3 +110,154 @@
     font-weight: 400;
     color: var(--dark);
 }
+
+.popup header .title {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.popup header .title input {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--dark);
+    border: none;
+    outline: none;
+    height: 100%;
+    margin-left: 1rem;
+}
+
+.popup .body {
+    font-family: var(--lato);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--dark);
+}
+
+.popup .body hgroup {
+    display: flex;
+    align-items: center;
+    grid-gap: 5rem;
+}
+
+.popup .body hgroup span {
+    flex-grow: 2;
+}
+
+.popup .body hgroup span select {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--blue);
+    border:none;
+    outline:none;
+    border-bottom: 2px solid var(--blue);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.popup .body hgroup .btn-add {
+    background-color: var(--blue);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--poppins);
+    font-weight: bold;
+}
+
+.popup .body section {
+    width: 100%;
+    height: 60%;
+}
+
+.popup .body section .task-items li::before {
+    content: "";
+    position: absolute;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    border: 1px solid var(--dark-gray);
+    background-image: url(../images/unchecked.svg);
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+}
+
+.popup .body section .task-items li {
+    margin: 1rem auto;
+    padding-left: 1.5rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.popup .body section .task-items li:hover {
+    color: var(--blue);
+}
+
+.popup .body section .task-items li.checked {
+    text-decoration: line-through;
+}
+
+.popup .body section .task-items li.checked::before {
+    background-image: url(../images/checked.svg);
+}
+
+.popup .body section .add-entry input {
+    height: 2rem;
+    border: 1.5px solid var(--dark-gray);
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: var(--dark);
+    border-radius: 0.5rem;
+}
+
+.popup .body section .add-entry button {
+    background-color: #e6e6e6;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.popup .body section .add-entry button:hover {
+    background-color: var(--dark-gray);
+}
+
+.popup .body footer .btn-delete {
+    background: transparent;
+    border: 1.5px solid var(--red); 
+    color: var(--red);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--poppins);
+    font-weight: bold;
+    margin: auto 0.5rem;
+}
+
+.popup .body footer .btn-save {
+    background: linear-gradient(90deg, var(--blue), var(--bright));
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    outline: none;
+    border: none;
+    font-family: var(--poppins);
+    font-weight: bold;
+    color: white;
+    margin: auto 0.5rem;
+}
+
+
+
+
+
+
+
