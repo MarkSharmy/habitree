@@ -25,7 +25,7 @@ export default class extends AbstractView
                         <h2>Today, 17th of April</h2>
                     </div>
                     <div class="tasks">
-                        <ul class="task-list">
+                        <ul class="agenda">
                             <li class="progress-bar">
                                 1 / 4 (25%)
                             </li>

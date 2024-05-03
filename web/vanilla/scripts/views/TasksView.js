@@ -36,13 +36,13 @@ export default class extends AbstractView
                             </span>
                         </hgroup>
                         <hgroup class="right">
-                            <button>+ Add Task</button>
+                            <button data-modal-create="#modal">+ Add Task</button>
                         </hgroup>
                     </header>
                     <ul class="task-list">
-                        <li>
+                        <li data-modal-target="#modal">
                             <div class="item-box">
-                                <span class="icon"><img src="images/icons_read.svg" alt="icon"></span>
+                                <span class="icon"><img src="/images/icons_read.svg" alt="icon"></span>
                                 <h3 class="title">Read book: Flutter in Action</h3>
                                 <div class="progress-bar"></div>
                             </div>
@@ -53,19 +53,93 @@ export default class extends AbstractView
                 <input type="radio" class="tabs-radio" name="tasks" id="goals">
                 <label for="goals" class="tabs-label">Goals</label>
                 <div class="tabs-content">
-                    
+                    <header>
+                        <hgroup class="left">
+                            <span class="selection">
+                                <input type="checkbox" name="selectall" id="selectall">
+                                <label for="selectall">Select All</label>
+                            </span>
+                            <span class="sort">
+                                <label>Sort</label>
+                                <i class='bx bx-filter'></i>
+                            </span>
+                        </hgroup>
+                        <hgroup class="right">
+                            <button data-modal-target="#modal">+ Add Goal</button>
+                        </hgroup>
+                    </header>
                 </div>
                 <input type="radio" class="tabs-radio" name="tasks" id="projects">
                 <label for="projects" class="tabs-label">Projects</label>
                 <div class="tabs-content">
-                    
+                    <header>
+                        <hgroup class="left">
+                            <span class="selection">
+                                <input type="checkbox" name="selectall" id="selectall">
+                                <label for="selectall">Select All</label>
+                            </span>
+                            <span class="sort">
+                                <label>Sort</label>
+                                <i class='bx bx-filter'></i>
+                            </span>
+                        </hgroup>
+                        <hgroup class="right">
+                            <button data-modal-target="#modal">+ Add Project</button>
+                        </hgroup>
+                    </header>
                 </div>
                 <input type="radio" class="tabs-radio" name="tasks" id="resolutions">
                 <label for="resolutions" class="tabs-label">Resolutions</label>
                 <div class="tabs-content">
-                    
+                    <header>
+                        <hgroup class="left">
+                            <span class="selection">
+                                <input type="checkbox" name="selectall" id="selectall">
+                                <label for="selectall">Select All</label>
+                            </span>
+                            <span class="sort">
+                                <label>Sort</label>
+                                <i class='bx bx-filter'></i>
+                            </span>
+                        </hgroup>
+                        <hgroup class="right">
+                            <button data-modal-target="#modal">+ Add Resolution</button>
+                        </hgroup>
+                    </header>
                 </div>
             </div>
+            <div class="popup" id="modal">
+                <header>
+                    <div class="title">
+                        <span class="text">Title:</span>
+                        <input type="text" id="title" placeholder="Enter title">
+                    </div>
+                    <button data-close-button class="btn-close">&times;</button>
+                </header>
+                <article class="body">
+                    <hgroup>
+                        <label for="list-type">Type: </label>
+                        <span>
+                            <select name="list-type" id="list-type">
+                                <option value="Todo">Todo</option>
+                            </select>
+                        </span>
+                        <button class="btn-add">Do Today</button>
+                    </hgroup>
+                    <section>
+                        <ul id="task-items"></ul>
+                        <div class="add-entry">
+                            <input type="text" placeholder="add sub task" id="data-entry">
+                            <button data-btn-add>+</button>
+                        </div>
+                    </section>
+                    <footer>
+                        <button data-close-button class="btn-delete">Delete</button>
+                        <button data-close-button class="btn-save">Save</button>
+                    </footer>
+                </article>
+            </div>
+            <div id="overlay"></div>
         </div>
         `;
     }

@@ -53,7 +53,7 @@
     letter-spacing: 0.5rem;
 }
 
-.tasks .task-list .task {
+.tasks .agenda .task {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,11 +66,11 @@
     position: relative;
 }
 
-.tasks .task-list .task:hover {
+.tasks .agenda .task:hover {
     background-color: var(--light);
 }
 
-.tasks .task-list .task::before {
+.tasks .agenda .task::before {
     content: "";
     position: absolute;
     height: 1.5rem;
@@ -83,50 +83,50 @@
     left: 0.2rem;
 }
 
-.tasks .task-list .task.checked::before {
+.tasks .agenda .task.checked::before {
     background-image: url(../images/checked.svg);
 }
 
 
-.tasks .task-list .task i {
+.tasks .agenda .task i {
     cursor: pointer;
 }
 
 
-.tasks .task-list .task .task-entry {
+.tasks .agenda .task .task-entry {
     margin-left: 1rem;
     font-size: 0.7rem;
 }
 
 
-.tasks .task-list .task .task-entry p {
+.tasks .agenda .task .task-entry p {
     margin: 0.5rem auto;
     font-size: 1rem;
 }
 
-.tasks .task-list .task .task-entry .task-info{
+.tasks .agenda .task .task-entry .task-info{
     display: flex;
     align-items: center;
     margin: 0.5rem auto;
 }
 
-.tasks .task-list .task .task-entry .task-info time {
+.tasks .agenda .task .task-entry .task-info time {
     font-weight: 600;
     color: var(--dark-gray);
 }
 
-.tasks .task-list .task .task-entry .task-info time i {
+.tasks .agenda .task .task-entry .task-info time i {
     margin: auto 0.25rem;
     font-weight: 600;
     color: var(--dark-gray);
 }
 
-.tasks .task-list .task .task-entry .task-info .progress {
+.tasks .agenda .task .task-entry .task-info .progress {
     margin-left: 4rem;
     
 }
 
-.tasks .task-list .btn-item button{
+.tasks .agenda .btn-item button{
     margin-left: 2rem;
     padding: 0.75rem 1rem;
     color: var(--light);
