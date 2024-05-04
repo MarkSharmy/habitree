@@ -134,8 +134,8 @@ export default class extends AbstractView
                         </div>
                     </section>
                     <footer>
-                        <button data-close-button class="btn-delete">Delete</button>
-                        <button data-close-button class="btn-save">Save</button>
+                        <button id="delete-task" class="btn-delete" data-close-button>Delete</button>
+                        <button id="update-task" class="btn-save" data-close-button>Save</button>
                     </footer>
                 </article>
             </div>

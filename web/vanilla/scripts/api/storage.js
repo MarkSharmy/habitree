@@ -2,19 +2,40 @@ export default class Storage {
 
     static getItem(key, id)
     {
+        let database = read(key);
 
+        const data = database.find(item => { return item.id == id});
+
+        return data;
     }
-    
-    static insertItem(key, entry)
-    {
 
+    static getItems(key)
+    {
+        return read(key);
+    }
+
+    static insertItem(key, data)
+    {
+        let database = read(key);
+
+        if (!database)
+        {
+            database = [data];
+            save(key, database);
+        }
+
+        else
+        {
+            database.push(data);
+            save(database);
+        }
     }
 
 }
 
 function read(key)
 {
-    const data = localStorage.getItem(key);
+    let data = localStorage.getItem(key);
 
     if (!data)
         return null;

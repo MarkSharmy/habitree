@@ -176,6 +176,8 @@
 .popup .body section {
     width: 100%;
     height: 60%;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .popup .body section #task-items li::before {

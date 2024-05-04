@@ -1,6 +1,6 @@
 import { registerEvents } from "./client/registry.js";
-import { registerHandlers } from "./client/handlers.js";
+import { createApplicationComponents } from "./client/components.js";
 
 registerEvents();
-registerHandlers();
+createApplicationComponents();
 

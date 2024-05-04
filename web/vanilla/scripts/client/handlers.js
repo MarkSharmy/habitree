@@ -1,9 +1,13 @@
+import Storage from "../api/storage.js";
+import Key from "../enum/keys.js";
+
 export function registerHandlers()
 {
     document.addEventListener("DOMContentLoaded", () =>{
         handleModal();
         handleMenuToggle();
         handleLabelsToggle();
+
     });
 }
 
@@ -23,9 +27,12 @@ function handleModal()
     });
 
     openModalButtons.forEach(element => {
+        
         element.addEventListener("click", () => {
+
             const modal = document.querySelector(element.dataset.modalTarget);
-            openModal(modal);
+            const data = Storage.getItem(Key.TODO, element.dataset.id);
+            openModal(modal, data);
         });
     });
 
@@ -36,31 +43,7 @@ function handleModal()
         });
     });
 
-    const createModal = (modal) => {
-        if (modal == null) return;
-
-        modal.classList.add("active");
-        overlay.classList.add("active");
-    };
-
-    const openModal = (modal) => {
-        if (modal == null) return;
-
-        
-
-        title = document.getElementById("title");
-
-        modal.classList.add("active");
-        overlay.classList.add("active")
-    };
-
-
-    const closeModal = (modal) => {
-        if (modal == null) return;
-
-        modal.classList.remove("active");
-        overlay.classList.remove("active")
-    };
+    
 }
 
 function handleMenuToggle()
@@ -81,10 +64,60 @@ function handleMenuToggle()
     });
 }
 
+function createModal(modal)
+{
+    if (modal == null) return;
+
+    modal.classList.add("active");
+    overlay.classList.add("active");
+};
+
+function openModal(modal, data)
+{
+    if (modal == null) return;
+
+    const title = document.getElementById("title")
+    title.value = data.title;
+
+    const taskItems = document.getElementById("task-items");
+
+    let entries = data.entries;
+
+    entries.forEach(entry => {
+
+        let li = document.createElement("li");
+        li.classList.add("item");
+        li.setAttribute("data-list-item", "");
+        li.innerText = entry.task;
+        let span = document.createElement("span");
+        span.innerHTML = "&times;";
+        li.appendChild(span);
+        taskItems.appendChild(li);
+
+    });
+
+    modal.classList.add("active");
+    overlay.classList.add("active")
+};
+
+
+function closeModal(modal)
+{
+    if (modal == null) return;
+
+    const taskList = document.getElementById("task-items");
+    const entryTitle = document.getElementById("title");
+    entryTitle.value = "";
+    taskList.innerHTML = "";
+
+    modal.classList.remove("active");
+    overlay.classList.remove("active")
+};
+
 function handleLabelsToggle()
 {
     document.body.addEventListener("click", e => {
-
+        
         if( e.target.classList.contains("tabs-label"))
         {
             const labels = document.getElementsByClassName("tabs-label")
@@ -99,3 +132,4 @@ function handleLabelsToggle()
     });
 
 }
+

@@ -6,7 +6,7 @@ import AnalyticsView from "./views/AnalyticsView.js";
 import ProjectsView from "./views/ProjectsView.js";
 import ProfileView from "./views/ProfileView.js";
 import SettingsView from "./views/SettingsView.js";
-import { loadParsedComponents } from "./client/events.js";
+import { loadParsedComponents } from "./client/components.js";
 
 
 //Defacto routing function
@@ -47,7 +47,6 @@ async function router()
     const view = new match.route.view(getParams(match));
 
     document.querySelector("#app").innerHTML = await view.getHtml();
-    loadParsedComponents();
 }
 
 function navigateTo(url)
@@ -75,7 +74,9 @@ function pathToRegex(path)
 
 window.addEventListener("popstate", router);
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () =>
+{
+
     document.body.addEventListener("click", e => {
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
@@ -84,4 +85,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     router();
+    loadParsedComponents();
 });
