@@ -6,19 +6,18 @@ import Storage from "./storage.js";
 
 export default class Model 
 {
-    static saveTask()
+    static saveTask(input)
     {   
-        console.log("Saving new.");
-        const input = document.getElementById("title");
-
         if (input.value === "")
         {
             alert("Please enter a title!");
         }
-        else{
+        else
+        {
 
-            const listElements = [...document.getElementById("task-items").children];
-
+            const taskItems = document.querySelector(".task-items");
+            const listElements = [...taskItems.children];
+            
             let listValues = []
 
             for (let i = 0; i < listElements.length; i++)
@@ -49,4 +48,55 @@ export default class Model
         }
         
     }
+
+    static updateTask(input, id)
+    {
+        if (input.value === "")
+        {
+            alert("Please enter a title!");
+        }
+        else
+        {
+            const taskItems = document.querySelector(".task-items");
+            const listElements = [...taskItems.children];
+
+            let listValues = []
+
+            for (let i = 0; i < listElements.length; i++)
+            {
+                let span = listElements[i].lastChild;
+                listElements[i].removeChild(span);
+
+                let status = Status.NOT_DONE;
+
+                if (listElements[i].classList.contains("checked"))
+                    status = Status.DONE;
+                
+                listValues.push({
+                    index: i,
+                    task: listElements[i].innerHTML,
+                    status: status,
+                });
+            }
+
+            const key = Key.TODO;
+            
+            const data = {
+                id: id,
+                title: input.value,
+                entries: listValues,
+                status: Status.NOT_DONE,
+                time: "",
+            }
+
+            Storage.updateItem(key, data);
+        }
+    }
+
+    static deleteTask(id)
+    {
+        const key = Key.TODO;
+        Storage.deleteItem(key, id);
+    }
+
 }

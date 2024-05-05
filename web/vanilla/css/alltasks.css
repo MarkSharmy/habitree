@@ -180,7 +180,7 @@
     overflow-y: scroll;
 }
 
-.popup .body section #task-items li::before {
+.popup .body section .task-items li::before {
     content: "";
     position: absolute;
     height: 1rem;
@@ -194,26 +194,26 @@
     left: 0;
 }
 
-.popup .body section #task-items li {
+.popup .body section .task-items li {
     margin: 1rem auto;
     padding-left: 1.5rem;
     position: relative;
     cursor: pointer;
 }
 
-.popup .body section #task-items li:hover {
+.popup .body section .task-items li:hover {
     color: var(--bright);
 }
 
-.popup .body section #task-items li.checked {
+.popup .body section .task-items li.checked {
     text-decoration: line-through;
 }
 
-.popup .body section #task-items li.checked::before {
+.popup .body section .task-items li.checked::before {
     background-image: url(../images/checked.svg);
 }
 
-.popup .body section #task-items li span {
+.popup .body section .task-items li span {
     position: absolute;
     right: 10rem;
     bottom: 1rem;
@@ -225,7 +225,7 @@
     text-align: center;
 }
 
-.popup .body section #task-items li span:hover {
+.popup .body section .task-items li span:hover {
     color: var(--red);
 }
 

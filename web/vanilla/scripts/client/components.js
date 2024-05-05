@@ -11,7 +11,7 @@ export default class Components
         refreshDashboard();
     }
 
-    static createTaskModal(element)
+    static createTaskModal(container)
     {
         const popup = document.createElement("div");
         popup.classList.add("popup", "active");
@@ -37,7 +37,7 @@ export default class Components
         closeButton.setAttribute("data-close-button", "");
         closeButton.classList.add("btn-close");
         closeButton.innerHTML = "&times";
-        closeButton.addEventListener("click", () => {TaskModal.close(element)});
+        closeButton.addEventListener("click", () => {TaskModal.close(container)});
         header.appendChild(closeButton);
 
         const body = document.createElement("article");
@@ -65,7 +65,7 @@ export default class Components
         hgroup.appendChild(optionSpan);
 
         let taskItems = document.createElement("ul");
-        taskItems.setAttribute("id", "task-items");
+        taskItems.classList.add("task-items");
         section.appendChild(taskItems);
 
         let entryDiv = document.createElement("div");
@@ -73,30 +73,20 @@ export default class Components
 
         let taskInput = document.createElement("input");
         taskInput.setAttribute("type", "text");
-        taskInput.classList.add("data-entry");
         taskInput.placeholder = "Add subtask";
         entryDiv.appendChild(taskInput);
 
         let addButton = document.createElement("button");
+        addButton.addEventListener("click", () => { createSubTask(taskInput, taskItems)});
         addButton.setAttribute("data-btn-add", "");
         addButton.innerHTML = "+";
         entryDiv.appendChild(addButton);
 
         section.appendChild(entryDiv);
 
-        let deleteButton = document.createElement("button");
-        deleteButton.addEventListener("click", () => {
-            TaskModal.delete(element);
-        });
-        deleteButton.setAttribute("data-close-button", "");
-        deleteButton.classList.add("btn-delete");
-        deleteButton.setAttribute("id", "delete-task");
-        deleteButton.innerText = "Delete";
-        footer.appendChild(deleteButton);
-
         let saveButton = document.createElement("button");
         saveButton.addEventListener("click", () => {
-            TaskModal.save(element);
+            TaskModal.save(container, titleInput);
         });
         saveButton.setAttribute("data-close-button", "");
         saveButton.classList.add("btn-save");
@@ -110,8 +100,134 @@ export default class Components
 
         popup.appendChild(header);
         popup.appendChild(body);
-        element.appendChild(popup);
+        container.appendChild(popup);
 
+    }
+
+    static openTaskModal(container, id)
+    {
+        const data = Storage.getItem(Key.TODO, id);
+
+        const popup = document.createElement("div");
+        popup.classList.add("popup", "active");
+        const header = document.createElement("header");
+
+        let titleDiv = document.createElement("div");
+        titleDiv.classList.add("title");
+
+        let titleSpan = document.createElement("span");
+        titleSpan.classList.add("text");
+        titleSpan.innerText = "Title:";
+        
+        let titleInput = document.createElement("input");
+        titleInput.setAttribute("id", "title");
+        titleInput.setAttribute("type", "text");
+        titleInput.value = data.title;
+
+        titleDiv.appendChild(titleSpan);
+        titleDiv.appendChild(titleInput);
+        header.appendChild(titleDiv);
+
+        let closeButton = document.createElement("button");
+        closeButton.setAttribute("data-close-button", "");
+        closeButton.classList.add("btn-close");
+        closeButton.innerHTML = "&times";
+        closeButton.addEventListener("click", () => {TaskModal.close(container)});
+        header.appendChild(closeButton);
+
+        const body = document.createElement("article");
+        body.classList.add("body");
+
+        let hgroup = document.createElement("hgroup");
+        let section = document.createElement("section");
+        let footer = document.createElement("footer");
+
+        let label = document.createElement("label");
+        label.setAttribute("for", "list-type");
+        label.innerHTML = "Type: ";
+        hgroup.appendChild(label);
+
+        let optionSpan = document.createElement("span");
+
+        let selection = document.createElement("select");
+        selection.name = "list-type";
+
+        let option = document.createElement("option");
+        option.value = "Todo";
+        option.innerText = "Todo";
+        selection.appendChild(option)
+        optionSpan.appendChild(selection);
+        hgroup.appendChild(optionSpan);
+
+        let taskItems = document.createElement("ul");
+        taskItems.classList.add("task-items");
+        section.appendChild(taskItems);
+
+        const entries = data.entries;
+        entries.forEach(entry => {
+
+            let li = document.createElement("li");
+            li.classList.add("item");
+            li.innerText = entry.task;
+            let delSpan = document.createElement("span");
+
+            delSpan.addEventListener("click", () => {
+                const listEntry = delSpan.closest(".item");
+                taskItems.removeChild(listEntry);
+            });
+
+            delSpan.innerHTML = "&times;"
+            li.appendChild(delSpan);
+            taskItems.appendChild(li);
+
+        });
+
+        let entryDiv = document.createElement("div");
+        entryDiv.classList.add("add-entry");
+
+        let taskInput = document.createElement("input");
+        taskInput.setAttribute("type", "text");
+        taskInput.setAttribute("id", "data-entry");
+        taskInput.placeholder = "Add subtask";
+        entryDiv.appendChild(taskInput);
+
+        let addButton = document.createElement("button");
+        addButton.addEventListener("click", () => { createSubTask(taskInput, taskItems)});
+        addButton.setAttribute("data-btn-add", "");
+        addButton.innerHTML = "+";
+        entryDiv.appendChild(addButton);
+
+        section.appendChild(entryDiv);
+
+        let deleteButton = document.createElement("button");
+        deleteButton.addEventListener("click", () => {
+            TaskModal.delete(container, id);
+        });
+
+        deleteButton.setAttribute("data-close-button", "");
+        deleteButton.classList.add("btn-delete");
+        deleteButton.setAttribute("id", "delete-task");
+        deleteButton.innerText = "Delete";
+        footer.appendChild(deleteButton);
+
+        let saveButton = document.createElement("button");
+        saveButton.addEventListener("click", () => {
+            TaskModal.update(container, titleInput, id);
+        });
+
+        saveButton.setAttribute("data-close-button", "");
+        saveButton.classList.add("btn-save");
+        saveButton.setAttribute("id", "update-task");
+        saveButton.innerText = "Save";
+        footer.appendChild(saveButton);
+
+        body.appendChild(hgroup);
+        body.appendChild(section);
+        body.appendChild(footer);
+
+        popup.appendChild(header);
+        popup.appendChild(body);
+        container.appendChild(popup);
     }
 }
 
@@ -138,10 +254,10 @@ function refreshTaskPanel()
         const li = document.createElement("li");
 
         //Attach modal-target attribute to li so it opens the modal
-        li.setAttribute("data-modal-target", "#modal");
+        li.setAttribute("data-task-item", "");
 
         //Store item id in state
-        li.dataset.listID = item.id;
+        li.setAttribute("listID", item.id);
 
         //Create li item components
         const div = document.createElement("div");
@@ -152,7 +268,7 @@ function refreshTaskPanel()
         const img = document.createElement("img");
 
         //TODO: Create function to change url src based on item type
-        img.src = "/images/icons_read.svg";
+        img.src = "../images/icons_read.svg";
         img.alt = "icon";
         const h3 = document.createElement("h3");
         //Add item title 
@@ -178,47 +294,46 @@ function refreshTaskPanel()
         li.appendChild(menuSpan);
         taskList.appendChild(li);
 
-        console.log("Title:", item.title, "ID:", li.dataset.listID);
+    });
+
+    const container = document.getElementById("modal");
+    const taskListItems = document.querySelectorAll("[data-task-item]");
+
+    taskListItems.forEach(item => {
+        item.addEventListener("click", () => {
+            let id = parseInt(item.getAttribute("listID"));
+            Components.openTaskModal(container, id);
+        });
     });
 
       
 }
 
-function createSubTask()
+function createSubTask(input, taskItems)
 {
-    const addButton = document.querySelectorAll("[data-btn-add]");
-    const taskItems = document.getElementById("task-items");
+    
+    if(input.value === "")
+    {
+        alert("Please write something");
+        return;
+    }
 
-    addButton.forEach(button => {
+    let li = document.createElement("li");
+    li.classList.add("item");
+    li.innerHTML = input.value;
+    taskItems.appendChild(li);
 
-        button.addEventListener("click", ()=> {
-          
-            const input = document.getElementById("data-entry");
+    li.addEventListener("click", () => {
+        li.classList.toggle("checked");
+    });
 
-            if(input.value === "")
-            {
-                alert("Please write something");
-            }
+    let span = document.createElement("span");
+    span.innerHTML = "\u00d7";
+    li.appendChild(span);
+    input.value = "";
 
-            let li = document.createElement("li");
-            li.classList.add("item");
-            li.innerHTML = input.value;
-            taskItems.appendChild(li);
-
-            li.addEventListener("click", () => {
-                li.classList.toggle("checked");
-            });
-
-            let span = document.createElement("span");
-            span.innerHTML = "\u00d7";
-            li.appendChild(span);
-            input.value = "";
-
-            span.addEventListener("click", () => {
-                const listEntry = span.closest(".item");
-                taskItems.removeChild(listEntry);
-            });
-        });
-        
+    span.addEventListener("click", () => {
+        const listEntry = span.closest(".item");
+        taskItems.removeChild(listEntry);
     });
 }

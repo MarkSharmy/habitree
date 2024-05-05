@@ -11,20 +11,21 @@ export default class
         Components.refresh();
     }
 
-    static save(element)
+    static save(element, title)
     {
-        Model.saveTask();
+        Model.saveTask(title);
         this.close(element);
     }
 
-    static update(element)
+    static update(element, title, id)
     {
-
+        Model.updateTask(title, id);
+        this.close(element);
     }
 
-    static delete(element)
+    static delete(element, id)
     {
-        Model.deleteTask();
+        Model.deleteTask(id);
         this.close(element);
     }
 
