@@ -1,8 +1,6 @@
-import { registerHandlers } from "./handlers.js"
-import { registerPersistanceHandlers } from "../api/persistance.js";
+import { registerHandlers } from "../handlers/handlers.js"
 
 export function registerEvents()
 {
     registerHandlers();
-    registerPersistanceHandlers();
 }

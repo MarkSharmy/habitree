@@ -1,19 +1,14 @@
 import Key from "../enum/keys.js";
 import Storage from "../api/storage.js";
+import TaskModal from "../handlers/TaskModal.js";
 
 export default class Components
 {
-    static createApplicationComponents()
-    {
-        document.addEventListener("DOMContentLoaded", () => {
-            createSubTask();
-        });
-    }
 
-    static loadParsedComponents()
+    static refresh()
     {
-        onTaskPanelLoaded();
-
+        refreshTaskPanel();
+        refreshDashboard();
     }
 
     static createTaskModal(element)
@@ -42,6 +37,7 @@ export default class Components
         closeButton.setAttribute("data-close-button", "");
         closeButton.classList.add("btn-close");
         closeButton.innerHTML = "&times";
+        closeButton.addEventListener("click", () => {TaskModal.close(element)});
         header.appendChild(closeButton);
 
         const body = document.createElement("article");
@@ -70,11 +66,43 @@ export default class Components
 
         let taskItems = document.createElement("ul");
         taskItems.setAttribute("id", "task-items");
-        
+        section.appendChild(taskItems);
+
         let entryDiv = document.createElement("div");
         entryDiv.classList.add("add-entry");
 
+        let taskInput = document.createElement("input");
+        taskInput.setAttribute("type", "text");
+        taskInput.classList.add("data-entry");
+        taskInput.placeholder = "Add subtask";
+        entryDiv.appendChild(taskInput);
 
+        let addButton = document.createElement("button");
+        addButton.setAttribute("data-btn-add", "");
+        addButton.innerHTML = "+";
+        entryDiv.appendChild(addButton);
+
+        section.appendChild(entryDiv);
+
+        let deleteButton = document.createElement("button");
+        deleteButton.addEventListener("click", () => {
+            TaskModal.delete(element);
+        });
+        deleteButton.setAttribute("data-close-button", "");
+        deleteButton.classList.add("btn-delete");
+        deleteButton.setAttribute("id", "delete-task");
+        deleteButton.innerText = "Delete";
+        footer.appendChild(deleteButton);
+
+        let saveButton = document.createElement("button");
+        saveButton.addEventListener("click", () => {
+            TaskModal.save(element);
+        });
+        saveButton.setAttribute("data-close-button", "");
+        saveButton.classList.add("btn-save");
+        saveButton.setAttribute("id", "update-task");
+        saveButton.innerText = "Save";
+        footer.appendChild(saveButton);
 
         body.appendChild(hgroup);
         body.appendChild(section);
@@ -87,20 +115,22 @@ export default class Components
     }
 }
 
-function onDashboardLoaded()
+function refreshDashboard()
 {
 
 }
 
-function onTaskPanelLoaded()
+function refreshTaskPanel()
 {
-    const taskList = Array.from(document.getElementsByClassName("task-list")).pop();
+    const taskList = document.querySelector(".task-list");
 
     if (!taskList) return;
 
     const data = Storage.getItems(Key.TODO);
 
     if(!data) return;
+
+    taskList.innerHTML = "";
 
     data.forEach(item => {
 
@@ -111,7 +141,7 @@ function onTaskPanelLoaded()
         li.setAttribute("data-modal-target", "#modal");
 
         //Store item id in state
-        li.dataset.id = item.id;
+        li.dataset.listID = item.id;
 
         //Create li item components
         const div = document.createElement("div");
@@ -148,6 +178,7 @@ function onTaskPanelLoaded()
         li.appendChild(menuSpan);
         taskList.appendChild(li);
 
+        console.log("Title:", item.title, "ID:", li.dataset.listID);
     });
 
       

@@ -36,19 +36,10 @@ export default class extends AbstractView
                             </span>
                         </hgroup>
                         <hgroup class="right">
-                            <button data-modal-create="#modal">+ Add Task</button>
+                            <button data-modal-task="#modal">+ Add Task</button>
                         </hgroup>
                     </header>
-                    <ul class="task-list">
-                        <li data-modal-target="#modal">
-                            <div class="item-box">
-                                <span class="icon"><img src="/images/icons_read.svg" alt="icon"></span>
-                                <h3 class="title">Read book: Flutter in Action</h3>
-                                <div class="progress-bar"></div>
-                            </div>
-                            <span class="menu"><i class='bx bx-dots-vertical-rounded' ></i></span>
-                        </li>
-                    </ul>
+                    <ul class="task-list"></ul>
                 </div>
                 <input type="radio" class="tabs-radio" name="tasks" id="goals">
                 <label for="goals" class="tabs-label">Goals</label>
@@ -65,7 +56,7 @@ export default class extends AbstractView
                             </span>
                         </hgroup>
                         <hgroup class="right">
-                            <button data-modal-target="#modal">+ Add Goal</button>
+                            <button data-modal-goal="#modal">+ Add Goal</button>
                         </hgroup>
                     </header>
                 </div>
@@ -84,7 +75,7 @@ export default class extends AbstractView
                             </span>
                         </hgroup>
                         <hgroup class="right">
-                            <button data-modal-target="#modal">+ Add Project</button>
+                            <button data-modal-project="#modal">+ Add Project</button>
                         </hgroup>
                     </header>
                 </div>
@@ -103,7 +94,7 @@ export default class extends AbstractView
                             </span>
                         </hgroup>
                         <hgroup class="right">
-                            <button data-modal-target="#modal">+ Add Resolution</button>
+                            <button data-modal-res="#modal">+ Add Resolution</button>
                         </hgroup>
                     </header>
                 </div>

@@ -1,6 +1,6 @@
 import Storage from "../api/storage.js";
 import Key from "../enum/keys.js";
-import Components from "./components.js";
+import Components from "../client/components.js";
 
 export function registerHandlers()
 {
@@ -12,46 +12,45 @@ export function registerHandlers()
     });
 }
 
-function createModal(element)
+
+
+function createTaskModal(element)
 {
     Components.createTaskModal(element);
     const overlay = document.getElementById("overlay");
     overlay.classList.add("active");
 }
 
+function createGoalModal(element)
+{
+
+}
+
+function createProjectModal(element)
+{
+
+}
+
+function createResolutionModal(element)
+{
+
+}
+
 function handleModals()
 {
 
-    const createModalButtons = document.querySelectorAll("[data-modal-create]");
-    const openModalButtons = document.querySelectorAll("[data-modal-target]");
-    const closeModalButtons = document.querySelectorAll("[data-close-button]");
+    const taskModalButtons = document.querySelectorAll("[data-modal-task]");
+    const goalModalButtons = document.querySelectorAll("[data-modal-goal]");
+    const projectModalButtons = document.querySelectorAll("[data-modal-project]");
+    const reModalButtons = document.querySelectorAll("[data-modal-res]");
     
+    const container = document.getElementById("modal");
 
-    createModalButtons.forEach(button => {
+    taskModalButtons.forEach(button => {
         button.addEventListener("click", () => {
-            const container = document.getElementById("modal");
-            createModal(container);
+            createTaskModal(container);
         });
     });
-
-    openModalButtons.forEach(element => {
-        
-        element.addEventListener("click", () => {
-
-            const modal = document.querySelector(element.dataset.modalTarget);
-            const data = Storage.getItem(Key.TODO, element.dataset.id);
-            openModal(modal, data);
-        });
-    });
-
-    closeModalButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const modal = button.closest(".popup");
-            closeModal(modal);
-        });
-    });
-
-    
 }
 
 function handleMenuToggle()

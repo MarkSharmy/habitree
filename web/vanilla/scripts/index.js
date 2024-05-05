@@ -47,7 +47,7 @@ async function router()
     const view = new match.route.view(getParams(match));
 
     document.querySelector("#app").innerHTML = await view.getHtml();
-    Components.loadParsedComponents();
+    Components.refresh();
 }
 
 function navigateTo(url)
