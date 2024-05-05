@@ -76,6 +76,11 @@
     cursor: pointer;
 }
 
+.tabs-content .right button:hover {
+    background-color: var(--bright);
+    color: white;
+}
+
 .tabs-content .task-list {
     height: 30rem;
     margin: 1rem;

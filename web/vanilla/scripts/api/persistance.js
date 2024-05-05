@@ -17,7 +17,7 @@ export default class Model
 
             const taskItems = document.querySelector(".task-items");
             const listElements = [...taskItems.children];
-            
+
             let listValues = []
 
             for (let i = 0; i < listElements.length; i++)
@@ -41,8 +41,6 @@ export default class Model
                 status: Status.NOT_DONE,
                 time: "",
             }
-
-            console.log("data:", data);
 
             Storage.insertItem(key, data);
         }

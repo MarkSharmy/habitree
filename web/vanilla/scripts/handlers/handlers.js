@@ -2,18 +2,6 @@ import Storage from "../api/storage.js";
 import Key from "../enum/keys.js";
 import Components from "../client/components.js";
 
-export function registerHandlers()
-{
-    document.addEventListener("DOMContentLoaded", () =>{
-        handleModals();
-        handleMenuToggle();
-        handleLabelsToggle();
-
-    });
-}
-
-
-
 function createTaskModal(element)
 {
     Components.createTaskModal(element);
@@ -36,7 +24,7 @@ function createResolutionModal(element)
 
 }
 
-function handleModals()
+export const handleModals = function()
 {
 
     const taskModalButtons = document.querySelectorAll("[data-modal-task]");
@@ -53,7 +41,7 @@ function handleModals()
     });
 }
 
-function handleMenuToggle()
+export const menuToggle = function()
 {
     document.body.addEventListener("click", e => {
 
@@ -71,7 +59,7 @@ function handleMenuToggle()
     });
 }
 
-function handleLabelsToggle()
+export const labelsToggle = function()
 {
     document.body.addEventListener("click", e => {
         
@@ -89,4 +77,6 @@ function handleLabelsToggle()
     });
 
 }
+
+
 
