@@ -1,28 +1,36 @@
 import Storage from "../api/storage.js";
 import Key from "../enum/keys.js";
+import Components from "./components.js";
 
 export function registerHandlers()
 {
     document.addEventListener("DOMContentLoaded", () =>{
-        handleModal();
+        handleModals();
         handleMenuToggle();
         handleLabelsToggle();
 
     });
 }
 
-function handleModal()
+function createModal(element)
+{
+    Components.createTaskModal(element);
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("active");
+}
+
+function handleModals()
 {
 
     const createModalButtons = document.querySelectorAll("[data-modal-create]");
     const openModalButtons = document.querySelectorAll("[data-modal-target]");
     const closeModalButtons = document.querySelectorAll("[data-close-button]");
-    const overlay = document.getElementById("overlay");
+    
 
     createModalButtons.forEach(button => {
         button.addEventListener("click", () => {
-            const modal = document.querySelector(button.dataset.modalCreate);
-            createModal(modal);
+            const container = document.getElementById("modal");
+            createModal(container);
         });
     });
 
@@ -63,56 +71,6 @@ function handleMenuToggle()
         }
     });
 }
-
-function createModal(modal)
-{
-    if (modal == null) return;
-
-    modal.classList.add("active");
-    overlay.classList.add("active");
-};
-
-function openModal(modal, data)
-{
-    if (modal == null) return;
-
-    const title = document.getElementById("title")
-    title.value = data.title;
-
-    const taskItems = document.getElementById("task-items");
-
-    let entries = data.entries;
-
-    entries.forEach(entry => {
-
-        let li = document.createElement("li");
-        li.classList.add("item");
-        li.setAttribute("data-list-item", "");
-        li.innerText = entry.task;
-        let span = document.createElement("span");
-        span.innerHTML = "&times;";
-        li.appendChild(span);
-        taskItems.appendChild(li);
-
-    });
-
-    modal.classList.add("active");
-    overlay.classList.add("active")
-};
-
-
-function closeModal(modal)
-{
-    if (modal == null) return;
-
-    const taskList = document.getElementById("task-items");
-    const entryTitle = document.getElementById("title");
-    entryTitle.value = "";
-    taskList.innerHTML = "";
-
-    modal.classList.remove("active");
-    overlay.classList.remove("active")
-};
 
 function handleLabelsToggle()
 {

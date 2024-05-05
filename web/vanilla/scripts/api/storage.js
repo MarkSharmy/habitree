@@ -14,6 +14,24 @@ export default class Storage {
         return read(key);
     }
 
+    static deleteItem(key, data)
+    {
+        let {id} = data;
+        let database = read(key);
+        const item = database.find(item => { return item.id == id});
+        database.splice(database.indexOf(item), 1);
+        save(key, database);
+    }
+
+    static updateItem(key, data)
+    {
+        let {id} = data;
+        let database = read(key);
+        const item = database.find(item => { return item.id == id});
+        database[database.indexOf(item)] = data;
+        save(key, database);
+    }
+
     static insertItem(key, data)
     {
         let database = read(key);
@@ -27,7 +45,7 @@ export default class Storage {
         else
         {
             database.push(data);
-            save(database);
+            save(key, database);
         }
     }
 

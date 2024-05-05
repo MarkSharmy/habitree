@@ -1,17 +1,90 @@
 import Key from "../enum/keys.js";
 import Storage from "../api/storage.js";
 
-export function createApplicationComponents()
+export default class Components
 {
-    document.addEventListener("DOMContentLoaded", () => {
-        createSubTask();
-    });
-}
+    static createApplicationComponents()
+    {
+        document.addEventListener("DOMContentLoaded", () => {
+            createSubTask();
+        });
+    }
 
-export function loadParsedComponents()
-{
-    onTaskPanelLoaded();
+    static loadParsedComponents()
+    {
+        onTaskPanelLoaded();
 
+    }
+
+    static createTaskModal(element)
+    {
+        const popup = document.createElement("div");
+        popup.classList.add("popup", "active");
+        const header = document.createElement("header");
+
+        let titleDiv = document.createElement("div");
+        titleDiv.classList.add("title");
+
+        let titleSpan = document.createElement("span");
+        titleSpan.classList.add("text");
+        titleSpan.innerText = "Title:";
+        
+        let titleInput = document.createElement("input");
+        titleInput.setAttribute("id", "title");
+        titleInput.setAttribute("type", "text");
+        titleInput.placeholder = "Enter title";
+
+        titleDiv.appendChild(titleSpan);
+        titleDiv.appendChild(titleInput);
+        header.appendChild(titleDiv);
+
+        let closeButton = document.createElement("button");
+        closeButton.setAttribute("data-close-button", "");
+        closeButton.classList.add("btn-close");
+        closeButton.innerHTML = "&times";
+        header.appendChild(closeButton);
+
+        const body = document.createElement("article");
+        body.classList.add("body");
+
+        let hgroup = document.createElement("hgroup");
+        let section = document.createElement("section");
+        let footer = document.createElement("footer");
+
+        let label = document.createElement("label");
+        label.setAttribute("for", "list-type");
+        label.innerHTML = "Type: ";
+        hgroup.appendChild(label);
+
+        let optionSpan = document.createElement("span");
+
+        let selection = document.createElement("select");
+        selection.name = "list-type";
+
+        let option = document.createElement("option");
+        option.value = "Todo";
+        option.innerText = "Todo";
+        selection.appendChild(option)
+        optionSpan.appendChild(selection);
+        hgroup.appendChild(optionSpan);
+
+        let taskItems = document.createElement("ul");
+        taskItems.setAttribute("id", "task-items");
+        
+        let entryDiv = document.createElement("div");
+        entryDiv.classList.add("add-entry");
+
+
+
+        body.appendChild(hgroup);
+        body.appendChild(section);
+        body.appendChild(footer);
+
+        popup.appendChild(header);
+        popup.appendChild(body);
+        element.appendChild(popup);
+
+    }
 }
 
 function onDashboardLoaded()

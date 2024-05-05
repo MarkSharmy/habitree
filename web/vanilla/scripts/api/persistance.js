@@ -1,3 +1,4 @@
+import Key from "../enum/keys.js";
 import Utils from "../utils/Utils.js";
 import Status from "../enum/status.js";
 import Storage from "./storage.js";
@@ -13,66 +14,71 @@ function createOrUpdateTask()
 {
     const button = document.getElementById("update-task");
 
-    try {
-        
+    button.addEventListener("click", () => {
+
         const modal = button.closest(".popup");
 
-        const id = modal.dataset.id;
+        if (!modal) return;
 
-        if (!id)
+        const hasID = modal.dataset.id;
+
+        console.log("ID:", hasID);
+
+        if (hasID == "null")
             saveTask();
         else
             updateTask();
+    });
+        
+}
 
-    } catch (error) {
-        
-    }
-        
+function updateTask()
+{
+    console.log("Updating task");
+    
 }
 
 
 function saveTask()
 {   
-    const saveButton = document.getElementById("update-task");
+    console.log("Saving new.");
+    const input = document.querySelector("title");
 
-    saveButton.addEventListener("click", () => {
-    
-        const entryTitle = document.getElementById("title");
+    if (input.value === "")
+    {
+        alert("Please enter a title!");
+    }
+    else{
 
-        if (entryTitle.value === "")
+        const listElements = [...document.getElementById("task-items").children];
+
+        let listValues = []
+
+        for (let i = 0; i < listElements.length; i++)
         {
-            alert("Please enter a title!");
-        }
-        else{
-
-            const listElements = [...document.getElementById("task-items").children];
-
-            let listValues = []
-    
-            for (let i = 0; i < listElements.length; i++)
-            {
-                let span = listElements[i].lastChild;
-                listElements[i].removeChild(span);
-                
-                listValues.push({
-                    index: i,
-                    task: listElements[i].innerHTML,
-                    status: Status.NOT_DONE
-                });
-            }
-
-            const key = "todo";
+            let span = listElements[i].lastChild;
+            listElements[i].removeChild(span);
             
-            const data = {
-                id: Utils.generateItemID(),
-                title: entryTitle.value,
-                entries: listValues,
-                status: Status.NOT_DONE,
-                time: "",
-            }
-
-            Storage.insertItem(key, data);
+            listValues.push({
+                index: i,
+                task: listElements[i].innerHTML,
+                status: Status.NOT_DONE
+            });
         }
-    });
+
+        const key = Key.TODO;
+        
+        const data = {
+            id: Utils.generateItemID(),
+            title: input.value,
+            entries: listValues,
+            status: Status.NOT_DONE,
+            time: "",
+        }
+
+        console.log("data:", data);
+
+        Storage.insertItem(key, data);
+    }
     
 }

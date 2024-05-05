@@ -6,7 +6,7 @@ import AnalyticsView from "./views/AnalyticsView.js";
 import ProjectsView from "./views/ProjectsView.js";
 import ProfileView from "./views/ProfileView.js";
 import SettingsView from "./views/SettingsView.js";
-import { loadParsedComponents } from "./client/components.js";
+import Components from "./client/components.js";
 
 
 //Defacto routing function
@@ -47,6 +47,7 @@ async function router()
     const view = new match.route.view(getParams(match));
 
     document.querySelector("#app").innerHTML = await view.getHtml();
+    Components.loadParsedComponents();
 }
 
 function navigateTo(url)
@@ -85,5 +86,4 @@ document.addEventListener("DOMContentLoaded", () =>
     });
 
     router();
-    loadParsedComponents();
 });
