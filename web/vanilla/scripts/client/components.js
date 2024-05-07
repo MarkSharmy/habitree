@@ -12,6 +12,7 @@ export default class Components
 
 function refreshDashboard()
 {
+    console.log("Refresh");
     const agenda = document.querySelector(".agenda");
     const progressBar = document.createElement("li");
     progressBar.classList.add("progress-bar");

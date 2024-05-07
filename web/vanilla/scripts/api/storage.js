@@ -1,3 +1,5 @@
+import Key from "../enum/keys.js"
+
 export default class Storage {
 
     static getItem(key, id)
@@ -12,6 +14,19 @@ export default class Storage {
     static getItems(key)
     {
         return read(key);
+    }
+
+    static getAllItems()
+    {
+        let allTasks = [];
+        const keys = Key.getKeys();
+
+        keys.forEach( key => {
+            let data = this.getItems(key);
+            if (data) allTasks.push(...data);
+        });
+
+        return allTasks;
     }
 
     static deleteItem(key, id)
