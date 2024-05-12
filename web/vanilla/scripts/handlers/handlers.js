@@ -1,27 +1,51 @@
-import Storage from "../api/storage.js";
-import Key from "../enum/keys.js";
+import TaskModal from "../client/modals/TaskModal.js";
 import Components from "../client/components.js";
+import AgendaModal from "../client/modals/AgendaModal.js";
 
 function createTaskModal(element)
 {
-    Components.createTaskModal(element);
+    TaskModal.createTaskModal(element);
     const overlay = document.getElementById("overlay");
     overlay.classList.add("active");
 }
 
 function createGoalModal(element)
 {
-
+    GoalModal.createTaskModal(element);
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("active");
 }
 
 function createProjectModal(element)
 {
-
+    ProjectModal.createTaskModal(element);
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("active");
 }
 
 function createResolutionModal(element)
 {
+    ResolutionModal.createTaskModal(element);
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("active");
+}
 
+function openAgendaModal(element)
+{
+    AgendaModal.openModal(element);
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("active");
+}
+
+function editItem(element)
+{
+    let nodes = Array.from(element.children);
+
+    let index = nodes.indexOf(nodes.find( node => {
+        return node.classList.contains("entry");
+    }));
+
+    AgendaModal.edit(element, nodes[index]);
 }
 
 export const handleModals = function()
@@ -30,13 +54,34 @@ export const handleModals = function()
     const taskModalButtons = document.querySelectorAll("[data-modal-task]");
     const goalModalButtons = document.querySelectorAll("[data-modal-goal]");
     const projectModalButtons = document.querySelectorAll("[data-modal-project]");
-    const reModalButtons = document.querySelectorAll("[data-modal-res]");
-    
+    const resModalButtons = document.querySelectorAll("[data-modal-res]");
+    const agendaModalButtons = document.querySelectorAll("[data-modal-agenda]")
+
     const container = document.getElementById("modal");
+
+    agendaModalButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            openAgendaModal(container);
+        });
+    });
+
+    
 
     taskModalButtons.forEach(button => {
         button.addEventListener("click", () => {
             createTaskModal(container);
+        });
+    });
+}
+
+export const handleItemEdits = function ()
+{
+    const editableItems = document.querySelectorAll("[data-item-edit]");
+    const container = document.getElementById("modal");
+
+    editableItems.forEach(item => {
+        item.addEventListener("click", () => {
+            editItem(item);
         });
     });
 }

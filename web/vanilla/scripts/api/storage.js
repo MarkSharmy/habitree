@@ -1,6 +1,6 @@
 import Key from "../enum/keys.js"
 
-export default class Storage {
+export default class TaskAPI {
 
     static getItem(key, id)
     {

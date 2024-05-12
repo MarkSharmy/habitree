@@ -1,7 +1,7 @@
-import Components from "./components.js";
-import Model from "../api/persistance.js"
-import Key from "../enum/keys.js";
-import Storage from "../api/storage.js";
+import Components from "../components.js";
+import Model from "../../api/persistance.js"
+import Key from "../../enum/keys.js";
+import Storage from "../../api/storage.js";
 
 export default class
 {

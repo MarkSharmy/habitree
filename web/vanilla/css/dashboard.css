@@ -67,7 +67,9 @@
 }
 
 .tasks .agenda .task:hover {
-    background-color: var(--light);
+    background-color: var(--bright);
+    border-color: var(--dark);
+    color: white;
 }
 
 .tasks .agenda .task::before {
@@ -137,3 +139,46 @@
     cursor: pointer;
 }
 
+.tasks .agenda .btn-item button:hover{
+    background: var(--light);
+    border: 2px solid var(--bright);
+    color: var(--bright);
+}
+
+.popup header .title .icon {
+    background-color: var(--blue);
+    padding: 0.25rem;
+    color: white;
+    border-radius: 0.25rem;
+}
+
+.popup .body .items li {
+    cursor: pointer;
+    margin: 1.5rem auto;
+}
+
+.popup .body .items li .title {
+    font-weight: bold;
+}
+
+.popup .body .items li input {
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+}
+
+.popup .body footer .btn-shelve{
+    background: transparent;
+    border: 1.5px solid var(--orange); 
+    color: var(--orange);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--poppins);
+    font-weight: bold;
+}
+
+.popup .body footer .btn-shelve:hover {
+    background-color: var(--orange);
+    color: white;
+}

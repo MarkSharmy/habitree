@@ -1,5 +1,5 @@
 import Routes from "./routes/Routes.js";
-import Dashboard from "./views/Dashboard.js";
+import DashboardView from "./views/DashboardView.js";
 import Calendar from "./views/Calendar.js";
 import TasksView from "./views/TasksView.js";
 import AnalyticsView from "./views/AnalyticsView.js";
@@ -15,7 +15,7 @@ async function router()
     //const routes = Routes.getRoutes();
     
     const routes = [
-        {path: "/dashboard", view: Dashboard},
+        {path: "/dashboard", view: DashboardView},
         {path: "/dashboard/calendar", view: Calendar},
         {path: "/dashboard/alltasks", view: TasksView},
         {path: "/dashboard/analytics", view: AnalyticsView},

@@ -99,40 +99,6 @@ export default class extends AbstractView
                     </header>
                 </div>
             </div>
-            <div id="modal">
-                <div class="popup">
-                    <header>
-                        <div class="title">
-                            <span class="text">Title:</span>
-                            <input type="text" id="title" placeholder="Enter title">
-                        </div>
-                        <button data-close-button class="btn-close">&times;</button>
-                    </header>
-                    <article class="body">
-                        <hgroup>
-                            <label for="list-type">Type: </label>
-                            <span>
-                                <select name="list-type" id="list-type">
-                                    <option value="Todo">Todo</option>
-                                </select>
-                            </span>
-                            <button class="btn-add">Do Today</button>
-                        </hgroup>
-                        <section>
-                            <ul id="task-items"></ul>
-                            <div class="add-entry">
-                                <input type="text" placeholder="add sub task" id="data-entry">
-                                <button data-btn-add>+</button>
-                            </div>
-                        </section>
-                        <footer>
-                            <button id="delete-task" class="btn-delete" data-close-button>Delete</button>
-                            <button id="update-task" class="btn-save" data-close-button>Save</button>
-                        </footer>
-                    </article>
-                </div>
-            </div>
-            <div id="overlay"></div>
         </div>
         `;
     }

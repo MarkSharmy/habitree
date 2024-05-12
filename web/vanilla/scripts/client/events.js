@@ -11,7 +11,7 @@ export default class EventBus
         return this.eventbus;
     }
 
-    subsribeEvent(event)
+    subscribeEvent(event)
     {
         this.subscribedEvents.push(event);
     }

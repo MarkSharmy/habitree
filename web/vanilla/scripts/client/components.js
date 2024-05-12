@@ -1,8 +1,8 @@
+import Status from "../enum/status.js";
 import DashboardUtil from "../handlers/DashboardUtil.js";
 
 export default class Components
 {
-
     static refresh()
     {
         refreshTaskPanel();
@@ -12,17 +12,68 @@ export default class Components
 
 function refreshDashboard()
 {
-    console.log("Refresh");
+    //Get UL element with the Today's list of tasks
     const agenda = document.querySelector(".agenda");
+    agenda.innerHTML = ""; //Reset agenda for every refresh
+
     const progressBar = document.createElement("li");
     progressBar.classList.add("progress-bar");
+    progressBar.innerText = "1 / 4 (25%)";
+
     agenda.appendChild(progressBar);
 
     const tasks = DashboardUtil.getCurrentAgenda();
 
     tasks.forEach(task => {
-        
+        console.log(task);
+
+        const listContainer = document.createElement("li");
+        listContainer.setAttribute("data-modal-agenda", "");
+        listContainer.classList.add("task");
+
+        const article = document.createElement("article");
+        article.classList.add("task-entry");
+
+        let title = document.createElement("p");
+        title.innerText = task.title;
+        article.appendChild(title);
+
+        let taskInfo = document.createElement("div");
+        taskInfo.classList.add("task-info");
+
+        let time = document.createElement("time");
+        taskInfo.appendChild(time);
+
+        let clock = document.createElement("i");
+        clock.classList.add("bx", "bx-time");
+        taskInfo.appendChild(clock);
+
+        let progress = document.createElement("span");
+        progress.classList.add("progress");
+        progress.innerText = "Progress: " + Status.getStatus(task.status);
+        taskInfo.appendChild(progress);
+
+        let menu = document.createElement("i");
+        menu.classList.add("bx", "bx-dots-vertical");
+
+        article.appendChild(taskInfo);
+        listContainer.appendChild(article);
+        listContainer.appendChild(menu);
+        agenda.appendChild(listContainer);
+
     });
+
+    const btnItem = document.createElement("li");
+    btnItem.classList.add("btn-item");
+
+    const addButton = document.createElement("button");
+    addButton.innerText = "Add";
+    addButton.addEventListener("click", () => {
+
+    });
+
+    btnItem.appendChild(addButton);
+    agenda.appendChild(btnItem);
 }
 
 function refreshTaskPanel()
