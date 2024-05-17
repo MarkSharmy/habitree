@@ -59,6 +59,7 @@ export default class extends AbstractView
                             <button data-modal-goal="#modal">+ Add Goal</button>
                         </hgroup>
                     </header>
+                    <ul class="goals-list"></ul>
                 </div>
                 <input type="radio" class="tabs-radio" name="tasks" id="projects">
                 <label for="projects" class="tabs-label">Projects</label>

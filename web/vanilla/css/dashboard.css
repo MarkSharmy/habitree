@@ -157,6 +157,10 @@
     margin: 1.5rem auto;
 }
 
+.popup .body .items li i {
+    margin-left: 0.25rem;
+}
+
 .popup .body .items li .title {
     font-weight: bold;
 }

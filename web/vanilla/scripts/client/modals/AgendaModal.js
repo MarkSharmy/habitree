@@ -2,6 +2,7 @@ import Components from "../components.js";
 import Model from "../../api/persistance.js"
 import Key from "../../enum/keys.js";
 import Storage from "../../api/storage.js";
+import { handleItemEdits } from "../../handlers/handlers.js";
 
 export default class 
 {
@@ -27,7 +28,10 @@ export default class
 
     static close(element)
     {
-
+        element.innerHTML = "";
+        const overlay = document.getElementById("overlay");
+        overlay.classList.remove("active");
+        Components.refresh();
     }
 
     static update(element)
@@ -65,6 +69,10 @@ export default class
         header.appendChild(titleDiv);
 
         let closeButton = document.createElement("button");
+        closeButton.addEventListener("click", () => {
+            this.close(container);
+        });
+        closeButton.classList.add("btn-close");
         closeButton.innerHTML = "&times;";
         header.appendChild(closeButton);
 
@@ -78,14 +86,14 @@ export default class
         let taskItem = document.createElement("li");
         taskItem.setAttribute("data-item-edit", "");
         
-        let span_title = document.createElement("span");
-        span_title.classList.add("title");
-        span_title.textContent = "Task -";
-        taskItem.appendChild(span_title);
+        let span_title_a = document.createElement("span");
+        span_title_a.classList.add("title");
+        span_title_a.textContent = "Task - ";
+        taskItem.appendChild(span_title_a);
 
         let span_entry_a = document.createElement("span");
         span_entry_a.classList.add("entry");
-        span_entry_a.textContent = "Read Chapter 5";
+        span_entry_a.textContent = "Read Book";
         taskItem.appendChild(span_entry_a);
 
         let icon_a = document.createElement("i");
@@ -95,19 +103,54 @@ export default class
         let scheduleItem = document.createElement("li");
         scheduleItem.setAttribute("data-item-edit", "");
 
+        let span_title_b = document.createElement("span");
+        span_title_b.classList.add("title");
+        span_title_b.textContent = "Schedule - ";
+        scheduleItem.appendChild(span_title_b);
+
         let span_entry_b = document.createElement("span");
         span_entry_b.classList.add("entry");
-        span_entry_b.textContent = "Read Chapter 5";
+        span_entry_b.textContent = "12:00";
         scheduleItem.appendChild(span_entry_b);
 
         let icon_b = document.createElement("i");
-        icon_a.classList.add("bx", "bxs-edit-alt");
+        icon_b.classList.add("bx", "bxs-edit-alt");
         scheduleItem.appendChild(icon_b);
 
         let progressItem = document.createElement("li");
         progressItem.setAttribute("data-item-edit", "")
+
+        let span_title_c = document.createElement("span");
+        span_title_c.classList.add("title");
+        span_title_c.textContent = "Progress - ";
+        progressItem.appendChild(span_title_c);
+
+        let span_entry_c = document.createElement("span");
+        span_entry_c.classList.add("entry");
+        span_entry_c.textContent = "DOING";
+        progressItem.appendChild(span_entry_c);
+
+        let icon_c = document.createElement("i");
+        icon_c.classList.add("bx", "bxs-edit-alt");
+        progressItem.appendChild(icon_c);
+
+
         let timeItem = document.createElement("li");
-        timeItem.setAttribute("data-item-edit", "")
+        timeItem.setAttribute("data-item-edit", "");
+
+        let span_title_d = document.createElement("span");
+        span_title_d.classList.add("title");
+        span_title_d.textContent = "Time Complete - ";
+        timeItem.appendChild(span_title_d);
+
+        let span_entry_d = document.createElement("span");
+        span_entry_d.classList.add("entry");
+        span_entry_d.textContent = "00:56;47";
+        timeItem.appendChild(span_entry_d);
+
+        let icon_d = document.createElement("i");
+        icon_d.classList.add("bx", "bxs-edit-alt");
+        timeItem.appendChild(icon_d);
 
         items.appendChild(taskItem);
         items.appendChild(scheduleItem);
@@ -135,6 +178,7 @@ export default class
         popup.appendChild(body);
         popup.classList.add("active");
         container.appendChild(popup);
+        handleItemEdits();
     }
 
 }

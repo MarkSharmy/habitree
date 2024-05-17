@@ -1,5 +1,9 @@
+import Key from "../enum/keys.js";
 import Status from "../enum/status.js";
+import Storage from "../api/storage.js"
 import DashboardUtil from "../handlers/DashboardUtil.js";
+import { handleModals } from "../handlers/handlers.js";
+import Utils from "../utils/Utils.js";
 
 export default class Components
 {
@@ -7,6 +11,8 @@ export default class Components
     {
         refreshTaskPanel();
         refreshDashboard();
+        refreshGoalsPanel();
+        handleModals();
     }
 }
 
@@ -14,6 +20,9 @@ function refreshDashboard()
 {
     //Get UL element with the Today's list of tasks
     const agenda = document.querySelector(".agenda");
+    
+    if (!agenda) return;
+
     agenda.innerHTML = ""; //Reset agenda for every refresh
 
     const progressBar = document.createElement("li");
@@ -147,6 +156,76 @@ function refreshTaskPanel()
     });
 
       
+}
+
+function refreshGoalsPanel()
+{
+    const goalsList = document.querySelector(".goals-list");
+
+    if (!goalsList) return;
+
+    const data = Storage.getItems(Key.GOAL);
+
+    if (!data) return;
+
+    goalsList.innerHTML = "";
+
+    data.forEach(goal => {
+
+        const li = document.createElement("li");
+        li.classList.add("goal");
+        goalsList.appendChild(li);
+
+        const itemBox = document.createElement("div");
+        itemBox.classList.add("item-box");
+        li.appendChild(itemBox);
+
+        let icon_span = document.createElement("span");
+        icon_span.classList.add("icon");
+        itemBox.appendChild(icon_span);
+
+        let icon = document.createElement("img");
+        icon.src = Utils.getIcon(goal.type);
+        icon.alt = "icon";
+        icon.height = "36";
+        icon_span.appendChild(icon);
+
+        let infoDiv = document.createElement("info");
+        infoDiv.classList.add("info");
+        itemBox.appendChild(infoDiv);
+
+        let title = document.createElement("h4");
+        title.classList.add("title");
+        title.textContent = goal.title;
+        infoDiv.appendChild(title);
+
+        let latest = document.createElement("p");
+        latest.classList.add("latest");
+        latest.textContent = Utils.getCurrent(goal);
+        infoDiv.appendChild(latest);
+
+        let progressDiv = document.createElement("div");
+        progressDiv.classList.add("progress");
+        itemBox.appendChild(progressDiv);
+
+        let meter = document.createElement("span");
+        meter.classList.add("meter");
+        progressDiv.appendChild(meter);
+
+        let bar = document.createElement("span");
+        bar.classList.add("bar");
+        Utils.renderProgress(goal, bar);
+        meter.appendChild(bar);
+
+        let text = document.createElement("span");
+        text.classList.add("text");
+        text.textContent = `${Utils.getNumItemsDone(goal)} / ${Utils.getNumItemsTotal(goal)} (${Utils.getItemsDonePercentile(goal)})`;
+        progressDiv.appendChild(text);
+
+        let menu = document.createElement("i");
+        menu.classList.add("bx", "bx-dots-vertical-rounded");
+        li.appendChild(menu);
+    });
 }
 
 

@@ -13,15 +13,74 @@ export default class
         Components.refresh();
     }
 
-    static save(element, title)
+    static save(element)
     {
-        Model.saveTask(title);
+        const taskItems = document.querySelector(".task-items");
+        const listElements = [...taskItems.children];
+
+        let listValues = []
+
+        for (let i = 0; i < listElements.length; i++)
+        {
+            let span = listElements[i].lastChild;
+            listElements[i].removeChild(span);
+            
+            listValues.push({
+                index: i,
+                task: listElements[i].innerHTML,
+                status: Status.NOT_DONE
+            });
+        }
+
+        const key = Key.TODO;
+        
+        const data = {
+            id: Utils.generateItemID(),
+            title: input.value,
+            entries: listValues,
+            status: Status.NOT_DONE,
+            time: "",
+        }
+
+        Storage.insertItem(key, data);
         this.close(element);
     }
 
-    static update(element, title, id)
+    static update(element, id)
     {
-        Model.updateTask(title, id);
+        const taskItems = document.querySelector(".task-items");
+        const listElements = [...taskItems.children];
+
+        let listValues = []
+
+        for (let i = 0; i < listElements.length; i++)
+        {
+            let span = listElements[i].lastChild;
+            listElements[i].removeChild(span);
+
+            let status = Status.NOT_DONE;
+
+            if (listElements[i].classList.contains("checked"))
+                status = Status.DONE;
+            
+            listValues.push({
+                index: i,
+                task: listElements[i].innerHTML,
+                status: status,
+            });
+        }
+
+        const key = Key.TODO;
+        
+        const data = {
+            id: id,
+            title: input.value,
+            entries: listValues,
+            status: Status.NOT_DONE,
+            time: "",
+        }
+
+        Storage.updateItem(key, data);
         this.close(element);
     }
 

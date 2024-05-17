@@ -1,19 +1,22 @@
 import TaskModal from "../client/modals/TaskModal.js";
 import Components from "../client/components.js";
 import AgendaModal from "../client/modals/AgendaModal.js";
+import GoalModal from "../client/modals/GoalModal.js";
 
 function createTaskModal(element)
 {
     TaskModal.createTaskModal(element);
     const overlay = document.getElementById("overlay");
     overlay.classList.add("active");
+    Components.refresh();
 }
 
 function createGoalModal(element)
 {
-    GoalModal.createTaskModal(element);
+    GoalModal.createGoalModal(element);
     const overlay = document.getElementById("overlay");
     overlay.classList.add("active");
+    Components.refresh();
 }
 
 function createProjectModal(element)
@@ -72,12 +75,17 @@ export const handleModals = function()
             createTaskModal(container);
         });
     });
+
+    goalModalButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            createGoalModal(container);
+        });
+    });
 }
 
 export const handleItemEdits = function ()
 {
     const editableItems = document.querySelectorAll("[data-item-edit]");
-    const container = document.getElementById("modal");
 
     editableItems.forEach(item => {
         item.addEventListener("click", () => {
@@ -118,6 +126,7 @@ export const labelsToggle = function()
             }
 
             e.target.classList.add("active");
+            Components.refresh();
         }
     });
 

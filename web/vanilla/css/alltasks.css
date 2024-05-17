@@ -110,6 +110,66 @@
     align-items: center;
 }
 
+.tabs-content .goals-list {
+    height: 30rem;
+    margin: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+
+}
+
+.tabs-content .goals-list li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--gray);
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    margin: 1rem auto;
+    cursor: pointer;
+}
+
+.tabs-content .goals-list li:hover {
+    background-color: var(--dark-gray);
+}
+
+.tabs-content .goals-list li .item-box{
+    display: flex;
+    align-items: center;
+}
+
+.tabs-content .goals-list li .item-box .progress
+{
+    display: flex;
+    align-items: center;
+}
+
+.item-box .progress .meter {
+    position: relative;
+    width: 15rem;
+    height: 0.5rem;
+    background-color: #e0e0e0;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+
+
+.item-box .progress .meter .bar {
+    position: absolute;
+    top: 0;
+    left: -0.5rem;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--bright));
+    border-radius: 0.25rem;
+    transition: width 0.5s ease-in-out;
+}
+
+
+
+
 .item-box * {
     margin: auto 0.5rem;
 }
@@ -155,6 +215,7 @@
 }
 
 .popup .body hgroup span select {
+    margin-left: 0.5rem;
     font-size: 1rem;
     font-weight: bold;
     color: var(--blue);
@@ -180,10 +241,11 @@
 
 .popup .body section {
     width: 100%;
-    height: 60%;
+    height: 50%;
     overflow: hidden;
     overflow-y: scroll;
 }
+
 
 .popup .body section .task-items li::before {
     content: "";
@@ -254,6 +316,75 @@
     outline: none;
     font-size: 1rem;
     font-weight: bold;
+}
+
+.popup .body section .milestones li::before {
+    content: "";
+    position: absolute;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    border: 1px solid var(--dark-gray);
+    background-image: url(../images/unchecked.svg);
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+}
+
+.popup .body section .milestones li {
+    margin: 1rem auto;
+    padding-left: 1.5rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.popup .body section .milestones li:hover {
+    color: var(--bright);
+}
+
+.popup .body section .milestones li.checked {
+    text-decoration: line-through;
+}
+
+.popup .body section .milestones li.checked::before {
+    background-image: url(../images/checked.svg);
+}
+
+.popup .body section .milestones li .btn-delete {
+    background: transparent;
+    border: 1.5px solid var(--red); 
+    padding: 0 0.5rem;
+    color: var(--red);
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--poppins);
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.popup .body section .milestones li .btn-delete:hover {
+    background-color: var(--red);
+    color: white;
+}
+
+.popup .body section .milestones li .btn-push {
+    background: transparent;
+    border: 1.5px solid var(--blue); 
+    padding: 0 0.5rem;
+    color: var(--blue);
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--poppins);
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.popup .body section .milestones li .btn-push:hover {
+    background-color: var(--blue);
+    color: white;
 }
 
 .popup .body section .add-entry button:hover {

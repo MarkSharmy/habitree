@@ -112,69 +112,154 @@
                 <ul class="breadcrumb">
                     <li><a href="/dashboard/">Dashboard</a></li>
                     <li><i class="bx bx-chevron-right"></i></li>
-                    <li><a href="/dashboard/" class="active" data-link>Home</a></li>
+                    <li><a href="/dashboard/" class="active" data-link>All Tasks</a></li>
                 </ul>
             </div>
-            <div id="display-dashboard">
-                <div class="left">
-                    <div class="date">
-                        <h2>Today, 17th of April</h2>
+            <div id="display-tasks">
+                <div class="tabs">
+                    <input type="radio" class="tabs-radio" name="tasks" id="miscs">
+                    <label for="miscs" class="tabs-label toggle active">Tasks</label>
+                    <div class="tabs-content">
+                        <header>
+                            <hgroup class="left">
+                                <span class="selection">
+                                    <input type="checkbox" name="selectall" id="selectall">
+                                    <label for="selectall">Select All</label>
+                                </span>
+                                <span class="sort">
+                                    <label>Sort</label>
+                                    <i class='bx bx-filter'></i>
+                                </span>
+                            </hgroup>
+                            <hgroup class="right">
+                                <button data-modal-task="#modal">+ Add Task</button>
+                            </hgroup>
+                        </header>
+                        <ul class="task-list"></ul>
                     </div>
-                    <div class="tasks">
-                        <ul class="agenda">
-                            <li class="progress-bar">
-                                1 / 4 (25%)
-                            </li>
-                            <li class="task">
-                                <article class="task-entry">
-                                    <p>Write JavaScript program</p>
-                                    <div class="task-info">
-                                        <time><i class='bx bx-time'></i>12.00</time>
-                                        <span class="progress">Progress: Doing</span>
+                    <input type="radio" class="tabs-radio" name="tasks" id="goals">
+                    <label for="goals" class="tabs-label">Goals</label>
+                    <div class="tabs-content">
+                        <header>
+                            <hgroup class="left">
+                                <span class="selection">
+                                    <input type="checkbox" name="selectall" id="selectall">
+                                    <label for="selectall">Select All</label>
+                                </span>
+                                <span class="sort">
+                                    <label>Sort</label>
+                                    <i class='bx bx-filter'></i>
+                                </span>
+                            </hgroup>
+                            <hgroup class="right">
+                                <button data-modal-goal="#modal">+ Add Goal</button>
+                            </hgroup>
+                        </header>
+                        <ul class="goals-list">
+                            <li class="goal">
+                                <div class="item-box">
+                                    <span class="icon">
+                                        <img src="images/icons_read.svg" height="36px" alt="icon">
+                                    </span>
+                                    <div class="info">
+                                        <h4 class="title">Read book: Flutter for beginners</h4>
+                                        <p class="latest">Current: Chapter 4</p>
                                     </div>
-                                </article>
-                                <i class='bx bx-dots-vertical'></i>
+                                    <div class="progress">
+                                        <div class="meter">
+                                            <div class="bar"></div>
+                                        </div>
+                                        <span class="text"> 4 / 11 (25%)</span>
+                                    </div>
+                                </div>
+                                <i class='bx bx-dots-vertical-rounded'></i>
                             </li>
-                            <li class="btn-item"><button>Add</button></li>
                         </ul>
                     </div>
-                </div>
-                <div class="right">
-                    <h2>Overview</h2>
-                    <div class="time">
-                        <h3>Current Output:</h3>
-                        <div class="output">04:56:47</div>
-                    <h3>Avg. Output 7(days):</h3>
-                    <div class="line-chart"></div>
-                        <h3>Efficiency:</h3>
-                    <div class="progress-circle"></div>
-                </div>
-                <div id="modal">
-                    <div class="popup active">
+                    <input type="radio" class="tabs-radio" name="tasks" id="projects">
+                    <label for="projects" class="tabs-label">Projects</label>
+                    <div class="tabs-content">
                         <header>
-                            <div class="title">
-                                <span class="icon">GOAL</span>
-                                <span class="text">Read Book: Flutter for Beginners</span>
-                            </div>
-                            <button data-close-button class="btn-close">&times;</button>
+                            <hgroup class="left">
+                                <span class="selection">
+                                    <input type="checkbox" name="selectall" id="selectall">
+                                    <label for="selectall">Select All</label>
+                                </span>
+                                <span class="sort">
+                                    <label>Sort</label>
+                                    <i class='bx bx-filter'></i>
+                                </span>
+                            </hgroup>
+                            <hgroup class="right">
+                                <button data-modal-project="#modal">+ Add Project</button>
+                            </hgroup>
                         </header>
-                        <article class="body">
-                            <ul class="items">
-                                <li data-item-edit><span class="title">Task -</span><span class="entry"> Read Chapter 5: Functions </span><i class="bx bxs-alt"></i></li>
-                                <li data-item-edit><span class="title">Schedule -</span><span class="entry"> 12:00 </span><i class="bx bxs-edit-alt"></i></li>
-                                <li data-item-edit><span class="title">Progress -</span><span class="entry"> Doing </span><i class="bx bxs-edit-alt"></i></li>
-                                <li data-item-edit><span class="title">Time Completed -</span><span class="entry"> 00:56:47 </span><i class="bx bxs-edit-alt"></i></li>
-                            </ul>
-                            <footer>
-                                <button id="shelve" class="btn-shelve" data-close-button>Shelve</button>
-                                <button id="delete" class="btn-delete" data-close-button>Delete</button>
-                            </footer>
-                        </article>
+                    </div>
+                    <input type="radio" class="tabs-radio" name="tasks" id="resolutions">
+                    <label for="resolutions" class="tabs-label">Resolutions</label>
+                    <div class="tabs-content">
+                        <header>
+                            <hgroup class="left">
+                                <span class="selection">
+                                    <input type="checkbox" name="selectall" id="selectall">
+                                    <label for="selectall">Select All</label>
+                                </span>
+                                <span class="sort">
+                                    <label>Sort</label>
+                                    <i class='bx bx-filter'></i>
+                                </span>
+                            </hgroup>
+                            <hgroup class="right">
+                                <button data-modal-res="#modal">+ Add Resolution</button>
+                            </hgroup>
+                        </header>
                     </div>
                 </div>
-                <div id="overlay" class="active"></div>
             </div>
         </main>
+        <div id="modal">
+            <div class="popup">
+                <header>
+                    <span class="title">Title: <input type="text" placeholder="Add title"></span>
+                    <button data-modal-close class="btn-close">&times;</button>
+                </header>
+                <article class="body">
+                    <hgroup>
+                        <span class="text">
+                            <label for="list-type">Type: </label>
+                            <select name="type" id="type">
+                                <option value="Read">Read</option>
+                                <option value="Watch">Watch</option>
+                                <option value="Note">Note</option>
+                                <option value="Practice">Practice</option>
+                            </select>
+                        </span>
+                        <button class="btn-add">Do Today</button>
+                    </hgroup>
+                    <section>
+                        <ul class="milestones">
+                            <li class="milestone">Chapter 1</li>
+                            <li class="milestone">Chapter 2</li>
+                            <li class="milestone">Chapter 3</li>
+                            <li class="milestone">Chapter 4</li>
+                            <li class="milestone">Chapter 5</li>
+                            <li class="milestone">Chapter 6</li>
+                            <li class="milestone">Chapter 7</li>
+                            <li class="milestone">Chapter 8</li>
+                        </ul>
+                        <div class="add-entry">
+                            <input type="text" placeholder="Add milestone">
+                            <button data-btn-add>+</button>
+                        </div>
+                    </section>
+                    <footer>
+                        <button data-modal-close class="btn-delete">Delete</button>
+                        <button data-modal-close class="btn-save">Save</button>
+                    </footer>
+                </article>
+            </div>
+        </div>
+        <div id="overlay" class="active"></div>
     </div>
     <script type="module" src="scripts/main.js"></script>
 </body>
