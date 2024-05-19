@@ -4,6 +4,8 @@ import Storage from "../api/storage.js"
 import DashboardUtil from "../handlers/DashboardUtil.js";
 import { handleModals } from "../handlers/handlers.js";
 import Utils from "../utils/Utils.js";
+import TaskModal from "./modals/TaskModal.js";
+import GoalModal from "./modals/GoalModal.js";
 
 export default class Components
 {
@@ -106,7 +108,7 @@ function refreshTaskPanel()
         li.setAttribute("data-task-item", "");
 
         //Store item id in state
-        li.setAttribute("listID", item.id);
+        li.setAttribute("task-id", item.id);
 
         //Create li item components
         const div = document.createElement("div");
@@ -150,8 +152,8 @@ function refreshTaskPanel()
 
     taskListItems.forEach(item => {
         item.addEventListener("click", () => {
-            let id = parseInt(item.getAttribute("listID"));
-            Components.openTaskModal(container, id);
+            let id = parseInt(item.getAttribute("task-id"));
+            TaskModal.openTaskModal(container, id);
         });
     });
 
@@ -173,7 +175,9 @@ function refreshGoalsPanel()
     data.forEach(goal => {
 
         const li = document.createElement("li");
+        li.setAttribute("data-goal-item", "");
         li.classList.add("goal");
+        li.setAttribute("goal-id", goal.id);
         goalsList.appendChild(li);
 
         const itemBox = document.createElement("div");
@@ -225,6 +229,16 @@ function refreshGoalsPanel()
         let menu = document.createElement("i");
         menu.classList.add("bx", "bx-dots-vertical-rounded");
         li.appendChild(menu);
+    });
+
+    const container = document.getElementById("modal");
+    const goalItems = document.querySelectorAll("[data-goal-item]");
+
+    goalItems.forEach(goal => {
+        goal.addEventListener("click", () => {
+            let id = parseInt(goal.getAttribute("goal-id"));
+            GoalModal.open(container, id);
+        });
     });
 }
 

@@ -25,7 +25,11 @@ export default class {
         let entries = data.entries;
 
         let current = entries.find(entry => {return entry.status != Status.DONE});
-        return current.task;
+        
+        if (current == null)
+            return entries[entries.length]
+        else
+            return current.task;
     }
 
     static renderProgress(data, progressNode)

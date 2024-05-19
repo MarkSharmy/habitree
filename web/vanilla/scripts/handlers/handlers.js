@@ -6,16 +6,12 @@ import GoalModal from "../client/modals/GoalModal.js";
 function createTaskModal(element)
 {
     TaskModal.createTaskModal(element);
-    const overlay = document.getElementById("overlay");
-    overlay.classList.add("active");
     Components.refresh();
 }
 
 function createGoalModal(element)
 {
-    GoalModal.createGoalModal(element);
-    const overlay = document.getElementById("overlay");
-    overlay.classList.add("active");
+    GoalModal.create(element);
     Components.refresh();
 }
 
