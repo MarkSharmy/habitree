@@ -3,6 +3,7 @@ export default class Key {
     static GOAL = "goals";
     static PROJECT = "projects";
     static RES = "resolution";
+    static CALENDAR = "calendar";
 
     static getKeys()
     {
@@ -11,6 +12,7 @@ export default class Key {
         keys.push(this.GOAL);
         keys.push(this.PROJECT);
         keys.push(this.RES);
+        keys.push(this.CALENDAR);
 
         return keys;
     }

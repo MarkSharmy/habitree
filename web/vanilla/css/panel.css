@@ -419,3 +419,19 @@ main .app {
     z-index: 100;
 }
 
+.btn-push {
+    background: transparent;
+    border: 1.5px solid var(--blue); 
+    padding: 0.5rem;
+    color: var(--blue);
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--poppins);
+    font-weight: bold;
+}
+
+.btn-push:hover {
+    background-color: var(--blue);
+    color: white;
+}

@@ -6,6 +6,7 @@ import { handleModals } from "../handlers/handlers.js";
 import Utils from "../utils/Utils.js";
 import TaskModal from "./modals/TaskModal.js";
 import GoalModal from "./modals/GoalModal.js";
+import Calendar from "./Calendar.js";
 
 export default class Components
 {
@@ -33,10 +34,14 @@ function refreshDashboard()
 
     agenda.appendChild(progressBar);
 
-    const tasks = DashboardUtil.getCurrentAgenda();
+    let date = Calendar.getCurrentDate();
+    console.log("Refresh Agenda:", Calendar.getAgenda(date));
 
+    return;
     tasks.forEach(task => {
-        console.log(task);
+        console.log("Task:", task);
+
+        return;
 
         const listContainer = document.createElement("li");
         listContainer.setAttribute("data-modal-agenda", "");

@@ -1,9 +1,10 @@
 import Utils from "../../utils/Utils.js";
 import Status from "../../enum/status.js";
 import Components from "../components.js";
-import Model from "../../api/persistance.js"
 import Key from "../../enum/keys.js";
 import Storage from "../../api/storage.js";
+import VirualTask from "../VirualTask.js";
+import AgendaModal from "./AgendaModal.js";
 
 export default class 
 {
@@ -293,16 +294,15 @@ export default class
             let li = document.createElement("li");
             li.classList.add("milestone");
 
-            li.addEventListener("click", () => {
-                li.classList.toggle("checked");
-            });
-
             if (entry.status == Status.DONE)
                 li.classList.add("checked");
 
             let span_entry = document.createElement("span");
             span_entry.classList.add("entry");
             span_entry.textContent = entry.task;
+            span_entry.addEventListener("click", () => {
+                li.classList.toggle("checked");
+            });
             li.appendChild(span_entry);
 
             let button_delete = document.createElement("button");
@@ -321,7 +321,17 @@ export default class
             li.appendChild(button_push);
 
             button_push.addEventListener("click", () => {
+                let index = entries.indexOf(entry);
+                let taskID = `${id}-${index}`;
+                const virtualTask = new VirualTask(
+                    taskID,
+                    title_input.value,
+                    Key.GOAL,
+                    true
+                );
 
+                virtualTask.setContent(span_entry.textContent);
+                AgendaModal.createAgendaModal(container, virtualTask);
             });
 
             milestones.appendChild(li);
@@ -434,12 +444,4 @@ function createMilestone(input, goalItems)
             goalItems.removeChild(listEntry);
         });
 
-        let pushButton = document.createElement("button");
-        pushButton.classList.add("btn-push");
-        pushButton.textContent = "Do Today";
-        li.appendChild(pushButton);
-
-        pushButton.addEventListener("click", () => {
-
-        });
 }
