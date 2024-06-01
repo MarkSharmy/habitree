@@ -32,9 +32,8 @@ export default class {
             return current.task;
     }
 
-    static renderProgress(data, progressNode)
+    static renderProgress(entries, progressNode)
     {
-        let entries = data.entries;
         let itemsDone = entries.filter(entry => {return entry.status == Status.DONE});
 
         let progress = Math.floor((itemsDone.length / entries.length) * 100);
@@ -43,28 +42,27 @@ export default class {
 
     }
 
-    static getNumItemsDone(data)
+    static getNumItemsDone(entries)
     {
-        let entries = data.entries;
         let itemsDone = entries.filter(entry => {return entry.status == Status.DONE});
 
         return `${itemsDone.length}`
     }
 
-    static getItemsDonePercentile(data)
+    static getItemsDonePercentile(entries)
     {
-        let entries = data.entries;
         let itemsDone = entries.filter(entry => {return entry.status == Status.DONE});
 
-        let progress = Math.floor((itemsDone.length / entries.length) * 100);
+        let progress = 0.0;
+
+        if(entries.length > 0)
+            progress = Math.floor((itemsDone.length / entries.length) * 100);
 
         return`${progress}%`;
     }
 
-    static getNumItemsTotal(data)
+    static getNumItemsTotal(entries)
     {
-        let entries = data.entries;
-        
         return `${entries.length}`;
     }
 

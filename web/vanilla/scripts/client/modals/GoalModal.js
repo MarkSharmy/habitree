@@ -3,7 +3,7 @@ import Status from "../../enum/status.js";
 import Components from "../components.js";
 import Key from "../../enum/keys.js";
 import Storage from "../../api/storage.js";
-import VirualTask from "../VirualTask.js";
+import VirtualTask from "../VirualTask.js";
 import AgendaModal from "./AgendaModal.js";
 
 export default class 
@@ -323,7 +323,7 @@ export default class
             button_push.addEventListener("click", () => {
                 let index = entries.indexOf(entry);
                 let taskID = `${id}-${index}`;
-                const virtualTask = new VirualTask(
+                const virtualTask = new VirtualTask(
                     taskID,
                     title_input.value,
                     Key.GOAL,

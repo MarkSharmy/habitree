@@ -37,16 +37,16 @@ export default class TaskAPI {
         save(key, database);
     }
 
-    static updateItem(key, data)
+    static updateItem(key, item)
     {
-        let {id} = data;
+        let {id} = item;
 
         if (!id) throw Error("Error: Invalid ID");
 
         let database = read(key);
-        const item = database.find(item => { return item.id == id});
+        const entry = database.find(item => { return item.id == id});
         
-        database[database.indexOf(item)] = data;
+        database[database.indexOf(entry)] = item;
         save(key, database);
     }
 

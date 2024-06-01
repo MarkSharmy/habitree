@@ -29,13 +29,6 @@ function createResolutionModal(element)
     overlay.classList.add("active");
 }
 
-function openAgendaModal(element)
-{
-    AgendaModal.openModal(element);
-    const overlay = document.getElementById("overlay");
-    overlay.classList.add("active");
-}
-
 function editItem(element)
 {
     let nodes = Array.from(element.children);
@@ -57,14 +50,6 @@ export const handleModals = function()
     const agendaModalButtons = document.querySelectorAll("[data-modal-agenda]")
 
     const container = document.getElementById("modal");
-
-    agendaModalButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            openAgendaModal(container);
-        });
-    });
-
-    
 
     taskModalButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -97,7 +82,7 @@ export const menuToggle = function()
         if (e.target.classList.contains("menu-item"))
         {
             const items = document.getElementsByClassName("menu-item")
-            console.log(items);
+            
             for(let i = 0; i < items.length; i++)
             {
                 items[i].classList.remove("active");

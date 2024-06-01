@@ -22,24 +22,12 @@ export default class extends AbstractView
             <div id="display-dashboard">
                 <div class="left">
                     <div class="date">
-                        <h2>Today, 17th of April</h2>
+                        <h2 id="date">Today, 17th of April</h2>
                     </div>
                     <div class="tasks">
                         <ul class="agenda">
-                            <li class="progress-bar">
-                                1 / 4 (25%)
-                            </li>
-                            <li class="task">
-                                <article class="task-entry">
-                                    <p>Write JavaScript program</p>
-                                    <div class="task-info">
-                                        <time><i class='bx bx-time'></i>12.00</time>
-                                        <span class="progress">Progress: Doing</span>
-                                    </div>
-                                </article>
-                                <i class='bx bx-dots-vertical'></i>
-                            </li>
-                            <li class="btn-item"><button>Add</button></li>
+                            <li class="progress-bar"></li>
+                            <li class="task"></li>
                         </ul>
                     </div>
                 </div>
@@ -47,10 +35,11 @@ export default class extends AbstractView
                     <h2>Overview</h2>
                     <div class="time">
                         <h3>Current Output:</h3>
-                        <div class="output">04:56:47</div>
+                        <div id="output">04:56:47</div>
+                    </div>
                     <h3>Avg. Output 7(days):</h3>
                     <div class="line-chart"></div>
-                        <h3>Efficiency:</h3>
+                    <h3>Efficiency:</h3>
                     <div class="progress-circle"></div>
                 </div>
             </div>

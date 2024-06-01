@@ -1,15 +1,39 @@
 import Key from "../enum/keys.js";
 import Status from "../enum/status.js";
+import Time from "../utils/Time.js";
 
 export default class Calendar
 {
-    constructor(date)
+    constructor(obj)
     {
-        this.date = date;
-        this.efficiency = 0.0;
-        this.output = "00:00:00";
-        this.agenda = [];
-        this.progress = 0.0;
+        if(typeof obj === "string")
+        {
+            this.date = obj;
+            this.efficiency = 0.0;
+            this.output = new Time(0, 0, 0);
+            this.agenda = [];
+            this.progress = 0.0;
+        }
+        else
+        {
+            this.date = obj.date;
+            this.efficiency = obj.efficiency;
+            this.output = new Time(obj.output.hours, obj.output.minutes, obj.output.seconds);
+            this.agenda = obj.agenda;
+            this.agenda.forEach(task => {
+                task.output = new Time(task.output.hours, task.output.minutes, task.output.seconds);
+            });
+            this.progress = obj.progress;
+        }
+    }
+
+    getTask(id)
+    {
+        let task = this.agenda.find( task => {
+            return task.id == id;
+        });
+
+        return task;
     }
 
     tasks()
@@ -20,6 +44,7 @@ export default class Calendar
     push(task)
     {
         this.agenda.push(task);
+        this.refresh();
     }
 
     remove(id)
@@ -29,12 +54,37 @@ export default class Calendar
         updateCalendar(this);
     }
 
-    update()
+    update(task)
     {
-        this.replaceAgenda(this);
-        
+        const agenda = this.agenda;
+        let found = this.agenda.find(entry => { return entry.id == task.id});
+        agenda[this.agenda.indexOf(found)] = task;
+        this.refresh();
+    }
+
+    refresh()
+    {
+        Calendar.replaceAgenda(this);
         let completedItems = this.agenda.filter( task => { return task.status == Status.DONE});
         this.progress = Math.floor((completedItems.length / this.agenda.length));
+        this.aggregateOutput(completedItems);
+    }
+
+    aggregateOutput(entries)
+    {
+        let time = new Time(0, 0, 0);
+
+        entries.forEach(entry => {
+            time = time.add(entry.output);
+        });
+
+        this.output = time;
+    }
+
+    static today()
+    {
+        const date = new Date();
+        return `${getDay(date.getDay())}, ${date.getDate()} ${getMonth(date.getMonth())} ${date.getFullYear()}`;
     }
 
     static getCurrentDate()
@@ -56,6 +106,10 @@ export default class Calendar
             saveCalendar(calendar);
         }
 
+        agenda = new Calendar(agenda);
+
+        agenda.refresh();
+
         return agenda;
     }
 
@@ -63,8 +117,11 @@ export default class Calendar
     {
         //Get the calendar array with agendas
         const calendar = getCalendar();
+
         //Replace agenda of the same date with the new agenda
-        calendar[calendar.indexOf(agenda)] = agenda;
+        let found = calendar.find(entry => {return entry.date == agenda.date});
+        calendar[calendar.indexOf(found)] = agenda;
+
         //Save new calendar to local storage
         saveCalendar(calendar);
     }
@@ -86,8 +143,6 @@ function getCalendar()
         calendar = JSON.parse(data);
     }
 
-    console.log("Calendar:", calendar)
-
     return calendar;
 }
 
@@ -95,5 +150,42 @@ function saveCalendar(calendar)
 {
     const data = JSON.stringify(calendar);
     localStorage.setItem(Key.CALENDAR, data);
+}
+
+function getDay(dayIndex)
+{
+    switch(dayIndex)
+    {
+        case 0: return "Sunday";
+        case 1: return "Monday";
+        case 2: return "Tuesday";
+        case 3: return "Wednesday";
+        case 4: return "Thursday";
+        case 5: return "Friday";
+        case 6: return "Saturday";
+    }
+
+    throw Error("Invalid date index");
+}
+
+function getMonth(monthIndex)
+{
+    switch(monthIndex)
+    {
+        case 0: return "January";
+        case 1: return "February";
+        case 2: return "March";
+        case 3: return "April";
+        case 4: return "May";
+        case 5: return "June";
+        case 6: return "July";
+        case 7: return "August";
+        case 8: return "September";
+        case 9: return "October";
+        case 10: return "November";
+        case 11: return "December";
+    }
+
+    throw Error("Invalid month index");
 }
 

@@ -139,37 +139,6 @@
     align-items: center;
 }
 
-.tabs-content .goals-list li .item-box .progress
-{
-    display: flex;
-    align-items: center;
-}
-
-.item-box .progress .meter {
-    position: relative;
-    width: 15rem;
-    height: 0.5rem;
-    background-color: #e0e0e0;
-    border-radius: 0.25rem;
-    overflow: hidden;
-}
-
-
-
-.item-box .progress .meter .bar {
-    position: absolute;
-    top: 0;
-    left: -0.5rem;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--blue), var(--bright));
-    border-radius: 0.25rem;
-    transition: width 0.5s ease-in-out;
-}
-
-
-
-
 .item-box * {
     margin: auto 0.5rem;
 }
@@ -423,7 +392,28 @@
 }
 
 .popup .body footer .btn-save:hover {
-    background-color: var(--bright);
+    color: var(--bright);
+    background: white;
+    border: 1px solid var(--bright);
+    border-radius: 0.5rem;
+}
+
+.popup .body footer .btn-shelve{
+    background-color: var(--orange);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--poppins);
+    font-weight: bold;
+}
+
+.popup .body footer .btn-shelve:hover {
+    background: transparent;
+    border: 1.5px solid var(--orange); 
+    color: var(--orange);
 }
 
 

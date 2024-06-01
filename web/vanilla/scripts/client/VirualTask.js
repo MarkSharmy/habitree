@@ -1,6 +1,8 @@
 import Status from "../enum/status.js";
+import Time from "../utils/Time.js";
+import TaskAPI from "../api/storage.js";
 
-export default class VirualTask
+export default class VirtualTask
 {
     constructor(id, title, type, subtask)
     {
@@ -8,10 +10,20 @@ export default class VirualTask
         this.title = title;
         this.type = type;
         this.status = Status.NOT_DONE;
-        this.output = 0;
+        this.output = new Time(0, 0, 0);
         this.date = "";
         this.time = "";
         this.subtask = subtask;
+    }
+
+    static getTask(data)
+    {
+        return new VirtualTask(
+            data.id,
+            data.title,
+            data.type,
+            data.subtask
+        );
     }
 
     setContent(content)
@@ -26,11 +38,7 @@ export default class VirualTask
 
     setOutput(hours, minutes, seconds)
     {
-        this.output = {
-            hours: hours,
-            minutes: minutes,
-            seconds: seconds
-        };
+        this.output = new Time(hours, minutes, seconds);
     }
 
     setSchedule(date, time)
@@ -39,18 +47,30 @@ export default class VirualTask
         this.time = time;
     }
 
-    static parse(task, subtask)
+    synchronize()
     {
-        let id = 0;
+        const key = this.type;
+        let id = null;
+        let index = null;
 
-        if(subtask)
+        let entries = TaskAPI.getItems(key);
+
+        if(this.subtask)
         {
-            
+            let dat = this.id.split("-");
+            id = parseInt(dat[0]);
+            index = parseInt(dat[1]);
+            let task = entries.find( entry => { return entry.id == id});
+            task.entries[index].status = this.status;
+            TaskAPI.updateItem(key, task);
+        }
+        else
+        {
+            id = this.id;
+            let task = entries.find( entry => { return entry.id == id});
+            task.status = this.status;
+            TaskAPI.updateItem(key, task);
         }
     }
-
-    static synchronize(task)
-    {
-        
-    }
+    
 }

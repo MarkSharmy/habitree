@@ -18,12 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     eventbus.registerEvents();
 });
 
-let date = Calendar.getCurrentDate();
-let agenda = Calendar.getAgenda(date);
-console.log("Agenda:", agenda);
-
-
-
 //Mockito.mockUpdate(39986, Key.TODO);
 
 

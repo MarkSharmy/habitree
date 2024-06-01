@@ -7,6 +7,7 @@ import Utils from "../utils/Utils.js";
 import TaskModal from "./modals/TaskModal.js";
 import GoalModal from "./modals/GoalModal.js";
 import Calendar from "./Calendar.js";
+import AgendaModal from "./modals/AgendaModal.js";
 
 export default class Components
 {
@@ -23,29 +24,61 @@ function refreshDashboard()
 {
     //Get UL element with the Today's list of tasks
     const agenda = document.querySelector(".agenda");
+    const calendar = Calendar.getAgenda(Calendar.getCurrentDate());
     
     if (!agenda) return;
 
     agenda.innerHTML = ""; //Reset agenda for every refresh
 
+    //Add right-side components
+    let output = document.getElementById("output");
+
+    output.textContent = `${calendar.output.toString()}`;
+
+    //Add left-side components
+
+    //Update today's date
+    let date = document.getElementById("date");
+    date.textContent = `${Calendar.today()}`;
+
     const progressBar = document.createElement("li");
     progressBar.classList.add("progress-bar");
-    progressBar.innerText = "1 / 4 (25%)";
+    let progressDiv = document.createElement("div");
+    progressDiv.classList.add("progress");
+    progressBar.appendChild(progressDiv);
+
+    let meter = document.createElement("span");
+    meter.classList.add("meter");
+    progressDiv.appendChild(meter);
+
+    let bar = document.createElement("span");
+    bar.classList.add("bar");
+    meter.appendChild(bar);
+
+    let text = document.createElement("span");
+    text.classList.add("text");
+    
+    progressDiv.appendChild(text);
 
     agenda.appendChild(progressBar);
 
-    let date = Calendar.getCurrentDate();
-    console.log("Refresh Agenda:", Calendar.getAgenda(date));
+    let tasks = calendar.tasks();
 
-    return;
+    Utils.renderProgress(tasks, bar);
+    text.textContent = `${Utils.getNumItemsDone(tasks)} / ${Utils.getNumItemsTotal(tasks)} (${Utils.getItemsDonePercentile(tasks)})`;
+
     tasks.forEach(task => {
-        console.log("Task:", task);
-
-        return;
 
         const listContainer = document.createElement("li");
         listContainer.setAttribute("data-modal-agenda", "");
         listContainer.classList.add("task");
+        listContainer.setAttribute("task-id", task.id);
+        agenda.appendChild(listContainer);
+
+        if (task.status == Status.DONE)
+        {
+            listContainer.classList.add("checked");
+        }
 
         const article = document.createElement("article");
         article.classList.add("task-entry");
@@ -62,7 +95,11 @@ function refreshDashboard()
 
         let clock = document.createElement("i");
         clock.classList.add("bx", "bx-time");
-        taskInfo.appendChild(clock);
+        time.appendChild(clock);
+
+        let time_entry = document.createElement("span");
+        time_entry.textContent = task.time;
+        time.appendChild(time_entry);
 
         let progress = document.createElement("span");
         progress.classList.add("progress");
@@ -90,6 +127,16 @@ function refreshDashboard()
 
     btnItem.appendChild(addButton);
     agenda.appendChild(btnItem);
+
+    const container = document.getElementById("modal");
+    const taskItems = document.querySelectorAll("[data-modal-agenda]");
+
+    taskItems.forEach(task => {
+        task.addEventListener("click", () => {
+            let id = task.getAttribute("task-id");
+            AgendaModal.open(container, id);
+        });
+    });
 }
 
 function refreshTaskPanel()
@@ -223,12 +270,12 @@ function refreshGoalsPanel()
 
         let bar = document.createElement("span");
         bar.classList.add("bar");
-        Utils.renderProgress(goal, bar);
+        Utils.renderProgress(goal.entries, bar);
         meter.appendChild(bar);
 
         let text = document.createElement("span");
         text.classList.add("text");
-        text.textContent = `${Utils.getNumItemsDone(goal)} / ${Utils.getNumItemsTotal(goal)} (${Utils.getItemsDonePercentile(goal)})`;
+        text.textContent = `${Utils.getNumItemsDone(goal.entries)} / ${Utils.getNumItemsTotal(goal.entries)} (${Utils.getItemsDonePercentile(goal.entries)})`;
         progressDiv.appendChild(text);
 
         let menu = document.createElement("i");

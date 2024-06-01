@@ -398,7 +398,7 @@ main .app {
 }
 
 .popup .body footer {
-    margin-top: 4rem;
+    margin: 1.5rem auto;
 }
 
 #overlay {
@@ -434,4 +434,29 @@ main .app {
 .btn-push:hover {
     background-color: var(--blue);
     color: white;
+}
+
+.progress
+{
+    display: flex;
+    align-items: center;
+}
+
+.progress .meter {
+    position: relative;
+    width: 15rem;
+    height: 0.5rem;
+    background-color: #e0e0e0;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.progress .meter .bar {
+    position: absolute;
+    top: 0;
+    left: -0.5rem;
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--bright));
+    border-radius: 0.25rem;
+    transition: width 0.5s ease-in-out;
 }
