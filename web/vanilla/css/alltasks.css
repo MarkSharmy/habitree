@@ -26,7 +26,7 @@
 .tabs .tabs-content {
     order: 1;
     width: 100%;
-    padding: 1rem 2rem;
+    padding: 1rem 0.5rem;
     display: none;
 }
 
@@ -210,7 +210,7 @@
 
 .popup .body section {
     width: 100%;
-    height: 50%;
+    height: 70%;
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -359,6 +359,114 @@
 .popup .body section .add-entry button:hover {
     background-color: var(--dark-gray);
 }
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    height: 32rem;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.project-list .project {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--gray);
+    color: var(--dark);
+    border-radius: 0.5rem;
+    width: 28rem;
+    height: 8rem;
+    padding: 1rem;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.project-list .project:hover {
+    background-color: var(--dark-gray);
+}   
+
+.project-list .project .info {
+    flex-grow: 2;
+}
+
+.project-list .project .progress {
+    flex-grow: 1;
+    width: 6rem;
+    height: 6rem;
+}
+
+.progress .circular-bar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.progress .circular-bar svg {
+    width: 100%;
+    height: 100%
+}
+
+.progress .circular-bar circle {
+    fill: none;
+    stroke-width: 5;
+    stroke: var(--dark-gray);
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.progress .circular-bar .path {
+    
+}
+
+
+
+.progress .circular-bar .percentage {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--dark);
+}
+
+.progress .circular-bar .text {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.project-list .project .info h2 {
+    font-size: 1rem;
+}
+
+.popup .body section div {
+    margin: 1rem;
+}
+
+.popup .body section div label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.popup .body section div textarea {
+    display: block;
+    margin-bottom: 1rem;
+    outline: none;
+    background-color: white;
+    border: 2px solid var(--gray);
+}
+
+.popup .body section div input {
+    display: block;
+    padding: 0.5rem;
+    border: 2px solid var(--gray);
+    margin-bottom: 1rem;
+    color: var(--dark);
+    font-family: var(--lato);
+}
+
+
 
 .popup .body footer .btn-delete {
     background: transparent;

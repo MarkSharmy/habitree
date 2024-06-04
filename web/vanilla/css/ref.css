@@ -2,6 +2,7 @@
 @import url("panel.css");
 @import url("alltasks.css");
 @import url("dashboard.css");
+@import url("kanban.css");
 
 html {
     font-size: 100%;

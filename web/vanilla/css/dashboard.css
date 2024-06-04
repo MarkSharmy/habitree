@@ -78,6 +78,12 @@
     margin-left: 1rem;
 }
 
+.tasks .agenda {
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 32rem;
+}
+
 .tasks .agenda .task {
     display: flex;
     align-items: center;

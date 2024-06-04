@@ -5,6 +5,7 @@ import TasksView from "./views/TasksView.js";
 import AnalyticsView from "./views/AnalyticsView.js";
 import ProjectsView from "./views/ProjectsView.js";
 import ProfileView from "./views/ProfileView.js";
+import KanbanView from "./views/KanbanView.js";
 import SettingsView from "./views/SettingsView.js";
 import Components from "./client/components.js";
 
@@ -19,7 +20,8 @@ async function router()
         {path: "/dashboard/calendar", view: Calendar},
         {path: "/dashboard/alltasks", view: TasksView},
         {path: "/dashboard/analytics", view: AnalyticsView},
-        {path: "/dashboard/projects", view: ProjectsView},
+        {path: "/dashboard/projects/", view: ProjectsView},
+        {path: "/dashboard/projects/:id", view: KanbanView},
         {path: "/dashboard/profile", view: ProfileView},
         {path: "/dashboard/settings", view: SettingsView},
 
@@ -60,9 +62,6 @@ function getParams(match)
 {
     const values = match.result.slice(1);
     const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(result => result[1]);
-
-    console.log("Array:",Array.from(match.route.path.matchAll(/:(\w+)/g)));
-
     return Object.fromEntries(keys.map((key, i) => {
         return [key, values[i]];
     }));
@@ -81,9 +80,17 @@ document.addEventListener("DOMContentLoaded", () =>
     document.body.addEventListener("click", e => {
         if (e.target.matches("[data-link]")) {
             e.preventDefault();
+            console.log("click");
             navigateTo(e.target.href);
+            
         }
     });
 
     router();
 });
+
+export function routeToPage(url)
+{
+    navigateTo(url);
+    router();
+}

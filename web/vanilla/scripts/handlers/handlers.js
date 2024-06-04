@@ -2,6 +2,7 @@ import TaskModal from "../client/modals/TaskModal.js";
 import Components from "../client/components.js";
 import AgendaModal from "../client/modals/AgendaModal.js";
 import GoalModal from "../client/modals/GoalModal.js";
+import ProjectModal from "../client/modals/ProjectModal.js";
 
 function createTaskModal(element)
 {
@@ -17,10 +18,10 @@ function createGoalModal(element)
 
 function createProjectModal(element)
 {
-    ProjectModal.createTaskModal(element);
-    const overlay = document.getElementById("overlay");
-    overlay.classList.add("active");
+    ProjectModal.open(element);
+    Components.refresh();
 }
+
 
 function createResolutionModal(element)
 {
@@ -62,6 +63,12 @@ export const handleModals = function()
             createGoalModal(container);
         });
     });
+
+    projectModalButtons.forEach( button => {
+        button.addEventListener("click", () => {
+            createProjectModal(container);
+        });
+    })
 }
 
 export const handleItemEdits = function ()

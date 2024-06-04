@@ -194,6 +194,9 @@
                                 <button data-modal-project="#modal">+ Add Project</button>
                             </hgroup>
                         </header>
+                        <ul class="project-list">
+                            
+                        </ul>
                     </div>
                     <input type="radio" class="tabs-radio" name="tasks" id="resolutions">
                     <label for="resolutions" class="tabs-label">Resolutions</label>
@@ -218,38 +221,20 @@
             </div>
         </main>
         <div id="modal">
-            <div class="popup">
+            <div class="popup active">
                 <header>
-                    <span class="title">Title: <input type="text" placeholder="Add title"></span>
+                    <span class="title">Project Name: <input type="text" placeholder="Enter project name"></span>
                     <button data-modal-close class="btn-close">&times;</button>
                 </header>
                 <article class="body">
-                    <hgroup>
-                        <span class="text">
-                            <label for="list-type">Type: </label>
-                            <select name="type" id="type">
-                                <option value="Read">Read</option>
-                                <option value="Watch">Watch</option>
-                                <option value="Note">Note</option>
-                                <option value="Practice">Practice</option>
-                            </select>
-                        </span>
-                        <button class="btn-add">Do Today</button>
-                    </hgroup>
                     <section>
-                        <ul class="milestones">
-                            <li class="milestone">Chapter 1</li>
-                            <li class="milestone">Chapter 2</li>
-                            <li class="milestone">Chapter 3</li>
-                            <li class="milestone">Chapter 4</li>
-                            <li class="milestone">Chapter 5</li>
-                            <li class="milestone">Chapter 6</li>
-                            <li class="milestone">Chapter 7</li>
-                            <li class="milestone">Chapter 8</li>
-                        </ul>
-                        <div class="add-entry">
-                            <input type="text" placeholder="Add milestone">
-                            <button data-btn-add>+</button>
+                        <div>
+                            <label for="desc">Description:</label>
+                            <textarea name="desc" id="desc" rows="8" cols="40"></textarea>
+                        </div>
+                        <div>
+                            <label for="date">Date Created:</label>
+                            <input type="date" id="date" name="date">
                         </div>
                     </section>
                     <footer>

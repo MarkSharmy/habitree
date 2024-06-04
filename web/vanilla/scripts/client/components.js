@@ -1,13 +1,13 @@
 import Key from "../enum/keys.js";
 import Status from "../enum/status.js";
-import Storage from "../api/storage.js"
-import DashboardUtil from "../handlers/DashboardUtil.js";
 import { handleModals } from "../handlers/handlers.js";
 import Utils from "../utils/Utils.js";
 import TaskModal from "./modals/TaskModal.js";
 import GoalModal from "./modals/GoalModal.js";
 import Calendar from "./Calendar.js";
 import AgendaModal from "./modals/AgendaModal.js";
+import TaskAPI from "../api/storage.js";
+import { routeToPage } from "../index.js";
 
 export default class Components
 {
@@ -16,6 +16,7 @@ export default class Components
         refreshTaskPanel();
         refreshDashboard();
         refreshGoalsPanel();
+        refreshProjectsPanel();
         handleModals();
     }
 }
@@ -145,7 +146,7 @@ function refreshTaskPanel()
 
     if (!taskList) return;
 
-    const data = Storage.getItems(Key.TODO);
+    const data = TaskAPI.getItems(Key.TODO);
 
     if(!data) return;
 
@@ -218,7 +219,7 @@ function refreshGoalsPanel()
 
     if (!goalsList) return;
 
-    const data = Storage.getItems(Key.GOAL);
+    const data = TaskAPI.getItems(Key.GOAL);
 
     if (!data) return;
 
@@ -291,6 +292,94 @@ function refreshGoalsPanel()
             let id = parseInt(goal.getAttribute("goal-id"));
             GoalModal.open(container, id);
         });
+    });
+}
+
+function refreshProjectsPanel()
+{
+    const projectList = document.querySelector(".project-list");
+
+    if(!projectList) return;
+
+    const data = TaskAPI.getItems(Key.PROJECT);
+
+    if(!data) return;
+
+    projectList.innerHTML = "";
+
+    data.forEach( project => {
+
+        const listItem = document.createElement("li");
+        listItem.classList.add("project");
+
+        listItem.addEventListener("click", () => {
+            routeToPage(`/dashboard/projects/${project.id}`);
+        });
+
+        projectList.appendChild(listItem);
+
+        const infoDiv = document.createElement("div");
+        infoDiv.classList.add("info");
+        listItem.appendChild(infoDiv);
+
+        let title_span = document.createElement("span");
+        title_span.classList.add("title");
+        title_span.textContent = project.name;
+        infoDiv.appendChild(title_span);
+
+        let desc_span = document.createElement("span");
+        desc_span.classList.add("description");
+        desc_span.textContent = project.description;
+        infoDiv.appendChild(desc_span);
+
+        let date_span = document.createElement("date");
+        date_span.classList.add("date");
+        date_span.textContent = project.date;
+        infoDiv.appendChild(date_span);
+
+        const progressDiv = document.createElement("div");
+        progressDiv.classList.add("progress");
+        listItem.appendChild(progressDiv);
+
+        let circular_bar = document.createElement("div");
+        circular_bar.classList.add("circular-bar");
+        progressDiv.appendChild(circular_bar);
+
+        let svg = document.createElement("svg");
+        svg.setAttribute("viewBox", "0 200");
+        circular_bar.appendChild(svg);
+
+        let circle = document.createElement("circle");
+        circle.classList.add("circle");
+        circle.setAttribute("cx", "50");
+        circle.setAttribute("cy", "50");
+        circle.setAttribute("r", "25");
+        svg.appendChild(circle);
+
+        let path = document.createElement("circle");
+        path.classList.add("path");
+        path.setAttribute("cx", "50");
+        path.setAttribute("cy", "50");
+        path.setAttribute("r", "25");
+        svg.appendChild(path);
+
+        let perc_span = document.createElement("span");
+        perc_span.classList.add("percentage");
+        perc_span.textContent = project.progress;
+        circular_bar.appendChild(perc_span);
+
+        let text_span = document.createElement("span");
+        text_span.classList.add("text");
+        text_span.textContent = "Progress";
+        circular_bar.appendChild(text_span);
+
+        const menuDiv = document.createElement("div");
+        menuDiv.classList.add("menu");
+        listItem.appendChild(menuDiv);
+
+        let i = document.createElement("i");
+        i.classList.add("bx", "bx-dots-vertical-rounded");
+        menuDiv.appendChild(i);
     });
 }
 

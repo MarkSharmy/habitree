@@ -79,6 +79,7 @@ export default class extends AbstractView
                             <button data-modal-project="#modal">+ Add Project</button>
                         </hgroup>
                     </header>
+                    <ul class="project-list"></ul>
                 </div>
                 <input type="radio" class="tabs-radio" name="tasks" id="resolutions">
                 <label for="resolutions" class="tabs-label">Resolutions</label>
