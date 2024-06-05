@@ -1,6 +1,7 @@
 import Components from "../components.js";
 import Utils from "../../utils/Utils.js";
 import TaskAPI from "../../api/storage.js";
+import Key from "../../enum/keys.js";
 
 export default class
 {
@@ -134,30 +135,31 @@ export default class
                 name: title_input.value,
                 description: textarea.value,
                 date: date_input.value,
+                progress: 0,
                 columns: [
                     {
                         id: 0,
-                        name: "Backlog",
+                        title: "Backlog",
                         entries: []
                     },
                     {
                         id: 1,
-                        name: "Design",
+                        title: "Design",
                         entries: []
                     },
                     {
                         id: 2,
-                        name: "Todo",
+                        title: "Todo",
                         entries: []
                     },
                     {
                         id: 3,
-                        name: "Doing",
+                        title: "Doing",
                         entries: []
                     },
                     {
                         id: 4,
-                        name: "Done",
+                        title: "Done",
                         entries: []
                     }
                 ]

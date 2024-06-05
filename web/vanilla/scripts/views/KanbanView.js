@@ -1,5 +1,7 @@
-import KanbanAPI from "../kanban/api/KanbanAPI.js";
+import Key from "../enum/keys.js";
+import TaskAPI from "../api/storage.js";
 import AbstractView from "./AbstractView.js";
+import Kanban from "../kanban/views/Kanban.js";
 
 export default class extends AbstractView
 {
@@ -7,13 +9,12 @@ export default class extends AbstractView
     {
         super(params);
         this.setTitle("Habitree: Kanban Board");
-        const project = KanbanAPI.getProject(params.id);
+        const project = TaskAPI.getItem(Key.PROJECT, params.id);
 
         this.name = project.name;
         this.description = project.description;
         this.date = project.date;
-        this.columns = project.columns;
-
+        this.kanban = true;
     }
 
     async getHtml()

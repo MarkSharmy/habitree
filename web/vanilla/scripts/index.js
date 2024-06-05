@@ -1,4 +1,5 @@
 import Routes from "./routes/Routes.js";
+import Kanban from "./kanban/views/Kanban.js";
 import DashboardView from "./views/DashboardView.js";
 import Calendar from "./views/Calendar.js";
 import TasksView from "./views/TasksView.js";
@@ -49,6 +50,12 @@ async function router()
     const view = new match.route.view(getParams(match));
 
     document.querySelector("#app").innerHTML = await view.getHtml();
+    
+    if(view.kanban)
+    {
+        new Kanban(getParams(match), document.getElementById("display-kanban"));
+    }
+
     Components.refresh();
 }
 
