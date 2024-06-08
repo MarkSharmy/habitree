@@ -1,7 +1,9 @@
 import TaskAPI from "../api/storage.js";
 import Calendar from "../client/Calendar.js";
 import Key from "../enum/keys.js";
+import KanbanAPI from "../kanban/api/KanbanAPI.js";
 import Column from "../kanban/views/Column.js";
+import Entry from "../kanban/views/Entry.js";
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView
@@ -55,35 +57,19 @@ export default class extends AbstractView
     {
         const projects = TaskAPI.getItems(Key.PROJECT);
 
+        if (!projects) return;
+
         projects.forEach( project => {
             
-            //Get "Doing" column object
-            const currentColumn = project.columns.find( column => column.id == Column.DOING);
-            //Get "TODO" column object
-            const targetColumn = project.columns.find( column => column.id == Column.TODO);
-            //Array to hold removed entries
-            let lostItems = [];
+            const column = project.columns.find( column => column.id == Column.DOING);
+            
+            column.entries.forEach( entry => {
 
-            currentColumn.entries.forEach( entry => {
-
-                if( entry.date != Calendar.getCurrentDate())
+                if(entry.date != Calendar.getCurrentDate())
                 {
-                    targetColumn.entries.push(entry);
-                    lostItems.push(entry);
+                    KanbanAPI.slateItem(project.id, entry.id, Column.DOING, Column.TODO);
                 }
             });
-
-            lostItems.forEach( item => {
-
-                //Remove lost item from the "Doing" column
-                currentColumn.entries.splice(currentColumn.entries.indexOf(item), 1);
-            
-            });
-
-            project.columns[Column.TODO] = targetColumn;
-            project.columns[Column.DOING] = currentColumn;
-
-            TaskAPI.updateItem(Key.PROJECT, project);
 
         });
     }

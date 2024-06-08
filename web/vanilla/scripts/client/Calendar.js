@@ -51,7 +51,7 @@ export default class Calendar
     {
         const task = this.agenda.find(task => { return task.id == id});
         this.agenda.splice(this.agenda.indexOf(task), 1);
-        updateCalendar(this);
+        this.refresh();
     }
 
     update(task)

@@ -1,6 +1,10 @@
 import Status from "../enum/status.js";
 import Time from "../utils/Time.js";
 import TaskAPI from "../api/storage.js";
+import Calendar from "./Calendar.js";
+import Key from "../enum/keys.js";
+import KanbanAPI from "../kanban/api/KanbanAPI.js";
+import Column from "../kanban/views/Column.js";
 
 export default class VirtualTask
 {
@@ -24,6 +28,26 @@ export default class VirtualTask
             data.type,
             data.subtask
         );
+    }
+
+    static shelve(id)
+    {
+        
+        const agenda = Calendar.getAgenda(Calendar.getCurrentDate());
+        const task = agenda.tasks().find( task => task.id == id);
+
+        if(task.type == Key.PROJECT)
+        {
+            //Split the task ID to ProjectId and EntryId
+            let info = task.id.split("-");
+            const projectId = info[0];
+            const entryId = info[1];
+            
+            KanbanAPI.slateItem(projectId, entryId, Column.DOING, Column.TODO);
+
+        }
+
+        agenda.remove(task.id);
     }
 
     setContent(content)

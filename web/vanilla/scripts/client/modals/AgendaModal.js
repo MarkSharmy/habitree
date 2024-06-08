@@ -274,7 +274,7 @@ export default class
     {
         container.innerHTML = "";
         const data = Calendar.getAgenda(Calendar.getCurrentDate()).getTask(id);
-        console.log(data);
+        
         let content = data.title;
 
         if(data.subtask)
@@ -490,6 +490,11 @@ export default class
         shelveButton.textContent = "Shelve";
         shelveButton.classList.add("btn-shelve");
         footer.appendChild(shelveButton);
+
+        shelveButton.addEventListener("click", () => {
+            VirtualTask.shelve(id);
+            this.close(container);
+        });
 
         let doneButton = document.createElement("button");
         doneButton.textContent = "Done";

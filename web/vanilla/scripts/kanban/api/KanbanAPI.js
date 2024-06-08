@@ -94,66 +94,23 @@ export default class KanbanAPI
         save(projectId, data);
     }
 
-    static slateItem(projectId, entry)
+    static slateItem(projectId, entryId, currentColumnId, targetColumnId)
     {
-        //Get items from DOING column
-        const currentColumn = KanbanAPI.getItems(projectId, Column.DOING);
+        const project = TaskAPI.getItem(Key.PROJECT, projectId);
 
-        //Get Items from TODO column
-        const targetColumn = KanbanAPI.getItems(projectId, Column.TODO);
+        const currentColumn = project.columns.find( column => column.id == currentColumnId);
+        const targetColumn = project.columns.find( column => column.id == targetColumnId);
 
-        //Delete the entry from DOING column
-        currentColumn.splice(currentColumn.indexOf(entry), 1);
+        const entry = currentColumn.entries.find( entry => entry.id == entryId);
+        
+        targetColumn.entries.push(entry);
+        currentColumn.entries.splice(currentColumn.entries.indexOf(entry), 1);
 
-        //Move entry to TODO colum
-        targetColumn.push(entry);
+        project.columns[targetColumnId] = targetColumn;
+        project.columns[currentColumnId] = currentColumn;
 
-        const data = read(projectId);
+        TaskAPI.updateItem(Key.PROJECT, project);
 
-        data[Column.TODO].entries = targetColumn;
-        data[Column.DOING].entries = currentColumn;
-
-        const columns = document.querySelectorAll(".kanban__column");
-        const lostItems = [];
-
-        columns.forEach(column => {
-
-            if(column.getAttribute("data-id") == Column.DOING)
-            {
-                const element = column.querySelector(".kanban__column-items");
-                
-                const items = element.querySelectorAll(".kanban__item-box");
-
-                items.forEach( item => {
-                    
-                    if(item.getAttribute("data-id") == entry.id)
-                    {
-                        element.removeChild(item);
-                        lostItems.push(item);
-                    }
-
-                });
-            }
-
-            console.log("Lost items:", lostItems);
-
-            if(column.getAttribute("data-id") == Column.TODO)
-            {
-                console.log("TODO Column~")
-                console.log("Found items:", lostItems);
-
-                const element = column.querySelector(".kanban__column-items");
-                
-                lostItems.forEach( item => {
-                    console.log("Appending element:", item);
-                    element.appendChild(item);
-
-                });
-            }
-
-        });
-
-        save(projectId, data);
     }   
 
     static deleteItem(projectId, entryId)
