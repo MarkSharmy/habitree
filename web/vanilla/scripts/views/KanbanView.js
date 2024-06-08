@@ -8,13 +8,15 @@ export default class extends AbstractView
     constructor(params)
     {
         super(params);
-        this.setTitle("Habitree: Kanban Board");
+
         const project = TaskAPI.getItem(Key.PROJECT, params.id);
 
         this.name = project.name;
         this.description = project.description;
         this.date = project.date;
         this.kanban = true;
+
+        this.setTitle(`Habitree: ${this.name}`);
     }
 
     async getHtml()

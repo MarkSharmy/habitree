@@ -346,37 +346,7 @@ function refreshProjectsPanel()
         progressDiv.classList.add("progress");
         listItem.appendChild(progressDiv);
 
-        let circular_bar = document.createElement("div");
-        circular_bar.classList.add("circular-bar");
-        progressDiv.appendChild(circular_bar);
-
-        let svg = document.createElement("svg");
-        svg.setAttribute("viewBox", "0 200");
-        circular_bar.appendChild(svg);
-
-        let circle = document.createElement("circle");
-        circle.classList.add("circle");
-        circle.setAttribute("cx", "50");
-        circle.setAttribute("cy", "50");
-        circle.setAttribute("r", "25");
-        svg.appendChild(circle);
-
-        let path = document.createElement("circle");
-        path.classList.add("path");
-        path.setAttribute("cx", "50");
-        path.setAttribute("cy", "50");
-        path.setAttribute("r", "25");
-        svg.appendChild(path);
-
-        let perc_span = document.createElement("span");
-        perc_span.classList.add("percentage");
-        perc_span.textContent = project.progress;
-        circular_bar.appendChild(perc_span);
-
-        let text_span = document.createElement("span");
-        text_span.classList.add("text");
-        text_span.textContent = "Progress";
-        circular_bar.appendChild(text_span);
+        
 
         const menuDiv = document.createElement("div");
         menuDiv.classList.add("menu");

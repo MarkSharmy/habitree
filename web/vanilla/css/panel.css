@@ -338,6 +338,10 @@ main .head-title .breadcrumb li a {
     pointer-events: none;
 }
 
+main .head-title .breadcrumb li:hover {
+    color: var(--bright);
+}
+
 main .head-title .breadcrumb li a.active {
     color: var(--bright);
     pointer-events: unset;

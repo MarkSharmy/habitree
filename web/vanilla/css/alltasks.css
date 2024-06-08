@@ -376,7 +376,7 @@
     color: var(--dark);
     border-radius: 0.5rem;
     width: 28rem;
-    height: 8rem;
+    height: 8.8rem;
     padding: 1rem;
     margin: 1rem;
     cursor: pointer;
@@ -390,51 +390,25 @@
     flex-grow: 2;
 }
 
+.project-list .project .info span {
+    display: block;
+}
+
+.project-list .project .info .title {
+    font-weight: bolder;
+}
+
+.project-list .project .info .date {
+    font-weight: bold;
+}
+
 .project-list .project .progress {
-    flex-grow: 1;
-    width: 6rem;
-    height: 6rem;
-}
-
-.progress .circular-bar {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.progress .circular-bar svg {
-    width: 100%;
-    height: 100%
-}
-
-.progress .circular-bar circle {
-    fill: none;
-    stroke-width: 5;
-    stroke: var(--dark-gray);
-    transform: rotate(-90deg);
-    transform-origin: center;
-}
-
-.progress .circular-bar .path {
-    
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--dark-gray);
 }
 
 
-
-.progress .circular-bar .percentage {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--dark);
-}
-
-.progress .circular-bar .text {
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 .project-list .project .info h2 {
     font-size: 1rem;

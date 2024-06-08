@@ -4,7 +4,7 @@ import DashboardView from "./views/DashboardView.js";
 import Calendar from "./views/Calendar.js";
 import TasksView from "./views/TasksView.js";
 import AnalyticsView from "./views/AnalyticsView.js";
-import ProjectsView from "./views/ProjectsView.js";
+import IssuesView from "./views/IssuesView.js";
 import ProfileView from "./views/ProfileView.js";
 import KanbanView from "./views/KanbanView.js";
 import SettingsView from "./views/SettingsView.js";
@@ -22,7 +22,7 @@ async function router()
         {path: "/dashboard/alltasks", view: TasksView},
         {path: "/dashboard/alltasks/:panel", view: TasksView},
         {path: "/dashboard/analytics", view: AnalyticsView},
-        {path: "/dashboard/projects/", view: ProjectsView},
+        {path: "/dashboard/issues/", view: IssuesView},
         {path: "/dashboard/projects/:id", view: KanbanView},
         {path: "/dashboard/profile", view: ProfileView},
         {path: "/dashboard/settings", view: SettingsView},

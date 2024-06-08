@@ -81,12 +81,23 @@ export default class VirtualTask
 
         if(this.subtask)
         {
-            let dat = this.id.split("-");
-            id = parseInt(dat[0]);
-            index = parseInt(dat[1]);
-            let task = entries.find( entry => { return entry.id == id});
-            task.entries[index].status = this.status;
-            TaskAPI.updateItem(key, task);
+            if(this.type == Key.PROJECT)
+            {
+                let info = this.id.split("-");
+                const projectId = info[0];
+                const entryId = info[1];
+                
+                KanbanAPI.slateItem(projectId, entryId, Column.DOING, Column.DONE);
+            }
+            else 
+            {
+                let dat = this.id.split("-");
+                id = parseInt(dat[0]);
+                index = parseInt(dat[1]);
+                let task = entries.find( entry => { return entry.id == id});
+                task.entries[index].status = this.status;
+                TaskAPI.updateItem(key, task);
+            }
         }
         else
         {

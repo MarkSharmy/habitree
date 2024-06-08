@@ -103,6 +103,8 @@ export default class KanbanAPI
 
         const entry = currentColumn.entries.find( entry => entry.id == entryId);
         
+        if(!entry) return;
+        
         targetColumn.entries.push(entry);
         currentColumn.entries.splice(currentColumn.entries.indexOf(entry), 1);
 

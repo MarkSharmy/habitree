@@ -1,6 +1,7 @@
 import TaskAPI from "../api/storage.js";
 import Calendar from "../client/Calendar.js";
 import Key from "../enum/keys.js";
+import Status from "../enum/status.js";
 import KanbanAPI from "../kanban/api/KanbanAPI.js";
 import Column from "../kanban/views/Column.js";
 import Entry from "../kanban/views/Entry.js";
@@ -61,7 +62,8 @@ export default class extends AbstractView
 
         projects.forEach( project => {
             
-            const column = project.columns.find( column => column.id == Column.DOING);
+            //Move any incomplete items from DOING to TODO columns
+            let column = project.columns.find( column => column.id == Column.DOING);
             
             column.entries.forEach( entry => {
 
@@ -70,6 +72,19 @@ export default class extends AbstractView
                     KanbanAPI.slateItem(project.id, entry.id, Column.DOING, Column.TODO);
                 }
             });
+
+            //Update item status in DONE column
+            column = project.columns.find( column => column.id == Column.DONE);
+            
+            column.entries.forEach( entry => {
+
+                entry.status = Status.DONE;
+
+            });
+
+            //Save update
+            project.columns[Column.DONE] = column;
+            TaskAPI.updateItem(Key.PROJECT, project);
 
         });
     }
