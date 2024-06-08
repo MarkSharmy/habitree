@@ -1,3 +1,7 @@
+import TaskAPI from "../api/storage.js";
+import Calendar from "../client/Calendar.js";
+import Key from "../enum/keys.js";
+import Column from "../kanban/views/Column.js";
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView
@@ -6,6 +10,7 @@ export default class extends AbstractView
     {
         super(params);
         this.setTitle("Habitree: Dashboard");
+        this.refreshData();
     }
 
     async getHtml()
@@ -44,5 +49,42 @@ export default class extends AbstractView
                 </div>
             </div>
         `;
+    }
+
+    refreshData()
+    {
+        const projects = TaskAPI.getItems(Key.PROJECT);
+
+        projects.forEach( project => {
+            
+            //Get "Doing" column object
+            const currentColumn = project.columns.find( column => column.id == Column.DOING);
+            //Get "TODO" column object
+            const targetColumn = project.columns.find( column => column.id == Column.TODO);
+            //Array to hold removed entries
+            let lostItems = [];
+
+            currentColumn.entries.forEach( entry => {
+
+                if( entry.date != Calendar.getCurrentDate())
+                {
+                    targetColumn.entries.push(entry);
+                    lostItems.push(entry);
+                }
+            });
+
+            lostItems.forEach( item => {
+
+                //Remove lost item from the "Doing" column
+                currentColumn.entries.splice(currentColumn.entries.indexOf(item), 1);
+            
+            });
+
+            project.columns[Column.TODO] = targetColumn;
+            project.columns[Column.DOING] = currentColumn;
+
+            TaskAPI.updateItem(Key.PROJECT, project);
+
+        });
     }
 }

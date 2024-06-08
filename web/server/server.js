@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-
 const app = express();
 
 app.use(express.static("../vanilla"));
@@ -11,4 +10,6 @@ app.get(["/dashboard/", "/dashboard/*"], (request, response) => {
 
 });
 
-app.listen(process.env.PORT || 5056, () => console.log("Server running"));
+app.listen(process.env.PORT || 5056, () => {
+    console.log("Server running");
+});

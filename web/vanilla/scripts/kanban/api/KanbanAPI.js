@@ -1,5 +1,9 @@
 import TaskAPI from "../../api/storage.js";
+import Calendar from "../../client/Calendar.js";
+import VirtualTask from "../../client/VirualTask.js";
 import Key from "../../enum/keys.js";
+import Status from "../../enum/status.js";
+import Column from "../views/Column.js";
 
 export default class KanbanAPI
 {
@@ -19,7 +23,8 @@ export default class KanbanAPI
         
         const entry = {
             id: Math.floor(Math.random() * 1000000),
-            content: content
+            content: content,
+            status: Status.NOT_DONE,
         };
 
         if(!column) throw Error("Data error. No column iD");
@@ -29,7 +34,13 @@ export default class KanbanAPI
 
         return entry;
     }
-
+    
+    /**
+     * This function updates entries for a given column.
+     * It can transfer an entry from one column to another.
+     * @param {object} props - Properties object, must contain:
+     * [projectId, entryId, content, {optional}position]
+     */
     static updateItem(props)
     {
         const {projectId, entryId} = props;
@@ -59,22 +70,91 @@ export default class KanbanAPI
             const targetColumn = data.find(column => column.id == props.columnId);
             
             if(!targetColumn) throw new Error("target column not found");
- 
+            
+            if(targetColumn.id === Column.DOING)
+            {
+                entry.status = Status.DOING;
+                entry.date = Calendar.getCurrentDate();
+                push(projectId, entry);
+            }
+
+            else if(targetColumn.id === Column.DONE)
+            {
+                entry.status = Status.DONE;
+            }
+
             //Delete the entry from it's current column
             currentColumn.entries.splice(currentColumn.entries.indexOf(entry), 1);
 
             //Move entry into it's new column and position
             targetColumn.entries.splice(props.position, 0, entry);
             
-            if(targetColumn === 3)
-            {
-                push(entry);
-            }
-            
         }
 
         save(projectId, data);
     }
+
+    static slateItem(projectId, entry)
+    {
+        //Get items from DOING column
+        const currentColumn = KanbanAPI.getItems(projectId, Column.DOING);
+
+        //Get Items from TODO column
+        const targetColumn = KanbanAPI.getItems(projectId, Column.TODO);
+
+        //Delete the entry from DOING column
+        currentColumn.splice(currentColumn.indexOf(entry), 1);
+
+        //Move entry to TODO colum
+        targetColumn.push(entry);
+
+        const data = read(projectId);
+
+        data[Column.TODO].entries = targetColumn;
+        data[Column.DOING].entries = currentColumn;
+
+        const columns = document.querySelectorAll(".kanban__column");
+        const lostItems = [];
+
+        columns.forEach(column => {
+
+            if(column.getAttribute("data-id") == Column.DOING)
+            {
+                const element = column.querySelector(".kanban__column-items");
+                
+                const items = element.querySelectorAll(".kanban__item-box");
+
+                items.forEach( item => {
+                    
+                    if(item.getAttribute("data-id") == entry.id)
+                    {
+                        element.removeChild(item);
+                        lostItems.push(item);
+                    }
+
+                });
+            }
+
+            console.log("Lost items:", lostItems);
+
+            if(column.getAttribute("data-id") == Column.TODO)
+            {
+                console.log("TODO Column~")
+                console.log("Found items:", lostItems);
+
+                const element = column.querySelector(".kanban__column-items");
+                
+                lostItems.forEach( item => {
+                    console.log("Appending element:", item);
+                    element.appendChild(item);
+
+                });
+            }
+
+        });
+
+        save(projectId, data);
+    }   
 
     static deleteItem(projectId, entryId)
     {
@@ -94,8 +174,26 @@ export default class KanbanAPI
     }
 }
 
-function push(entry)
+function push(projectId, entry)
 {
+    const project = TaskAPI.getItem(Key.PROJECT, projectId);
+
+    const task = new VirtualTask(
+        `${project.id}-${entry.id}`,
+        project.name,
+        Key.PROJECT,
+        true
+    );
+
+    let date_obj = new Date();
+
+    let time = `${new String(date_obj.getHours()).padStart(2, "0")}:00`;
+    
+    task.setSchedule(Calendar.getCurrentDate(), time);
+    task.setContent(entry.content);
+
+    const calendar = Calendar.getAgenda(Calendar.getCurrentDate());
+    calendar.push(task);
 }
 
 function read(projectId)

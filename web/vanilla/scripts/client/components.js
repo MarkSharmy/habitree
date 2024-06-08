@@ -316,6 +316,11 @@ function refreshProjectsPanel()
             routeToPage(`/dashboard/projects/${project.id}`);
         });
 
+        listItem.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            console.log("Right Click!");
+        });
+
         projectList.appendChild(listItem);
 
         const infoDiv = document.createElement("div");

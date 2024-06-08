@@ -24,7 +24,7 @@
 
 .kanban__column {
     width: 12rem;
-    height: 16rem;
+    height: 20rem;
     padding: 0.5rem;
     margin: 2rem auto;
     border-radius: 0.5rem;
@@ -37,6 +37,12 @@
     font-size: 1.5rem;
     color: white;
     user-select: none;
+}
+
+.kanban__column-items {
+    height: 12rem;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .kanban__column .dropdown {
@@ -123,4 +129,5 @@
     outline: none;
     justify-content: space-between;
     cursor: pointer;
+    margin-top: 1rem;
 }

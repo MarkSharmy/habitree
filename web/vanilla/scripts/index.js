@@ -20,6 +20,7 @@ async function router()
         {path: "/dashboard", view: DashboardView},
         {path: "/dashboard/calendar", view: Calendar},
         {path: "/dashboard/alltasks", view: TasksView},
+        {path: "/dashboard/alltasks/:panel", view: TasksView},
         {path: "/dashboard/analytics", view: AnalyticsView},
         {path: "/dashboard/projects/", view: ProjectsView},
         {path: "/dashboard/projects/:id", view: KanbanView},
@@ -100,4 +101,9 @@ export function routeToPage(url)
 {
     navigateTo(url);
     router();
+}
+
+export function dataCleanUp()
+{
+    console.log("local Storage:", localStorage.getItem("goals"));
 }

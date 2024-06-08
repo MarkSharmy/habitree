@@ -4,6 +4,12 @@ import Entry from "./Entry.js";
 
 export default class Column 
 {
+    static BACKLOG = 0;
+    static DESIGN = 1;
+    static TODO = 2;
+    static DOING = 3;
+    static DONE = 4;
+    
     constructor(props)
     {
 

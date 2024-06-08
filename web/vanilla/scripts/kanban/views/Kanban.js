@@ -7,12 +7,14 @@ export default class Kanban
     constructor(params, root)
     {
         this.root = root;
-        const project = TaskAPI.getItem(Key.PROJECT, params.id);
+        this.projectId = params.id;
+
+        const project = TaskAPI.getItem(Key.PROJECT, this.projectId);
 
         project.columns.forEach( column => {
 
             const columnView = new Column({
-                projectId: params.id,
+                projectId: this.projectId,
                 columnId: column.id,
                 title: column.title
             });
@@ -20,4 +22,5 @@ export default class Kanban
             this.root.appendChild(columnView.elements.root);
         });
     }
+  
 }

@@ -274,7 +274,7 @@ export default class
     {
         container.innerHTML = "";
         const data = Calendar.getAgenda(Calendar.getCurrentDate()).getTask(id);
-
+        console.log(data);
         let content = data.title;
 
         if(data.subtask)
