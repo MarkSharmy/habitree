@@ -3,6 +3,7 @@ import Calendar from "../Calendar.js";
 import { handleItemEdits } from "../../handlers/handlers.js";
 import Status from "../../enum/status.js";
 import VirtualTask from "../VirualTask.js";
+import TaskAPI from "../../api/storage.js";
 
 export default class 
 {
@@ -368,7 +369,8 @@ export default class
         let time_info = document.createElement("span");
         time_info.setAttribute("type", "time");
         time_info.classList.add("schedule");
-        time_info.textContent = data.time
+        time_info.textContent = data.time;
+        time_info.addEventListener("click", () => { makeEditable(time_info)});
         time_entry.appendChild(time_info);
         ///////////////////////////////////////
 
@@ -503,17 +505,25 @@ export default class
 
         doneButton.addEventListener("click", () => {
 
-            let task = VirtualTask.getTask(data);
+            if(selection.value != Status.DONE)
+            {
+                Calendar.getAgenda(Calendar.getCurrentDate()).update(data);
+            }
+            else
+            {
+                let task = VirtualTask.getTask(data);
             
-            task.setStatus(parseInt(selection.value));
+                task.setStatus(parseInt(selection.value));
 
-            let hours = hh_input.value ? hh_input.value : 0;
-            let minutes = mm_input.value ? mm_input.value : 0;
-            let seconds = ss_input.value ? ss_input.value : 0;
+                let hours = hh_input.value ? hh_input.value : 0;
+                let minutes = mm_input.value ? mm_input.value : 0;
+                let seconds = ss_input.value ? ss_input.value : 0;
 
-            task.setOutput(hours, minutes, seconds);
-            task.synchronize();
-            Calendar.getAgenda(Calendar.getCurrentDate()).update(task);
+                task.setOutput(hours, minutes, seconds);
+                task.synchronize();
+                Calendar.getAgenda(Calendar.getCurrentDate()).update(task);
+            }
+
             this.close(container);
 
         });
@@ -524,3 +534,33 @@ export default class
     }
 
 }
+
+function makeEditable(element) {
+    let originalText = element.textContent;
+    let input = document.createElement('input');
+    input.setAttribute("type", "time");
+    input.value = originalText;
+  
+    // Replace the text with an input element
+    element.replaceWith(input);
+  
+    // Add event listeners to handle the change and blur events
+    input.addEventListener('change', () => {
+      // Create a new text element with the updated value
+      let newText = document.createElement('span');
+      newText.textContent = input.value;
+  
+      // Replace the input element with the new text element
+      input.replaceWith(newText);
+  
+      // Restore the makeEditable function on the new text element
+      newText.addEventListener('click', () => makeEditable(newText));
+    });
+  
+    input.addEventListener('blur', () => {
+      // If the input is empty, revert to the original text
+      if (input.value.trim() === '') {
+        input.replaceWith(originalText);
+      }
+    });
+  }

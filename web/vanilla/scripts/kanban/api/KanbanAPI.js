@@ -139,7 +139,7 @@ function push(projectId, entry)
 
     const task = new VirtualTask(
         `${project.id}-${entry.id}`,
-        project.name,
+        `${project.name} - ${entry.content}`,
         Key.PROJECT,
         true
     );

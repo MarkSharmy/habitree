@@ -1,7 +1,10 @@
 import Components from "../components.js";
-import Model from "../../api/persistance.js"
 import Key from "../../enum/keys.js";
 import Storage from "../../api/storage.js";
+import VirtualTask from "../VirualTask.js";
+import AgendaModal from "./AgendaModal.js";
+import TaskAPI from "../../api/storage.js";
+import Utils from "../../utils/Utils.js";
 
 export default class
 {
@@ -13,80 +16,10 @@ export default class
         Components.refresh();
     }
 
-    static save(element)
-    {
-        const taskItems = document.querySelector(".task-items");
-        const listElements = [...taskItems.children];
-
-        let listValues = []
-
-        for (let i = 0; i < listElements.length; i++)
-        {
-            let span = listElements[i].lastChild;
-            listElements[i].removeChild(span);
-            
-            listValues.push({
-                index: i,
-                task: listElements[i].innerHTML,
-                status: Status.NOT_DONE
-            });
-        }
-
-        const key = Key.TODO;
-        
-        const data = {
-            id: Utils.generateItemID(),
-            title: input.value,
-            entries: listValues,
-            status: Status.NOT_DONE,
-            time: "",
-        }
-
-        Storage.insertItem(key, data);
-        this.close(element);
-    }
-
-    static update(element, id)
-    {
-        const taskItems = document.querySelector(".task-items");
-        const listElements = [...taskItems.children];
-
-        let listValues = []
-
-        for (let i = 0; i < listElements.length; i++)
-        {
-            let span = listElements[i].lastChild;
-            listElements[i].removeChild(span);
-
-            let status = Status.NOT_DONE;
-
-            if (listElements[i].classList.contains("checked"))
-                status = Status.DONE;
-            
-            listValues.push({
-                index: i,
-                task: listElements[i].innerHTML,
-                status: status,
-            });
-        }
-
-        const key = Key.TODO;
-        
-        const data = {
-            id: id,
-            title: input.value,
-            entries: listValues,
-            status: Status.NOT_DONE,
-            time: "",
-        }
-
-        Storage.updateItem(key, data);
-        this.close(element);
-    }
 
     static delete(element, id)
     {
-        Model.deleteTask(id);
+        TaskAPI.deleteItem(Key.TODO, id);
         this.close(element);
     }
 
@@ -126,23 +59,6 @@ export default class
         let section = document.createElement("section");
         let footer = document.createElement("footer");
 
-        let label = document.createElement("label");
-        label.setAttribute("for", "list-type");
-        label.innerHTML = "Type: ";
-        hgroup.appendChild(label);
-
-        let optionSpan = document.createElement("span");
-
-        let selection = document.createElement("select");
-        selection.name = "list-type";
-
-        let option = document.createElement("option");
-        option.value = "Todo";
-        option.innerText = "Todo";
-        selection.appendChild(option)
-        optionSpan.appendChild(selection);
-        hgroup.appendChild(optionSpan);
-
         let statusLabel = document.createElement("label");
         statusLabel.setAttribute("for", "status");
         statusLabel.innerHTML = "Status: ";
@@ -171,34 +87,27 @@ export default class
         contSpan.appendChild(statSelection);
         hgroup.appendChild(contSpan);
 
-        let taskItems = document.createElement("ul");
-        taskItems.classList.add("task-items");
-        section.appendChild(taskItems);
-
-        let entryDiv = document.createElement("div");
-        entryDiv.classList.add("add-entry");
-
-        let taskInput = document.createElement("input");
-        taskInput.setAttribute("type", "text");
-        taskInput.placeholder = "Add subtask";
-        entryDiv.appendChild(taskInput);
-
-        let addButton = document.createElement("button");
-        addButton.addEventListener("click", () => { createSubTask(taskInput, taskItems)});
-        addButton.setAttribute("data-btn-add", "");
-        addButton.innerHTML = "+";
-        entryDiv.appendChild(addButton);
-
-        section.appendChild(entryDiv);
 
         let saveButton = document.createElement("button");
-        saveButton.addEventListener("click", () => {
-            this.save(container, titleInput);
-        });
         saveButton.setAttribute("data-close-button", "");
         saveButton.classList.add("btn-save");
         saveButton.setAttribute("id", "update-task");
         saveButton.innerText = "Save";
+
+        saveButton.addEventListener("click", () => {
+            
+            const data = {
+
+                id: Utils.generateItemID(),
+                title: titleInput.value,
+                status: statSelection.value
+            }
+
+            Storage.insertItem(Key.TODO, data);
+            this.close(container);
+
+        }); 
+
         footer.appendChild(saveButton);
 
         body.appendChild(hgroup);
@@ -249,23 +158,6 @@ export default class
         let section = document.createElement("section");
         let footer = document.createElement("footer");
 
-        let label = document.createElement("label");
-        label.setAttribute("for", "list-type");
-        label.innerHTML = "Type: ";
-        hgroup.appendChild(label);
-
-        let optionSpan = document.createElement("span");
-
-        let selection = document.createElement("select");
-        selection.name = "list-type";
-
-        let option = document.createElement("option");
-        option.value = "Todo";
-        option.innerText = "Todo";
-        selection.appendChild(option)
-        optionSpan.appendChild(selection);
-        hgroup.appendChild(optionSpan);
-
         let statusLabel = document.createElement("label");
         statusLabel.setAttribute("for", "status");
         statusLabel.innerHTML = "Status: ";
@@ -294,50 +186,30 @@ export default class
         contSpan.appendChild(statSelection);
         hgroup.appendChild(contSpan);
 
-        let taskItems = document.createElement("ul");
-        taskItems.classList.add("task-items");
-        section.appendChild(taskItems);
+        let pushButton = document.createElement("button");
+        pushButton.classList.add("btn-add");
+        pushButton.textContent = "Do Today";
+        hgroup.appendChild(pushButton);
 
-        const entries = data.entries;
-        entries.forEach(entry => {
+        pushButton.addEventListener("click", () => {
 
-            let li = document.createElement("li");
+            if( titleInput.value == "")
+            {
+                alert("Please enter a title");
+                return;
+            }
 
-            li.addEventListener("click", () => {
-                li.classList.toggle("checked");
-            });
-            
-            li.classList.add("item");
-            li.innerText = entry.task;
-            let delSpan = document.createElement("span");
+            const virtualTask = new VirtualTask(
+                id, 
+                titleInput.value,
+                Key.TODO,
+                false
+            );
 
-            delSpan.addEventListener("click", () => {
-                const listEntry = delSpan.closest(".item");
-                taskItems.removeChild(listEntry);
-            });
-
-            delSpan.innerHTML = "&times;"
-            li.appendChild(delSpan);
-            taskItems.appendChild(li);
+            AgendaModal.createAgendaModal(container, virtualTask);
 
         });
 
-        let entryDiv = document.createElement("div");
-        entryDiv.classList.add("add-entry");
-
-        let taskInput = document.createElement("input");
-        taskInput.setAttribute("type", "text");
-        taskInput.setAttribute("id", "data-entry");
-        taskInput.placeholder = "Add subtask";
-        entryDiv.appendChild(taskInput);
-
-        let addButton = document.createElement("button");
-        addButton.addEventListener("click", () => { createSubTask(taskInput, taskItems)});
-        addButton.setAttribute("data-btn-add", "");
-        addButton.innerHTML = "+";
-        entryDiv.appendChild(addButton);
-
-        section.appendChild(entryDiv);
 
         let deleteButton = document.createElement("button");
         deleteButton.addEventListener("click", () => {
@@ -351,8 +223,19 @@ export default class
         footer.appendChild(deleteButton);
 
         let saveButton = document.createElement("button");
+
         saveButton.addEventListener("click", () => {
-            this.update(container, titleInput, id);
+            
+            const data = {
+
+                id: id,
+                title: titleInput.value,
+                status: statSelection.value
+            }
+
+            Storage.updateItem(Key.TODO, data);
+            this.close(container);
+
         });
 
         saveButton.setAttribute("data-close-button", "");
@@ -369,33 +252,4 @@ export default class
         popup.appendChild(body);
         container.appendChild(popup);
     }
-}
-
-function createSubTask(input, taskItems)
-{
-    
-    if(input.value === "")
-    {
-        alert("Please write something");
-        return;
-    }
-
-    let li = document.createElement("li");
-    li.classList.add("item");
-    li.innerHTML = input.value;
-    taskItems.appendChild(li);
-
-    li.addEventListener("click", () => {
-        li.classList.toggle("checked");
-    });
-
-    let span = document.createElement("span");
-    span.innerHTML = "\u00d7";
-    li.appendChild(span);
-    input.value = "";
-
-    span.addEventListener("click", () => {
-        const listEntry = span.closest(".item");
-        taskItems.removeChild(listEntry);
-    });
 }

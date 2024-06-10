@@ -22,12 +22,17 @@ export default class VirtualTask
 
     static getTask(data)
     {
-        return new VirtualTask(
+        const task =  new VirtualTask(
             data.id,
             data.title,
             data.type,
             data.subtask
         );
+
+        task.date = data.date;
+        task.time = data.time;
+
+        return task;
     }
 
     static shelve(id)

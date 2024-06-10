@@ -163,6 +163,11 @@ function refreshTaskPanel()
         //Store item id in state
         li.setAttribute("task-id", item.id);
 
+        if(item.status == 2)
+        {
+            li.classList.add("checked");
+        }
+
         //Create li item components
         const div = document.createElement("div");
         div.classList.add("item-box");
