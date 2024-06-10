@@ -352,6 +352,11 @@ export default class
         date_info.setAttribute("type", "date");
         date_info.classList.add("schedule");
         date_info.textContent = data.date;
+
+        date_info.addEventListener("click", () => {
+            makeEditable(date_info, "date");
+        });
+
         date_entry.appendChild(date_info);
 
         let time_span = document.createElement("div");
@@ -370,7 +375,11 @@ export default class
         time_info.setAttribute("type", "time");
         time_info.classList.add("schedule");
         time_info.textContent = data.time;
-        time_info.addEventListener("click", () => { makeEditable(time_info)});
+
+        time_info.addEventListener("click", () => {
+            makeEditable(time_info, "time");
+        });
+
         time_entry.appendChild(time_info);
         ///////////////////////////////////////
 
@@ -507,6 +516,10 @@ export default class
 
             if(selection.value != Status.DONE)
             {
+
+                data.date = date_info.textContent;
+                data.time = time_info.textContent;
+
                 Calendar.getAgenda(Calendar.getCurrentDate()).update(data);
             }
             else
@@ -535,11 +548,26 @@ export default class
 
 }
 
-function makeEditable(element) {
+function makeEditable(element, type) {
     let originalText = element.textContent;
     let input = document.createElement('input');
-    input.setAttribute("type", "time");
-    input.value = originalText;
+
+    if(type == "time")
+    {
+        input.setAttribute("type", "time");
+        input.value = originalText;
+    }
+
+    else if(type == "date")
+    {
+        input.setAttribute("type", "date");
+        input.value = originalText;
+    }
+
+    else 
+    {
+        throw new Error("Invalid input.");
+    }
   
     // Replace the text with an input element
     element.replaceWith(input);
@@ -547,14 +575,13 @@ function makeEditable(element) {
     // Add event listeners to handle the change and blur events
     input.addEventListener('change', () => {
       // Create a new text element with the updated value
-      let newText = document.createElement('span');
-      newText.textContent = input.value;
+      element.textContent = input.value;
   
       // Replace the input element with the new text element
-      input.replaceWith(newText);
+      input.replaceWith(element);
   
       // Restore the makeEditable function on the new text element
-      newText.addEventListener('click', () => makeEditable(newText));
+      element.addEventListener('click', () => makeEditable(element));
     });
   
     input.addEventListener('blur', () => {
