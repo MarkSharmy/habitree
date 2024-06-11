@@ -5,6 +5,7 @@ import VirtualTask from "../VirualTask.js";
 import AgendaModal from "./AgendaModal.js";
 import TaskAPI from "../../api/storage.js";
 import Utils from "../../utils/Utils.js";
+import Status from "../../enum/status.js";
 
 export default class
 {
@@ -70,17 +71,17 @@ export default class
         statSelection.name = "list-type";
 
         let not_done = document.createElement("option");
-        not_done.value = "Not done";
+        not_done.value = Status.NOT_DONE;
         not_done.innerText = "Not done";
         statSelection.appendChild(not_done);
 
         let doing = document.createElement("option");
-        doing.value = "Doing";
+        doing.value = Status.DOING;
         doing.innerText = "Doing";
         statSelection.appendChild(doing);
 
         let done = document.createElement("option");
-        done.value = "Done";
+        done.value = Status.DONE;
         done.innerText = "Done";
         statSelection.appendChild(done);
 
@@ -169,17 +170,17 @@ export default class
         statSelection.name = "list-type";
 
         let not_done = document.createElement("option");
-        not_done.value = "Not done";
+        not_done.value = Status.NOT_DONE;
         not_done.innerText = "Not done";
         statSelection.appendChild(not_done);
 
         let doing = document.createElement("option");
-        doing.value = "Doing";
+        doing.value = Status.DOING;
         doing.innerText = "Doing";
         statSelection.appendChild(doing);
 
         let done = document.createElement("option");
-        done.value = "Done";
+        done.value = Status.DONE;
         done.innerText = "Done";
         statSelection.appendChild(done);
 
@@ -230,7 +231,7 @@ export default class
 
                 id: id,
                 title: titleInput.value,
-                status: statSelection.value
+                status: parseInt(statSelection.value)
             }
 
             Storage.updateItem(Key.TODO, data);

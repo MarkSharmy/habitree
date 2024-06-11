@@ -63,7 +63,7 @@ function refreshDashboard()
 
     agenda.appendChild(progressBar);
 
-    let tasks = calendar.tasks();
+    let tasks = calendar.tasks;
 
     Utils.renderProgress(tasks, bar);
     text.textContent = `${Utils.getNumItemsDone(tasks)} / ${Utils.getNumItemsTotal(tasks)} (${Utils.getItemsDonePercentile(tasks)})`;
@@ -166,6 +166,10 @@ function refreshTaskPanel()
         if(item.status == 2)
         {
             li.classList.add("checked");
+        }
+        else
+        {
+            li.classList.remove("checked");
         }
 
         //Create li item components

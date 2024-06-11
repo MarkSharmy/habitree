@@ -39,7 +39,7 @@ export default class VirtualTask
     {
         
         const agenda = Calendar.getAgenda(Calendar.getCurrentDate());
-        const task = agenda.tasks().find( task => task.id == id);
+        const task = agenda.tasks.find( task => task.id == id);
 
         if(task.type == Key.PROJECT)
         {
@@ -108,7 +108,7 @@ export default class VirtualTask
         {
             id = this.id;
             let task = entries.find( entry => { return entry.id == id});
-            task.status = this.status;
+            task.status = Status.NOT_DONE;
             TaskAPI.updateItem(key, task);
         }
     }

@@ -100,7 +100,7 @@
     margin: 1rem auto;
     cursor: pointer;
 }
-.tabs-content .task-list li {
+.tabs-content .task-list li.checked {
     border: 2px solid var(--bright);
 }
 

@@ -11,7 +11,7 @@ export default class Calendar
             this.date = obj;
             this.efficiency = 0.0;
             this.output = new Time(0, 0, 0);
-            this.agenda = [];
+            this.tasks = [];
             this.progress = 0.0;
         }
         else
@@ -19,54 +19,50 @@ export default class Calendar
             this.date = obj.date;
             this.efficiency = obj.efficiency;
             this.output = new Time(obj.output.hours, obj.output.minutes, obj.output.seconds);
-            this.agenda = obj.agenda;
-            this.agenda.forEach(task => {
+            this.tasks = obj.tasks;
+            this.tasks.forEach(task => {
                 task.output = new Time(task.output.hours, task.output.minutes, task.output.seconds);
             });
+
             this.progress = obj.progress;
         }
     }
 
     getTask(id)
     {
-        let task = this.agenda.find( task => {
+        let task = this.tasks.find( task => {
             return task.id == id;
         });
 
         return task;
     }
 
-    tasks()
-    {
-        return this.agenda;
-    }
-
     push(task)
     {
-        this.agenda.push(task);
+        this.tasks.push(task);
         this.refresh();
     }
 
     remove(id)
     {
-        const task = this.agenda.find(task => { return task.id == id});
-        this.agenda.splice(this.agenda.indexOf(task), 1);
+        const task = this.tasks.find(task => { return task.id == id});
+        this.tasks.splice(this.tasks.indexOf(task), 1);
         this.refresh();
     }
 
     update(task)
     {
-        const agenda = this.agenda;
-        let found = this.agenda.find(entry => { return entry.id == task.id});
-        agenda[this.agenda.indexOf(found)] = task;
+        const agenda = this.tasks;
+        let found = this.tasks.find(entry => { return entry.id == task.id});
+        agenda[this.tasks.indexOf(found)] = task;
         this.refresh();
     }
 
     refresh()
     {
         Calendar.replaceAgenda(this);
-        let completedItems = this.agenda.filter( task => { return task.status == Status.DONE});
-        this.progress = Math.floor((completedItems.length / this.agenda.length));
+        let completedItems = this.tasks.filter( task => { return task.status == Status.DONE});
+        this.progress = Math.floor((completedItems.length / this.tasks.length));
         this.aggregateOutput(completedItems);
     }
 
@@ -107,11 +103,28 @@ export default class Calendar
         }
 
         agenda = new Calendar(agenda);
+        
+        agenda.sort();
 
         agenda.refresh();
 
         return agenda;
     }
+
+    sort()
+    {
+        
+        this.tasks.sort((a, b) => {
+            // Convert the time strings to Date objects
+
+            const dateA = new Date(`${a.date}T${a.time}:00`);
+            const dateB = new Date(`${b.date}T${b.time}:00`);
+
+            return dateB - dateA;
+
+        });
+
+      }
 
     static replaceAgenda(agenda)
     {
